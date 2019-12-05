@@ -22,6 +22,15 @@ class Characters:
         self.posx = posx
         self.posy = posy
 
+    def __repr__(self):
+        """
+        Show the feature of a character
+        :return:message
+        """
+        message = "*****\nType: {}\nCharacter: {}\npath picture: '{}'\nposition x = {}\nposition y = {}\n*****"\
+            .format(type(self), self.name, self.picture, self.posx, self.posy)
+        return message
+
     def display_character(self):
         """
 

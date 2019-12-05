@@ -27,6 +27,15 @@ class Window:
         displayed_window = pg.display.set_mode((self.width, self.height))
         return displayed_window
 
+    def __repr__(self):
+        """
+        Show the feature of a window
+        :return:message
+        """
+        message = "*****\nType: {}\nwidth: '{}'\nheight = {}\ncolor (RGB) = {}\n*****"\
+            .format(type(self), self.width, self.height, self.rgb_colors)
+        return message
+
 
 def color_window(window, color=BACKGROUND):
     """
