@@ -57,13 +57,36 @@ class Characters:
         avatar_set = window.blit(avatar, (self.posx, self.posy))
         return avatar_set
 
-    def move_avatar_vertical(self, new_x, new_y):
+    def start_move_avatar(self, event):
         """
 
-        :param new_x:
-        :param new_y:
+        :param event:
         :return:
         """
-        self.posx = new_x
-        self.posy = new_y
-        return self.posy
+        mc_gyver_move_x = 0
+        mc_gyver_move_y = 0
+        arrow_key = pg.key.get_pressed()
+        if event.type == pg.KEYUP:
+            pass
+        if event.type == pg.KEYDOWN:
+            if event.key == pg.K_UP:
+                mc_gyver_move_y = -0.1
+                mc_gyver_move_x = 0
+            if event.key == pg.K_DOWN:
+                mc_gyver_move_y = 0.1
+                mc_gyver_move_x = 0
+            if arrow_key[pg.K_RIGHT]:
+                mc_gyver_move_x = 0.1
+                mc_gyver_move_y = 0
+            if event.key == pg.K_LEFT:
+                mc_gyver_move_x = -0.1
+                mc_gyver_move_y = 0
+            self.posx += mc_gyver_move_x
+            self.posy += mc_gyver_move_y
+
+    def stop_move_avatar(self):
+        """
+
+        :return:
+        """
+        pass

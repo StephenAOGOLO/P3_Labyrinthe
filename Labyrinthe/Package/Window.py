@@ -32,9 +32,19 @@ class Window:
         Show the feature of a window
         :return:message
         """
-        message = "*****\nType: {}\nwidth: '{}'\nheight = {}\ncolor (RGB) = {}\n*****"\
-            .format(type(self), self.width, self.height, self.rgb_colors)
+        message = "*****\nType: {}\nwidth = {}\nheight = {}\n" \
+                  "color (RGB) = {}\n*****".format(type(self), self.width, self.height, self.rgb_colors)
         return message
+
+    def set_on_window(self, window, element1, element2):
+        """
+        This function need to be fix. There is no attribute used into this funtion.
+        :param window:
+        :param element1:
+        :param element2:
+        :return:
+        """
+        return window.blit(element1, element2)
 
 
 def color_window(window, color=BACKGROUND):
@@ -46,3 +56,5 @@ def color_window(window, color=BACKGROUND):
     """
     colored_window = window.fill(color)
     return colored_window
+
+
