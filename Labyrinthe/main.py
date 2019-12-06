@@ -167,8 +167,12 @@ def main():
     When this funtion is running, a green window is launched.
     Two pictures are loaded and set.
     """
+    mc_gyver_x = 150
+    mc_gyver_y = 200
+    mc_gyver_move_x = 0
+    mc_gyver_move_y = 0
     window_base = Wd.Window(640, 480)
-    mc_gyver = Character.Characters("Mac Gyver", "./Package/Pictures/MacGyver.png", 150, 200)
+    mc_gyver = Character.Characters("Mac Gyver", "./Package/Pictures/MacGyver.png", mc_gyver_x, mc_gyver_y)
     watchman = Character.Characters("WatchMan", "./Package/Pictures/Gardien.png", 300, 200)
     mc_gyver_avatar = mc_gyver.load_character_picture()
     watchman_avatar = watchman.load_character_picture()
@@ -179,6 +183,25 @@ def main():
         for event in pg.event.get():
             if event.type == pg.QUIT:
                 launched = False
+            if event.type == pg.KEYDOWN:
+                pass
+            if event.type == pg.KEYUP:
+                if event.key == pg.K_UP:
+                    mc_gyver_move_y = -5
+                    mc_gyver_move_x = 0
+                if event.key == pg.K_DOWN:
+                    mc_gyver_move_y = 5
+                    mc_gyver_move_x = 0
+                mc_gyver.posy += mc_gyver_move_y
+                mc_gyver.posx += mc_gyver_move_x
+                if event.key == pg.K_RIGHT:
+                    mc_gyver_move_x = 5
+                    mc_gyver_move_y = 0
+                if event.key == pg.K_LEFT:
+                    mc_gyver_move_x = -5
+                    mc_gyver_move_y = 0
+                mc_gyver.posx += mc_gyver_move_x
+                mc_gyver.posy += mc_gyver_move_y
         mc_gyver.set_avatar(mc_gyver_avatar, surface)
         watchman.set_avatar(watchman_avatar, surface)
         pg.display.update()

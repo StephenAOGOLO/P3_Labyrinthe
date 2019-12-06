@@ -57,6 +57,13 @@ class Characters:
         avatar_set = window.blit(avatar, (self.posx, self.posy))
         return avatar_set
 
+    def move_avatar_vertical(self, new_x, new_y):
+        """
 
-
-
+        :param new_x:
+        :param new_y:
+        :return:
+        """
+        self.posx = new_x
+        self.posy = new_y
+        return self.posy
