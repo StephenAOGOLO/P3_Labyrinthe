@@ -46,6 +46,14 @@ class Window:
         """
         return window.blit(element1, element2)
 
+    def load_element_picture(self,):
+        """
+
+        :return:
+        """
+        avatar = pg.image.load(self.picture)
+        return avatar
+
 
 def color_window(window, color=BACKGROUND):
     """

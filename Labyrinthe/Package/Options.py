@@ -123,3 +123,33 @@ class SettingsObject(Settings):
         super().__init__()
         self.particular_sections = self.get_particular_sections("object_")
         self.data_file = self.get_data_file_ini("window_main")
+
+
+class SettingsSurroundings(Settings):
+    """
+    Building in progress...
+    """
+    CREATION = 0
+    def __init__(self):
+        """
+        Building in progress...
+        """
+        super().__init__()
+        self.particular_sections = self.get_particular_sections("surroundings_")
+        self.element = self.sort_all_elements()
+        if self.CREATION == 0:
+            self.data_file = self.get_data_file_ini("surroundings_brown_block")
+        elif self.CREATION == 1:
+            pass
+
+    def sort_all_elements(self):
+
+        dict_elements = {}
+        brown_block = "mac_gyver"
+        add_another_block = "add_another_block"
+        for section in self.particular_sections:
+            if str(section[13:]) == brown_block:
+                dict_elements[brown_block] = self.get_data_file_ini(section)
+            elif str(section[13:]) == add_another_block:
+                dict_elements[add_another_block] = self.get_data_file_ini(section)
+        return dict_elements

@@ -6,6 +6,7 @@ import Labyrinthe.Package.Mazes as Maze
 import Labyrinthe.Package.Options as Opt
 import Labyrinthe.Package.Window as Wd
 import Labyrinthe.Package.Characters as Character
+import Labyrinthe.Package.Surroundings as Sd
 
 
 def in_progress_main():
@@ -20,14 +21,19 @@ def in_progress_main():
     mc_gyver_settings = Opt.SettingsCharacter()
     mc_gyver_settings = mc_gyver_settings.data_file
     window_settings = Opt.SettingsWindow()
+    brown_block_settings = Opt.SettingsSurroundings()
+    brown_block_settings = brown_block_settings.data_file
     window_base = Wd.Window(int(window_settings.data_file["window_width"]),
                             int(window_settings.data_file["window_height"]))
     mc_gyver = Character.Characters(mc_gyver_settings["name"], mc_gyver_settings["path_picture"],
                                     mc_gyver_settings["startx"], mc_gyver_settings["starty"])
     watchman = Character.Characters(watchman_settings["name"], watchman_settings["path_picture"],
                                     watchman_settings["startx"], watchman_settings["starty"])
+    brown_block = Sd.SurroundingsElement(brown_block_settings["name"], brown_block_settings["path_picture"],
+                                         brown_block_settings["width"], brown_block_settings["height"])
     mc_gyver_avatar = mc_gyver.load_character_picture()
     watchman_avatar = watchman.load_character_picture()
+    brown_block = brown_block.load_element_picture()
     surface = window_base.display_window()
     Wd.color_window(surface)
     launched = True
@@ -61,15 +67,22 @@ def main():
     """
     Pg.init()
     Pg.display.set_caption("Aidez MacGyver à s'échapper !")
-    mc_gyver_x = 1
-    mc_gyver_y = 1
+    mc_gyver_x = 20
+    mc_gyver_y = 20
     window_x = 640
     window_y = 480
+    limit_window_x = window_x - 50
+    limit_window_y = window_y - 50
+    brown_block_x = 1
+    brown_block_y = 1
     window_base = Wd.Window(window_x, window_y)
     mc_gyver = Character.Characters("Mac Gyver", "./Package/Pictures/MacGyver.png", mc_gyver_x, mc_gyver_y)
     watchman = Character.Characters("WatchMan", "./Package/Pictures/Gardien.png", 300, 200)
+    brown_block = Sd.SurroundingsElement("Brown_Block", "./Package/Pictures/brown_block.png",
+                                         brown_block_x, brown_block_y)
     mc_gyver_avatar = mc_gyver.load_character_picture()
     watchman_avatar = watchman.load_character_picture()
+    brown_block_picture = brown_block.load_element_picture()
     surface = window_base.display_window()
     launched = True
     while launched:
@@ -80,10 +93,13 @@ def main():
         Wd.color_window(surface)
         mc_gyver.set_avatar(mc_gyver_avatar, surface)
         watchman.set_avatar(watchman_avatar, surface)
-        if mc_gyver.posy > window_y - 50 or mc_gyver.posy < 0:
+        brown_block.set_element(brown_block_picture, surface)
+        if mc_gyver.posy > limit_window_y or mc_gyver.posy < 0:
             message("Aie !!!! un mur !!!", window_base, surface)
-        if mc_gyver.posx > window_x - 50 or mc_gyver.posx < 0:
+            mc_gyver.stop_move_avatar(event, limit_window_x, limit_window_y)
+        if mc_gyver.posx > limit_window_x or mc_gyver.posx < 0:
             message("Aie !!!! un mur !!!", window_base, surface)
+            mc_gyver.stop_move_avatar(event, limit_window_x, limit_window_y)
         Pg.display.update()
     Pg.quit()
 

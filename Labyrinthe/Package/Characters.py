@@ -69,24 +69,33 @@ class Characters:
         if event.type == pg.KEYUP:
             pass
         if event.type == pg.KEYDOWN:
-            if event.key == pg.K_UP:
+            if arrow_key[pg.K_UP]:
                 mc_gyver_move_y = -0.1
                 mc_gyver_move_x = 0
-            if event.key == pg.K_DOWN:
+            elif arrow_key[pg.K_DOWN]:
                 mc_gyver_move_y = 0.1
                 mc_gyver_move_x = 0
-            if arrow_key[pg.K_RIGHT]:
+            elif arrow_key[pg.K_RIGHT]:
                 mc_gyver_move_x = 0.1
                 mc_gyver_move_y = 0
-            if event.key == pg.K_LEFT:
+            elif arrow_key[pg.K_LEFT]:
                 mc_gyver_move_x = -0.1
                 mc_gyver_move_y = 0
-            self.posx += mc_gyver_move_x
-            self.posy += mc_gyver_move_y
+        self.posx += mc_gyver_move_x
+        self.posy += mc_gyver_move_y
 
-    def stop_move_avatar(self):
+    def stop_move_avatar(self, event, limit_x, limit_y):
         """
 
         :return:
         """
-        pass
+        arrow_key = pg.key.get_pressed()
+        if event.type == pg.KEYDOWN:
+            if arrow_key[pg.K_UP]:
+                self.posy = 0
+            elif arrow_key[pg.K_DOWN]:
+                self.posy = limit_y
+            elif arrow_key[pg.K_RIGHT]:
+                self.posx = limit_x
+            elif arrow_key[pg.K_LEFT]:
+                self.posx = 0
