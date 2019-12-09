@@ -24,7 +24,7 @@ class Window:
 
         :return:
         """
-        displayed_window = pg.display.set_mode((self.width, self.height))
+        displayed_window = pg.display.set_mode((self.width, self.height), pg.RESIZABLE)
         return displayed_window
 
     def __repr__(self):

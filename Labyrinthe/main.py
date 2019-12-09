@@ -67,22 +67,38 @@ def main():
     """
     Pg.init()
     Pg.display.set_caption("Aidez MacGyver à s'échapper !")
-    mc_gyver_x = 20
-    mc_gyver_y = 20
+    clock = Pg.time.Clock()
+    fps = 60
     window_x = 640
     window_y = 480
+    mc_gyver_x = window_x/2
+    mc_gyver_y = window_y/2
+    watchman_x = window_x-50
+    watchman_y = 20
+    # needle_x = 10
+    # needle_y = 10
+    # tube_x =  10
+    # tube_y = watchman_y + 10
+    # ether_x = window_x + 10
+    # ether_y = window_y + 10
     limit_window_x = window_x - 50
     limit_window_y = window_y - 50
     brown_block_x = 1
     brown_block_y = 1
     window_base = Wd.Window(window_x, window_y)
     mc_gyver = Character.Characters("Mac Gyver", "./Package/Pictures/MacGyver.png", mc_gyver_x, mc_gyver_y)
-    watchman = Character.Characters("WatchMan", "./Package/Pictures/Gardien.png", 300, 200)
+    watchman = Character.Characters("WatchMan", "./Package/Pictures/Gardien.png", watchman_x, watchman_y)
+    # needle = Sd.SurroundingsElement("Needle", "./Package/Pictures/aiguille.png", needle_x, needle_y)
+    # tube = Sd.SurroundingsElement("Tube", "./Package/Pictures/tube_plastique.png", tube_x, tube_y)
+    # ether = Sd.SurroundingsElement("Ether", "./Package/Pictures/ether.png", ether_x, ether_y)
     brown_block = Sd.SurroundingsElement("Brown_Block", "./Package/Pictures/brown_block.png",
                                          brown_block_x, brown_block_y)
     mc_gyver_avatar = mc_gyver.load_character_picture()
     watchman_avatar = watchman.load_character_picture()
     brown_block_picture = brown_block.load_element_picture()
+    # needle_picture = needle.load_element_picture()
+    # tube_picture = tube.load_element_picture()
+    # ether_picture = ether.load_element_picture()
     surface = window_base.display_window()
     launched = True
     while launched:
@@ -91,15 +107,19 @@ def main():
                 launched = False
         mc_gyver.start_move_avatar(event)
         Wd.color_window(surface)
+        brown_block.initialize_landscape(brown_block_picture, surface, window_base)
         mc_gyver.set_avatar(mc_gyver_avatar, surface)
         watchman.set_avatar(watchman_avatar, surface)
-        brown_block.set_element(brown_block_picture, surface)
+        # needle.set_element(needle_picture, surface)
+        # tube.set_element(tube_picture, surface)
+        # ether.set_element(ether_picture, surface)
         if mc_gyver.posy > limit_window_y or mc_gyver.posy < 0:
             message("Aie !!!! un mur !!!", window_base, surface)
             mc_gyver.stop_move_avatar(event, limit_window_x, limit_window_y)
         if mc_gyver.posx > limit_window_x or mc_gyver.posx < 0:
             message("Aie !!!! un mur !!!", window_base, surface)
             mc_gyver.stop_move_avatar(event, limit_window_x, limit_window_y)
+        clock.tick(fps)
         Pg.display.update()
     Pg.quit()
 

@@ -36,3 +36,6 @@ class Maze:
         self.run_instance(state)
         print(message)
         return message
+
+    def initialize_landscape(self):
+        pass
