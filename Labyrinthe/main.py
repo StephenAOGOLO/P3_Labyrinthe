@@ -1,6 +1,6 @@
 # coding: utf-8
 
-import pygame as Pg
+import pygame as pg
 import configparser as cp
 import Labyrinthe.Package.Mazes as Maze
 import Labyrinthe.Package.Options as Opt
@@ -38,17 +38,17 @@ def in_progress_main():
     Wd.color_window(surface)
     launched = True
     while launched:
-        for event in Pg.event.get():
-            if event.type == Pg.QUIT:
+        for event in pg.event.get():
+            if event.type == pg.QUIT:
                 launched = False
         mc_gyver.set_avatar(mc_gyver_avatar, surface)
         watchman.set_avatar(watchman_avatar, surface)
-        Pg.display.update()
-    Pg.quit()
+        pg.display.update()
+    pg.quit()
 
 
 def message(text, area, surface):
-    pop_font = Pg.font.Font("./Package/Fonts/AGENCYR.TTF", 20)
+    pop_font = pg.font.Font("./Package/Fonts/AGENCYR.TTF", 20)
     pop_area, pop_rect = custom_message(text, pop_font)
     pop_rect.center = 320, 240
     area.set_on_window(surface, pop_area, pop_rect)
@@ -65,9 +65,9 @@ def main():
     When this funtion is running, a green window is launched.
     Two pictures are loaded and set.
     """
-    Pg.init()
-    Pg.display.set_caption("Aidez MacGyver à s'échapper !")
-    clock = Pg.time.Clock()
+    pg.init()
+    pg.display.set_caption("Aidez MacGyver à s'échapper !")
+    clock = pg.time.Clock()
     fps = 60
     window_x = 640
     window_y = 480
@@ -100,12 +100,19 @@ def main():
     # tube_picture = tube.load_element_picture()
     # ether_picture = ether.load_element_picture()
     surface = window_base.display_window()
+    # Adding sprites
+    sprite_char_group = pg.sprite.Group()
+    mc_gyver_sprite = Character.CharactersSprite()
+    mc_gyver_sprite.set_position(1, 1)
+    mc_gyver_sprite.set_image("./Package/Pictures/MacGyver.png")
+    # sprite_char_group.add(mc_gyver_sprite)
+    mc_gyver_sprite.add_to_group(sprite_char_group)
     launched = True
     while launched:
-        for event in Pg.event.get():
-            if event.type == Pg.QUIT:
+        for event in pg.event.get():
+            if event.type == pg.QUIT:
                 launched = False
-        mc_gyver.start_move_avatar(event)
+        # mc_gyver.start_move_avatar(event)
         Wd.color_window(surface)
         brown_block.initialize_landscape(brown_block_picture, surface, window_base)
         mc_gyver.set_avatar(mc_gyver_avatar, surface)
@@ -113,6 +120,8 @@ def main():
         # needle.set_element(needle_picture, surface)
         # tube.set_element(tube_picture, surface)
         # ether.set_element(ether_picture, surface)
+        sprite_char_group.draw(surface)
+        mc_gyver_sprite.start_move_avatar(event)
         if mc_gyver.posy > limit_window_y or mc_gyver.posy < 0:
             message("Aie !!!! un mur !!!", window_base, surface)
             mc_gyver.stop_move_avatar(event, limit_window_x, limit_window_y)
@@ -120,8 +129,8 @@ def main():
             message("Aie !!!! un mur !!!", window_base, surface)
             mc_gyver.stop_move_avatar(event, limit_window_x, limit_window_y)
         clock.tick(fps)
-        Pg.display.update()
-    Pg.quit()
+        pg.display.update()
+    pg.quit()
 
     # This following block have to be fix first before implementation
     # the_maze = Maze.Maze()
@@ -129,7 +138,7 @@ def main():
     # mc_gyver.move_avatar(event)
     # mc_gyver.set_avatar(mc_gyver_avatar, surface)
     # watchman.set_avatar(watchman_avatar, surface)
-    # Pg.display.update()
+    # pg.display.update()
 
 
 if __name__ == "__main__":

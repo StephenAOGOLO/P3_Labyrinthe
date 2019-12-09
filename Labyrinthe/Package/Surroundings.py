@@ -52,7 +52,7 @@ class SurroundingsElement:
 
 
 class SurroundigsSprite(pg.sprite.Sprite):
-    def __init__(self, color=(0, 0, 0), width=50, height=50):
+    def __init__(self, color=(0, 0, 0), width=20, height=20):
         super(SurroundigsSprite, self).__init__()
         self.image = pg.Surface((width, height))
         self.image.fill(color)
@@ -70,6 +70,8 @@ class SurroundigsSprite(pg.sprite.Sprite):
 
 if __name__ == "__main__":
     import Labyrinthe.Package.Window as Wd
+    pg.init()
+    pg.display.set_caption("Aidez MacGyver à s'échapper !")
     window = Wd.Window(600, 600)
     window = window.display_window()
     window.fill((255, 255, 255))
