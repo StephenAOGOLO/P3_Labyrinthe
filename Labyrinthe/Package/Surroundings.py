@@ -1,5 +1,54 @@
 import pygame as pg
 
+matrix_maze_off = ["tbl", "tb", "tb", "tb", "tb", "tb", "tb", "tb", "tb", "tb", "tb", "tr", "tl", "tr", "watchman",
+               "trl" ,"tl" ,"tb" ,"tb" ,"tb" ,"tb" ,"tr" ,"rl" ,"rl" ,"rl" ,"rl" ,"rl" ,"rl" ,"rl" ,"rl" ,
+               "rl" ,"" ,"" ,"" ,"" ,"" ,"" ,"" ,"" ,"" ,"" ,"" ,"" ,"" ,"rl" ,
+               "rl" ,"" ,"" ,"" ,"" ,"" ,"" ,"" ,"" ,"" ,"" ,"" ,"" ,"" ,"rl" ,
+               "rl" ,"" ,"" ,"" ,"" ,"" ,"" ,"" ,"" ,"" ,"" ,"" ,"" ,"" ,"rl" ,
+               "rl" ,"" ,"" ,"" ,"" ,"" ,"" ,"" ,"" ,"" ,"" ,"" ,"" ,"" ,"rl" ,
+               "rl" ,"" ,"" ,"" ,"" ,"" ,"" ,"" ,"" ,"" ,"" ,"" ,"" ,"" ,"rl" ,
+               "rl" ,"" ,"" ,"" ,"" ,"" ,"" ,"" ,"" ,"" ,"" ,"" ,"" ,"" ,"rl" ,
+               "rl" ,"" ,"" ,"" ,"" ,"" ,"" ,"" ,"" ,"" ,"" ,"" ,"" ,"" ,"rl" ,
+               "rl" ,"" ,"" ,"" ,"" ,"" ,"" ,"" ,"" ,"" ,"" ,"" ,"" ,"" ,"rl" ,
+               "rl" ,"" ,"" ,"" ,"" ,"" ,"" ,"" ,"" ,"" ,"" ,"" ,"" ,"" ,"rl" ,
+               "l" ,"" ,"" ,"" ,"" ,"" ,"" ,"" ,"" ,"" ,"" ,"" ,"" ,"" ,"rl" ,
+               "rl" ,"" ,"" ,"" ,"" ,"" ,"" ,"" ,"" ,"" ,"" ,"" ,"" ,"" ,"rl" ,
+               "l" ,"" ,"" ,"" ,"" ,"" ,"" ,"" ,"" ,"" ,"" ,"" ,"" ,"" ,"rl" ,
+               "bl" ,"tb" ,"tb" ,"tb" ,"b" ,"b" ,"b" ,"b" ,"b" ,"rb" ,"bl" ,"b" ,"b" ,"b" ,"rb" ,
+]
+
+matrix_maze = [False, False, True, False, False, False, True, False, False, False, False, False, False, True, False,
+               True, False, False, False, True, False, False, False, True, True, True, True, True, False, False,
+               False, False, True, True, True, True, True, False, True, True, True, False, False, False, True,
+               False, True, True, False, False, False, False, False, False, False, True, False, True, True, False,
+               False, False, True, False, True, True, True, True, True, False, True, False, True, False, False,
+               True, False, True, False, True, False, False, False, True, False, True, False, False, False, True,
+               False, False, True, False, True, False, True, False, True, False, True, True, True, False, False,
+               False, True, True, False, True, False, True, True, True, False, True, False, True, True, False,
+               False, False, True, False, True, False, False, False, False, False, True, False, True, True, False,
+               True, False, True, False, True, True, True, True, True, True, True, False, True, True, False,
+               False, False, True, False, False, False, False, False, False, False, False, False, True, False, False,
+               False, True, True, True, True, True, True, True, False, True, True, True, True, False, True,
+               False, False, True, True, False, False, False, True, False, False, False, False, False, False, False,
+               True, True, True, False, False, True, False, False, True, False, True, True, True, False, True,
+               False, False, False, False, True, False, False, False, False, False, False, True, False, False, False,
+               ]
+matrix_test = [True, True, True, True, True, True, True, True, True, True, True, True, True, True, True,
+               True, True, True, True, True, True, True, True, True, True, True, True, True, True, True,
+               True, True, True, True, True, True, True, True, True, True, True, True, True, True, True,
+               True, True, True, True, True, True, True, True, True, True, True, True, True, True, True,
+               True, True, True, True, True, True, True, True, True, True, True, True, True, True, True,
+               True, True, True, True, True, True, True, True, True, True, True, True, True, True, True,
+               True, True, True, True, True, True, True, True, True, True, True, True, True, True, True,
+               True, True, True, True, True, True, True, True, True, True, True, True, True, True, True,
+               True, True, True, True, True, True, True, True, True, True, True, True, True, True, True,
+               True, True, True, True, True, True, True, True, True, True, True, True, True, True, True,
+               True, True, True, True, True, True, True, True, True, True, True, True, True, True, True,
+               True, True, True, True, True, True, True, True, True, True, True, True, True, True, True,
+               True, True, True, True, True, True, True, True, True, True, True, True, True, True, True,
+               True, True, True, True, True, True, True, True, True, True, True, True, True, True, True,
+               True, True, True, True, True, True, True, True, True, True, True, True, True, True, True,
+]
 
 class SurroundingsElement:
     """
@@ -52,7 +101,7 @@ class SurroundingsElement:
 
 
 class SurroundigsSprite(pg.sprite.Sprite):
-    def __init__(self, color=(0, 0, 0), width=20, height=20):
+    def __init__(self, color=(0, 0, 0), width=50, height=50):
         super(SurroundigsSprite, self).__init__()
         self.image = pg.Surface((width, height))
         self.image.fill(color)
@@ -65,29 +114,51 @@ class SurroundigsSprite(pg.sprite.Sprite):
     def set_image(self, filename=None):
         if filename is not None:
             self.image = pg.image.load(filename)
-            self.rect = self.image.get_rect()
+            #self.rect = self.image.get_rect()
+
+
+def sort_wall(list_pictures, group):
+    for element in list_pictures:
+        if element == "b":
+            pass
+
+
+def landscape(list_pictures, group):
+    for x in range(0, 750, 50):
+        for element in list_pictures:
+            pass
 
 
 if __name__ == "__main__":
     import Labyrinthe.Package.Window as Wd
     pg.init()
     pg.display.set_caption("Aidez MacGyver à s'échapper !")
-    window = Wd.Window(600, 600)
-    window = window.display_window()
-    window.fill((255, 255, 255))
+    window = Wd.Window(770, 770)
+    window_displayed = window.display_window()
     clock = pg.time.Clock()
     fps = 60
-    sprites_group = pg.sprite.Group()
-    sprites_landscape = pg.sprite.Group()
-    wall = SurroundigsSprite((192, 192, 192))
-    wall.set_image("./Pictures/brown_block.png")
-    first_sprite = SurroundigsSprite()
-    second_sprite = SurroundigsSprite((0, 0, 128))
-    first_sprite.set_position(50, 50)
-    second_sprite.set_position(75, 75)
-    wall.set_position(210, 210)
-    sprites_group.add(first_sprite, second_sprite, wall)
-    sprites_group.draw(window)
+    walls_group = pg.sprite.Group()
+    list_bool = [True, False]
+    y = 0
+    x = 0
+    end_window = 750
+    window.set_background_on(window_displayed, 0, 0)
+    while (y and x) < end_window:
+        for element in matrix_maze:
+            if x == end_window:
+                x = 0
+                y += 50
+            if element:
+                wall = SurroundigsSprite()
+                wall.set_position(x, y)
+                wall.set_image("./Pictures/Wall/big_brown_block.png")
+                walls_group.add(wall)
+                walls_group.draw(window_displayed)
+            else:
+                pass
+            x += 50
+    print(walls_group.sprites())
+    print(len(walls_group))
     launched = True
     while launched:
         for event in pg.event.get():

@@ -115,7 +115,7 @@ def main():
         # mc_gyver.start_move_avatar(event)
         Wd.color_window(surface)
         brown_block.initialize_landscape(brown_block_picture, surface, window_base)
-        mc_gyver.set_avatar(mc_gyver_avatar, surface)
+        #mc_gyver.set_avatar(mc_gyver_avatar, surface)
         watchman.set_avatar(watchman_avatar, surface)
         # needle.set_element(needle_picture, surface)
         # tube.set_element(tube_picture, surface)

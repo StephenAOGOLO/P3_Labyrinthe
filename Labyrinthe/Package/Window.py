@@ -18,6 +18,7 @@ class Window:
         self.width = width
         self.height = height
         self.rgb_colors = BACKGROUND
+        self.picture = pg.image.load("./Pictures/Wall/block_background.png")
 
     def display_window(self):
         """
@@ -53,6 +54,10 @@ class Window:
         """
         avatar = pg.image.load(self.picture)
         return avatar
+
+    def set_background_on(self, window, x, y):
+        picture_set = window.blit(self.picture, (x, y))
+        return picture_set
 
 
 def color_window(window, color=BACKGROUND):
