@@ -134,19 +134,37 @@ class CharactersSprite(pg.sprite.Sprite):
             pass
         if event.type == pg.KEYDOWN:
             if arrow_key[pg.K_UP]:
-                mc_gyver_move_y = -1
+                mc_gyver_move_y = -10
                 mc_gyver_move_x = 0
             elif arrow_key[pg.K_DOWN]:
-                mc_gyver_move_y = 1
+                mc_gyver_move_y = 10
                 mc_gyver_move_x = 0
             elif arrow_key[pg.K_RIGHT]:
-                mc_gyver_move_x = 1
+                mc_gyver_move_x = 10
                 mc_gyver_move_y = 0
             elif arrow_key[pg.K_LEFT]:
-                mc_gyver_move_x = -1
+                mc_gyver_move_x = -10
                 mc_gyver_move_y = 0
+            else:
+                pass
         self.rect.x += mc_gyver_move_x
         self.rect.y += mc_gyver_move_y
+
+    def stop_move_avatar(self, event, limit_x, limit_y):
+        """
+
+        :return:
+        """
+        arrow_key = pg.key.get_pressed()
+        if event.type == pg.KEYDOWN:
+            if arrow_key[pg.K_UP]:
+                self.rect.y = 0
+            elif arrow_key[pg.K_DOWN]:
+                self.rect.y = limit_y
+            elif arrow_key[pg.K_RIGHT]:
+                self.rect.x = limit_x
+            elif arrow_key[pg.K_LEFT]:
+                self.rect.x = 0
 
 
 if __name__ == "__main__":

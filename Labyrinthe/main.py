@@ -9,7 +9,7 @@ import Labyrinthe.Package.Characters as Character
 import Labyrinthe.Package.Surroundings as Sd
 
 
-def in_progress_main():
+def first_main_off():
     """
     All the main operations are handle into this function.
     When this funtion is running, a green window is launched.
@@ -59,7 +59,7 @@ def custom_message(text, font):
     return text_area, text_area.get_rect()
 
 
-def main():
+def second_main_off():
     """
     All the main operations are handle into this function.
     When this funtion is running, a green window is launched.
@@ -139,6 +139,73 @@ def main():
     # mc_gyver.set_avatar(mc_gyver_avatar, surface)
     # watchman.set_avatar(watchman_avatar, surface)
     # pg.display.update()
+
+
+def running_maze(window_displayed):
+    """
+
+    :param window_displayed:
+    :return:
+    """
+    y = 0
+    x = 0
+    end_window = 750
+    walls_group = pg.sprite.Group()
+    while (y and x) < end_window:
+        for element in Sd.matrix_maze:
+            if x == end_window:
+                x = 0
+                y += 50
+            if element:
+                wall = Sd.SurroundigsSprite()
+                wall.set_position(x, y)
+                wall.set_image("./Package/Pictures/Wall/big_brown_block.png")
+                walls_group.add(wall)
+                walls_group.draw(window_displayed)
+            else:
+                pass
+            x += 50
+
+
+def main():
+    """
+
+    :return:
+    """
+    import Labyrinthe.Package.Window as Wd
+    pg.init()
+    window_x = 770
+    window_y = 770
+    limit_window_x = window_x - 70
+    limit_window_y = window_y - 70
+    pg.display.set_caption("Aidez MacGyver à s'échapper !")
+    window = Wd.Window(770, 770)
+    window_displayed = window.display_window()
+    clock = pg.time.Clock()
+    fps = 60
+    mc_gyver_sprite = Character.CharactersSprite()
+    mc_gyver_sprite.set_position(1, 1)
+    mc_gyver_sprite.set_image("./Package/Pictures/MacGyver.png")
+    sprite_char_group = pg.sprite.Group()
+    mc_gyver_sprite.add_to_group(sprite_char_group)
+    launched = True
+    while launched:
+        for event in pg.event.get():
+            if event.type == pg.QUIT:
+                launched = False
+            mc_gyver_sprite.start_move_avatar(event)
+            window.set_background_on(window_displayed, 0, 0)
+            running_maze(window_displayed)
+            sprite_char_group.draw(window_displayed)
+        if mc_gyver_sprite.rect.y > limit_window_y or mc_gyver_sprite.rect.y < 20:
+            message("Aie !!!! un mur !!!", window, window_displayed)
+            mc_gyver_sprite.stop_move_avatar(event, limit_window_x, limit_window_y)
+        if mc_gyver_sprite.rect.x > limit_window_x or mc_gyver_sprite.rect.x < 20:
+            message("Aie !!!! un mur !!!", window, window_displayed)
+            mc_gyver_sprite.stop_move_avatar(event, limit_window_x, limit_window_y)
+        clock.tick(fps)
+        pg.display.update()
+    pg.quit()
 
 
 if __name__ == "__main__":
