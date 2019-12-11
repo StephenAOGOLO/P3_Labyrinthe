@@ -115,7 +115,7 @@ class CharactersSprite(pg.sprite.Sprite):
     def set_image(self, filename=None):
         if filename is not None:
             self.image = pg.image.load(filename)
-            self.rect = self.image.get_rect()
+            #self.rect = self.image.get_rect()
 
     def add_to_group(self, group):
         sprite_group = group.add(self)
@@ -134,16 +134,20 @@ class CharactersSprite(pg.sprite.Sprite):
             pass
         if event.type == pg.KEYDOWN:
             if arrow_key[pg.K_UP]:
-                mc_gyver_move_y = -10
+                pg.key.set_repeat(1)
+                mc_gyver_move_y = -50
                 mc_gyver_move_x = 0
             elif arrow_key[pg.K_DOWN]:
-                mc_gyver_move_y = 10
+                pg.key.set_repeat(1)
+                mc_gyver_move_y = 50
                 mc_gyver_move_x = 0
             elif arrow_key[pg.K_RIGHT]:
-                mc_gyver_move_x = 10
+                pg.key.set_repeat(1)
+                mc_gyver_move_x = 50
                 mc_gyver_move_y = 0
             elif arrow_key[pg.K_LEFT]:
-                mc_gyver_move_x = -10
+                pg.key.set_repeat(1)
+                mc_gyver_move_x = -50
                 mc_gyver_move_y = 0
             else:
                 pass
