@@ -70,16 +70,16 @@ class Characters:
             pass
         if event.type == pg.KEYDOWN:
             if arrow_key[pg.K_UP]:
-                mc_gyver_move_y = -1
+                mc_gyver_move_y = -0.1
                 mc_gyver_move_x = 0
             elif arrow_key[pg.K_DOWN]:
-                mc_gyver_move_y = 1
+                mc_gyver_move_y = 0.1
                 mc_gyver_move_x = 0
             elif arrow_key[pg.K_RIGHT]:
-                mc_gyver_move_x = 1
+                mc_gyver_move_x = 0.1
                 mc_gyver_move_y = 0
             elif arrow_key[pg.K_LEFT]:
-                mc_gyver_move_x = -1
+                mc_gyver_move_x = -0.1
                 mc_gyver_move_y = 0
         self.posx += mc_gyver_move_x
         self.posy += mc_gyver_move_y
@@ -162,13 +162,13 @@ class CharactersSprite(pg.sprite.Sprite):
         arrow_key = pg.key.get_pressed()
         if event.type == pg.KEYDOWN:
             if arrow_key[pg.K_UP]:
-                self.rect.y = 0
-            elif arrow_key[pg.K_DOWN]:
+                self.rect.y = 50
+            if arrow_key[pg.K_DOWN]:
                 self.rect.y = limit_y
-            elif arrow_key[pg.K_RIGHT]:
+            if arrow_key[pg.K_RIGHT]:
                 self.rect.x = limit_x
-            elif arrow_key[pg.K_LEFT]:
-                self.rect.x = 0
+            if arrow_key[pg.K_LEFT]:
+                self.rect.x = 50
 
 
 if __name__ == "__main__":

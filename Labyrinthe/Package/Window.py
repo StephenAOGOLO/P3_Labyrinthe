@@ -18,7 +18,7 @@ class Window:
         self.width = width
         self.height = height
         self.rgb_colors = BACKGROUND
-        self.picture = pg.image.load("./Package/Pictures/Wall/block_background.png")
+        self.picture = pg.image.load("./Package/Pictures/Wall/blue_background_850_850.png")
 
     def display_window(self):
         """

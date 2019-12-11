@@ -145,15 +145,14 @@ def running_maze(window_displayed):
     """
 
     :param window_displayed:
-    :param sprite_player:
     :return:
     """
     y = 0
     x = 0
-    end_window = 750
+    end_window = 850
     walls_group = pg.sprite.Group()
     while (y and x) < end_window:
-        for element in Sd.matrix_maze:
+        for element in Sd.matrix_maze_2:
             if x == end_window:
                 x = 0
                 y += 50
@@ -174,19 +173,20 @@ def main():
     :return:
     """
     pg.init()
-    window_x = 770
-    window_y = 770
-    limit_window_x = window_x - 70
-    limit_window_y = window_y - 70
+    window_x = 850
+    window_y = 850
+    limit_window_x = window_x - 100
+    limit_window_y = window_y - 100
     pg.display.set_caption("Aidez MacGyver à s'échapper !")
-    window = Wd.Window(770, 770)
+    window = Wd.Window(window_x, window_y)
     window_displayed = window.display_window()
+    window.set_background_on(window_displayed, 0, 0)
     clock = pg.time.Clock()
     fps = 60
     mc_gyver_sprite = Character.CharactersSprite()
     watchman_sprite = Character.CharactersSprite()
-    mc_gyver_sprite.set_position(350, 300)
-    watchman_sprite.set_position(700, 20)
+    mc_gyver_sprite.set_position(400, 350)
+    watchman_sprite.set_position(750, 50)
     mc_gyver_sprite.set_image("./Package/Pictures/MacGyver.png")
     watchman_sprite.set_image("./Package/Pictures/Gardien.png")
     sprite_char_group = pg.sprite.Group()
@@ -201,10 +201,10 @@ def main():
         window.set_background_on(window_displayed, 0, 0)
         running_maze(window_displayed)
         sprite_char_group.draw(window_displayed)
-        if mc_gyver_sprite.rect.y > limit_window_y or mc_gyver_sprite.rect.y < 20:
+        if mc_gyver_sprite.rect.y > limit_window_y or mc_gyver_sprite.rect.y < 100:
             message("Aie !!!! un mur !!!", window, window_displayed)
             mc_gyver_sprite.stop_move_avatar(event, limit_window_x, limit_window_y)
-        if mc_gyver_sprite.rect.x > limit_window_x or mc_gyver_sprite.rect.x < 20:
+        if mc_gyver_sprite.rect.x > limit_window_x or mc_gyver_sprite.rect.x < 100:
             message("Aie !!!! un mur !!!", window, window_displayed)
             mc_gyver_sprite.stop_move_avatar(event, limit_window_x, limit_window_y)
         clock.tick(fps)
