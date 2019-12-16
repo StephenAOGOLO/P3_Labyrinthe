@@ -128,7 +128,7 @@ class CharactersSprite(pg.sprite.Sprite):
         sprite_group = group.add(self)
         return sprite_group
 
-    def start_move_avatar(self, event, list_ghost_status):
+    def start_move_avatar(self, event, list_ghost_status=[True, True, True, True]):
         """
 
         :param event:
@@ -143,7 +143,7 @@ class CharactersSprite(pg.sprite.Sprite):
             pass
         if event.type == pg.KEYDOWN:
             if arrow_key[pg.K_UP] and list_ghost_status[0]:
-                pg.key.set_repeat(1, 2)
+                pg.key.set_repeat(1000, 250)
                 mc_gyver_move_y = -50
                 mc_gyver_move_x = 0
                 self.rect.x += mc_gyver_move_x
@@ -151,7 +151,7 @@ class CharactersSprite(pg.sprite.Sprite):
             elif arrow_key[pg.K_UP] and not list_ghost_status[0]:
                 pass
             elif arrow_key[pg.K_RIGHT] and list_ghost_status[1]:
-                pg.key.set_repeat(1, 2)
+                pg.key.set_repeat(1000, 250)
                 mc_gyver_move_x = 50
                 mc_gyver_move_y = 0
                 self.rect.x += mc_gyver_move_x
@@ -159,7 +159,7 @@ class CharactersSprite(pg.sprite.Sprite):
             elif arrow_key[pg.K_RIGHT] and not list_ghost_status[1]:
                 pass
             elif arrow_key[pg.K_DOWN] and list_ghost_status[2]:
-                pg.key.set_repeat(1, 2)
+                pg.key.set_repeat(1000, 250)
                 mc_gyver_move_y = 50
                 mc_gyver_move_x = 0
                 self.rect.x += mc_gyver_move_x
@@ -167,7 +167,7 @@ class CharactersSprite(pg.sprite.Sprite):
             elif arrow_key[pg.K_DOWN] and not list_ghost_status[2]:
                 pass
             elif arrow_key[pg.K_LEFT] and list_ghost_status[3]:
-                pg.key.set_repeat(1, 2)
+                pg.key.set_repeat(1000, 250)
                 mc_gyver_move_x = -50
                 mc_gyver_move_y = 0
                 self.rect.x += mc_gyver_move_x
@@ -184,14 +184,16 @@ class CharactersSprite(pg.sprite.Sprite):
         """
         arrow_key = pg.key.get_pressed()
         if event.type == pg.KEYDOWN:
-            if arrow_key[pg.K_UP]:
+            if arrow_key[pg.K_UP] and (limit_x > self.rect.x > 50):
                 self.rect.y = 50
-            if arrow_key[pg.K_DOWN]:
+            elif arrow_key[pg.K_DOWN] and (limit_x > self.rect.x > 50):
                 self.rect.y = limit_y
-            if arrow_key[pg.K_RIGHT]:
+            elif arrow_key[pg.K_RIGHT] and (limit_y > self.rect.y > 50):
                 self.rect.x = limit_x
-            if arrow_key[pg.K_LEFT]:
+            elif arrow_key[pg.K_LEFT] and (limit_y > self.rect.y > 50):
                 self.rect.x = 50
+            else:
+                pass
 
 
 if __name__ == "__main__":

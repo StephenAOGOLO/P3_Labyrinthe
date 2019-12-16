@@ -186,6 +186,12 @@ def browsing_maze(sprite, sprite_group, sprite_name="sprite"):
     print("*" * 100)
     return True
 
+def draw_all_things(window, window_displayed, the_maze, sprite_char_group):
+
+    window.set_background_on(window_displayed, 0, 0)
+    walls_group = the_maze.initialize_maze(window_displayed)
+    sprite_char_group.draw(window_displayed)
+    return walls_group
 
 def main():
     """
@@ -230,7 +236,8 @@ def main():
             if event.type == pg.QUIT:
                 launched = False
             window.set_background_on(window_displayed, 0, 0)
-            walls_group = the_maze.initialize_maze(window_displayed, mc_gyver_sprite, watchman_sprite)
+            walls_group = the_maze.initialize_maze(window_displayed)
+            sprite_char_group.draw(window_displayed)
             top_ghost.set_position(mc_gyver_sprite.rect.x, mc_gyver_sprite.rect.y - 50)
             bottom_ghost.set_position(mc_gyver_sprite.rect.x, mc_gyver_sprite.rect.y + 50)
             left_ghost.set_position(mc_gyver_sprite.rect.x - 50, mc_gyver_sprite.rect.y)
@@ -243,7 +250,6 @@ def main():
             list_ghost_status = [top_collision_status, right_collision_status,
                                  bottom_collision_status, left_collision_status]
             mc_gyver_sprite.start_move_avatar(event, list_ghost_status)
-            sprite_char_group.draw(window_displayed)
             if mc_gyver_sprite.rect.y > limit_window_y or mc_gyver_sprite.rect.y < 100:
                 message("Aie !!!! un mur !!!", window, window_displayed)
                 mc_gyver_sprite.stop_move_avatar(event, limit_window_x, limit_window_y)
