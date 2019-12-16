@@ -107,10 +107,17 @@ class CharactersSprite(pg.sprite.Sprite):
         self.image = pg.Surface((width, height))
         self.image.fill(color)
         self.rect = self.image.get_rect()
+        self.last_x = 400
+        self.last_y = 350
 
     def set_position(self, x, y):
         self.rect.x = x
         self.rect.y = y
+
+    def reset_last_position(self):
+        self.rect.x = self.last_x
+        self.rect.y = self.last_y
+        return self.rect.x, self.rect.y
 
     def set_image(self, filename=None):
         if filename is not None:
@@ -121,38 +128,54 @@ class CharactersSprite(pg.sprite.Sprite):
         sprite_group = group.add(self)
         return sprite_group
 
-    def start_move_avatar(self, event):
+    def start_move_avatar(self, event, list_ghost_status):
         """
 
         :param event:
         :return:
         """
+        self.last_x = self.rect.x
+        self.last_y = self.rect.y
         mc_gyver_move_x = 0
         mc_gyver_move_y = 0
         arrow_key = pg.key.get_pressed()
         if event.type == pg.KEYUP:
             pass
         if event.type == pg.KEYDOWN:
-            if arrow_key[pg.K_UP]:
-                pg.key.set_repeat(1)
+            if arrow_key[pg.K_UP] and list_ghost_status[0]:
+                pg.key.set_repeat(1, 2)
                 mc_gyver_move_y = -50
                 mc_gyver_move_x = 0
-            elif arrow_key[pg.K_DOWN]:
-                pg.key.set_repeat(1)
-                mc_gyver_move_y = 50
-                mc_gyver_move_x = 0
-            elif arrow_key[pg.K_RIGHT]:
-                pg.key.set_repeat(1)
+                self.rect.x += mc_gyver_move_x
+                self.rect.y += mc_gyver_move_y
+            elif arrow_key[pg.K_UP] and not list_ghost_status[0]:
+                pass
+            elif arrow_key[pg.K_RIGHT] and list_ghost_status[1]:
+                pg.key.set_repeat(1, 2)
                 mc_gyver_move_x = 50
                 mc_gyver_move_y = 0
-            elif arrow_key[pg.K_LEFT]:
-                pg.key.set_repeat(1)
+                self.rect.x += mc_gyver_move_x
+                self.rect.y += mc_gyver_move_y
+            elif arrow_key[pg.K_RIGHT] and not list_ghost_status[1]:
+                pass
+            elif arrow_key[pg.K_DOWN] and list_ghost_status[2]:
+                pg.key.set_repeat(1, 2)
+                mc_gyver_move_y = 50
+                mc_gyver_move_x = 0
+                self.rect.x += mc_gyver_move_x
+                self.rect.y += mc_gyver_move_y
+            elif arrow_key[pg.K_DOWN] and not list_ghost_status[2]:
+                pass
+            elif arrow_key[pg.K_LEFT] and list_ghost_status[3]:
+                pg.key.set_repeat(1, 2)
                 mc_gyver_move_x = -50
                 mc_gyver_move_y = 0
+                self.rect.x += mc_gyver_move_x
+                self.rect.y += mc_gyver_move_y
+            elif arrow_key[pg.K_LEFT] and not list_ghost_status[3]:
+                pass
             else:
                 pass
-        self.rect.x += mc_gyver_move_x
-        self.rect.y += mc_gyver_move_y
 
     def stop_move_avatar(self, event, limit_x, limit_y):
         """

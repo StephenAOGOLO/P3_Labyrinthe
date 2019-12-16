@@ -165,6 +165,26 @@ def running_maze(window_displayed):
             else:
                 pass
             x += 50
+        break
+    state = True
+    return state
+
+
+def browsing_maze(sprite, sprite_group, sprite_name="sprite"):
+
+    blocks_hit_list = pg.sprite.spritecollide(sprite, sprite_group, False)
+    print("*" * 100)
+    print("Event of the sprite : {}\n".format(sprite_name))
+    print("***")
+    for index, block in enumerate(blocks_hit_list):
+        print(index, block)
+        if block:
+            return False
+        else:
+            return True
+    print("***")
+    print("*" * 100)
+    return True
 
 
 def main():
@@ -173,8 +193,9 @@ def main():
     :return:
     """
     pg.init()
-    window_x = 850
-    window_y = 850
+    window_size = 850
+    window_x = window_size
+    window_y = window_size
     limit_window_x = window_x - 100
     limit_window_y = window_y - 100
     pg.display.set_caption("Aidez MacGyver à s'échapper !")
@@ -187,26 +208,48 @@ def main():
     watchman_sprite = Character.CharactersSprite()
     mc_gyver_sprite.set_position(400, 350)
     watchman_sprite.set_position(750, 50)
+    top_ghost = Character.CharactersSprite()
+    bottom_ghost = Character.CharactersSprite()
+    left_ghost = Character.CharactersSprite()
+    right_ghost = Character.CharactersSprite()
+    top_ghost.set_position(mc_gyver_sprite.rect.x, mc_gyver_sprite.rect.y-50)
+    bottom_ghost.set_position(mc_gyver_sprite.rect.x, mc_gyver_sprite.rect.y+50)
+    left_ghost.set_position(mc_gyver_sprite.rect.x-50, mc_gyver_sprite.rect.y)
+    right_ghost.set_position(mc_gyver_sprite.rect.x+50, mc_gyver_sprite.rect.y)
+    ghost_group = pg.sprite.Group()
+    ghost_group.add(top_ghost, bottom_ghost, right_ghost, left_ghost)
     mc_gyver_sprite.set_image("./Package/Pictures/MacGyver.png")
     watchman_sprite.set_image("./Package/Pictures/Gardien.png")
     sprite_char_group = pg.sprite.Group()
     mc_gyver_sprite.add_to_group(sprite_char_group)
     watchman_sprite.add_to_group(sprite_char_group)
+    the_maze = Maze.Maze(window_size)
     launched = True
     while launched:
         for event in pg.event.get():
             if event.type == pg.QUIT:
                 launched = False
-        mc_gyver_sprite.start_move_avatar(event)
-        window.set_background_on(window_displayed, 0, 0)
-        running_maze(window_displayed)
-        sprite_char_group.draw(window_displayed)
-        if mc_gyver_sprite.rect.y > limit_window_y or mc_gyver_sprite.rect.y < 100:
-            message("Aie !!!! un mur !!!", window, window_displayed)
-            mc_gyver_sprite.stop_move_avatar(event, limit_window_x, limit_window_y)
-        if mc_gyver_sprite.rect.x > limit_window_x or mc_gyver_sprite.rect.x < 100:
-            message("Aie !!!! un mur !!!", window, window_displayed)
-            mc_gyver_sprite.stop_move_avatar(event, limit_window_x, limit_window_y)
+            window.set_background_on(window_displayed, 0, 0)
+            walls_group = the_maze.initialize_maze(window_displayed, mc_gyver_sprite, watchman_sprite)
+            top_ghost.set_position(mc_gyver_sprite.rect.x, mc_gyver_sprite.rect.y - 50)
+            bottom_ghost.set_position(mc_gyver_sprite.rect.x, mc_gyver_sprite.rect.y + 50)
+            left_ghost.set_position(mc_gyver_sprite.rect.x - 50, mc_gyver_sprite.rect.y)
+            right_ghost.set_position(mc_gyver_sprite.rect.x + 50, mc_gyver_sprite.rect.y)
+            pg.sprite.Group.update(ghost_group)
+            top_collision_status = browsing_maze(top_ghost, walls_group, "top_ghost")
+            right_collision_status = browsing_maze(right_ghost, walls_group, "right_ghost")
+            bottom_collision_status = browsing_maze(bottom_ghost, walls_group, "bottom_ghost")
+            left_collision_status = browsing_maze(left_ghost, walls_group, "left_ghost")
+            list_ghost_status = [top_collision_status, right_collision_status,
+                                 bottom_collision_status, left_collision_status]
+            mc_gyver_sprite.start_move_avatar(event, list_ghost_status)
+            sprite_char_group.draw(window_displayed)
+            if mc_gyver_sprite.rect.y > limit_window_y or mc_gyver_sprite.rect.y < 100:
+                message("Aie !!!! un mur !!!", window, window_displayed)
+                mc_gyver_sprite.stop_move_avatar(event, limit_window_x, limit_window_y)
+            if mc_gyver_sprite.rect.x > limit_window_x or mc_gyver_sprite.rect.x < 100:
+                message("Aie !!!! un mur !!!", window, window_displayed)
+                mc_gyver_sprite.stop_move_avatar(event, limit_window_x, limit_window_y)
         clock.tick(fps)
         pg.display.update()
     pg.quit()
