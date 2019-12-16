@@ -105,7 +105,6 @@ if __name__ == "__main__":
             window.set_background_on(window_displayed, 0, 0)
             char_group.draw(window_displayed)
             surrounding_group.draw(window_displayed)
-            a_sprite_char.s
             pg.display.update()
     pg.quit()
 
