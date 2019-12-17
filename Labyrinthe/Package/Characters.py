@@ -1,4 +1,5 @@
 import pygame as pg
+import random as rd
 
 STARTX = 150
 STARTY = 200
@@ -153,11 +154,15 @@ class CharactersSprite(pg.sprite.Sprite):
                 mc_gyver_move_x = 0
                 self.rect.x += mc_gyver_move_x
                 self.rect.y += mc_gyver_move_y
-                picture_behavior = "./Package/Pictures/Above_MacGyver/a_mg_w1_u_f.png"
+                chance = rd.randrange(1, 3)
+                if chance == 1:
+                    picture_behavior = "./Package/Pictures/Above_MacGyver/a_mg_w1_t_f.png"
+                else:
+                    picture_behavior = "./Package/Pictures/Above_MacGyver/a_mg_w2_t_f.png"
                 self.set_image(picture_behavior)
                 move_status = True
             elif arrow_key[pg.K_UP] and not list_ghost_status[0]:
-                picture_behavior = "./Package/Pictures/Above_MacGyver/a_mg_w1_u_f.png"
+                picture_behavior = "./Package/Pictures/Above_MacGyver/a_mg_w1_t_f.png"
                 self.set_image(picture_behavior)
             elif arrow_key[pg.K_RIGHT] and list_ghost_status[1]:
                 pg.key.set_repeat(1000, 250)
@@ -165,7 +170,11 @@ class CharactersSprite(pg.sprite.Sprite):
                 mc_gyver_move_y = 0
                 self.rect.x += mc_gyver_move_x
                 self.rect.y += mc_gyver_move_y
-                picture_behavior = "./Package/Pictures/Above_MacGyver/a_mg_w1_r_f.png"
+                chance = rd.randrange(1, 3)
+                if chance == 1:
+                    picture_behavior = "./Package/Pictures/Above_MacGyver/a_mg_w1_r_f.png"
+                else:
+                    picture_behavior = "./Package/Pictures/Above_MacGyver/a_mg_w2_r_f.png"
                 self.set_image(picture_behavior)
                 move_status = True
             elif arrow_key[pg.K_RIGHT] and not list_ghost_status[1]:
@@ -177,7 +186,11 @@ class CharactersSprite(pg.sprite.Sprite):
                 mc_gyver_move_x = 0
                 self.rect.x += mc_gyver_move_x
                 self.rect.y += mc_gyver_move_y
-                picture_behavior = "./Package/Pictures/Above_MacGyver/a_mg_w1_b_f.png"
+                chance = rd.randrange(1, 3)
+                if chance == 1:
+                    picture_behavior = "./Package/Pictures/Above_MacGyver/a_mg_w1_b_f.png"
+                else:
+                    picture_behavior = "./Package/Pictures/Above_MacGyver/a_mg_w2_b_f.png"
                 self.set_image(picture_behavior)
                 move_status = True
             elif arrow_key[pg.K_DOWN] and not list_ghost_status[2]:
@@ -189,7 +202,11 @@ class CharactersSprite(pg.sprite.Sprite):
                 mc_gyver_move_y = 0
                 self.rect.x += mc_gyver_move_x
                 self.rect.y += mc_gyver_move_y
-                picture_behavior = "./Package/Pictures/Above_MacGyver/a_mg_w1_l_f.png"
+                chance = rd.randrange(1, 3)
+                if chance == 1:
+                    picture_behavior = "./Package/Pictures/Above_MacGyver/a_mg_w1_l_f.png"
+                else:
+                    picture_behavior = "./Package/Pictures/Above_MacGyver/a_mg_w2_l_f.png"
                 self.set_image(picture_behavior)
                 move_status = True
             elif arrow_key[pg.K_LEFT] and not list_ghost_status[3]:

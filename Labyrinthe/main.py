@@ -279,10 +279,10 @@ def main():
             sprite_char_group.draw(window_displayed)
             mc_gyver_group.draw(window_displayed)
             if mc_gyver_sprite.rect.y > limit_window_y or mc_gyver_sprite.rect.y < 100:
-                message("Aie !!!! un mur !!!", window, window_displayed)
+                #message("Aie !!!! un mur !!!", window, window_displayed)
                 mc_gyver_sprite.stop_move_avatar(event, limit_window_x, limit_window_y)
             if mc_gyver_sprite.rect.x > limit_window_x or mc_gyver_sprite.rect.x < 100:
-                message("Aie !!!! un mur !!!", window, window_displayed)
+                #message("Aie !!!! un mur !!!", window, window_displayed)
                 mc_gyver_sprite.stop_move_avatar(event, limit_window_x, limit_window_y)
         clock.tick(fps)
         pg.display.update()
