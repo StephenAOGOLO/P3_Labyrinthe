@@ -106,7 +106,7 @@ def second_main_off():
     mc_gyver_sprite.set_position(1, 1)
     mc_gyver_sprite.set_image("./Package/Pictures/MacGyver.png")
     # sprite_char_group.add(mc_gyver_sprite)
-    mc_gyver_sprite.add_to_group(sprite_char_group)
+    #mc_gyver_sprite.add_to_group(sprite_char_group)
     launched = True
     while launched:
         for event in pg.event.get():
@@ -186,12 +186,32 @@ def browsing_maze(sprite, sprite_group, sprite_name="sprite"):
     print("*" * 100)
     return True
 
-def draw_all_things(window, window_displayed, the_maze, sprite_char_group):
 
-    window.set_background_on(window_displayed, 0, 0)
-    walls_group = the_maze.initialize_maze(window_displayed)
-    sprite_char_group.draw(window_displayed)
-    return walls_group
+def remove_track(move_status, last_position, window_displayed):
+    remove_status = False
+    the_track = pg.sprite.Group()
+    track_sprite = Character.CharactersSprite()
+    if move_status:
+        track_sprite.set_position(last_position[0], last_position[1])
+        track_sprite.set_image("./Package/Pictures/Above_MacGyver/pyramid_sample.png")
+        the_track = pg.sprite.Group()
+        #the_track.draw(window_displayed)
+        remove_status = True
+        print("MOUVEMENT !!!!!!")
+        return track_sprite
+    else:
+        return track_sprite
+
+
+def game():
+    for event in pg.event.get():
+        if event.type == pg.QUIT:
+            pg.quit()
+            quit()
+        elif event.type == pg.KEYUP:
+            continue
+        return event.key
+    return None
 
 def main():
     """
@@ -224,20 +244,20 @@ def main():
     right_ghost.set_position(mc_gyver_sprite.rect.x+50, mc_gyver_sprite.rect.y)
     ghost_group = pg.sprite.Group()
     ghost_group.add(top_ghost, bottom_ghost, right_ghost, left_ghost)
-    mc_gyver_sprite.set_image("./Package/Pictures/MacGyver.png")
+    mc_gyver_sprite.set_image("./Package/Pictures/Above_MacGyver/a_mg_s_t_f.png")
     watchman_sprite.set_image("./Package/Pictures/Gardien.png")
     sprite_char_group = pg.sprite.Group()
-    mc_gyver_sprite.add_to_group(sprite_char_group)
     watchman_sprite.add_to_group(sprite_char_group)
     the_maze = Maze.Maze(window_size)
+    window.set_background_on(window_displayed, 0, 0)
+    walls_group = the_maze.initialize_maze(window_displayed)
     launched = True
     while launched:
         for event in pg.event.get():
             if event.type == pg.QUIT:
                 launched = False
-            window.set_background_on(window_displayed, 0, 0)
-            walls_group = the_maze.initialize_maze(window_displayed)
-            sprite_char_group.draw(window_displayed)
+            elif mc_gyver_sprite.rect.x == limit_window_x and mc_gyver_sprite.rect.y == 50:
+                game()
             top_ghost.set_position(mc_gyver_sprite.rect.x, mc_gyver_sprite.rect.y - 50)
             bottom_ghost.set_position(mc_gyver_sprite.rect.x, mc_gyver_sprite.rect.y + 50)
             left_ghost.set_position(mc_gyver_sprite.rect.x - 50, mc_gyver_sprite.rect.y)
@@ -249,7 +269,15 @@ def main():
             left_collision_status = browsing_maze(left_ghost, walls_group, "left_ghost")
             list_ghost_status = [top_collision_status, right_collision_status,
                                  bottom_collision_status, left_collision_status]
-            mc_gyver_sprite.start_move_avatar(event, list_ghost_status)
+            last_position = [mc_gyver_sprite.rect.x, mc_gyver_sprite.rect.y]
+            move_status = mc_gyver_sprite.start_move_avatar(event, list_ghost_status)
+            mc_gyver_sprite.standstill_avatar(move_status, event)
+            track_sprite = remove_track(move_status, last_position, window_displayed)
+            sprite_char_group.add(track_sprite)
+            mc_gyver_group = pg.sprite.Group()
+            mc_gyver_group.add(mc_gyver_sprite)
+            sprite_char_group.draw(window_displayed)
+            mc_gyver_group.draw(window_displayed)
             if mc_gyver_sprite.rect.y > limit_window_y or mc_gyver_sprite.rect.y < 100:
                 message("Aie !!!! un mur !!!", window, window_displayed)
                 mc_gyver_sprite.stop_move_avatar(event, limit_window_x, limit_window_y)

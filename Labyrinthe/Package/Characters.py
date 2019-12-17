@@ -128,19 +128,24 @@ class CharactersSprite(pg.sprite.Sprite):
         sprite_group = group.add(self)
         return sprite_group
 
+
     def start_move_avatar(self, event, list_ghost_status=[True, True, True, True]):
         """
 
         :param event:
         :return:
         """
+        print("event -->", event)
+        move_status = False
+        picture_behavior = "./Package/Pictures/Above_MacGyver/a_mg_s_t_f.png"
+        list_behavior = [move_status, picture_behavior]
         self.last_x = self.rect.x
         self.last_y = self.rect.y
         mc_gyver_move_x = 0
         mc_gyver_move_y = 0
         arrow_key = pg.key.get_pressed()
         if event.type == pg.KEYUP:
-            pass
+            self.set_image(picture_behavior)
         if event.type == pg.KEYDOWN:
             if arrow_key[pg.K_UP] and list_ghost_status[0]:
                 pg.key.set_repeat(1000, 250)
@@ -148,34 +153,75 @@ class CharactersSprite(pg.sprite.Sprite):
                 mc_gyver_move_x = 0
                 self.rect.x += mc_gyver_move_x
                 self.rect.y += mc_gyver_move_y
+                picture_behavior = "./Package/Pictures/Above_MacGyver/a_mg_w1_u_f.png"
+                self.set_image(picture_behavior)
+                move_status = True
             elif arrow_key[pg.K_UP] and not list_ghost_status[0]:
-                pass
+                picture_behavior = "./Package/Pictures/Above_MacGyver/a_mg_w1_u_f.png"
+                self.set_image(picture_behavior)
             elif arrow_key[pg.K_RIGHT] and list_ghost_status[1]:
                 pg.key.set_repeat(1000, 250)
                 mc_gyver_move_x = 50
                 mc_gyver_move_y = 0
                 self.rect.x += mc_gyver_move_x
                 self.rect.y += mc_gyver_move_y
+                picture_behavior = "./Package/Pictures/Above_MacGyver/a_mg_w1_r_f.png"
+                self.set_image(picture_behavior)
+                move_status = True
             elif arrow_key[pg.K_RIGHT] and not list_ghost_status[1]:
-                pass
+                picture_behavior = "./Package/Pictures/Above_MacGyver/a_mg_w1_r_f.png"
+                self.set_image(picture_behavior)
             elif arrow_key[pg.K_DOWN] and list_ghost_status[2]:
                 pg.key.set_repeat(1000, 250)
                 mc_gyver_move_y = 50
                 mc_gyver_move_x = 0
                 self.rect.x += mc_gyver_move_x
                 self.rect.y += mc_gyver_move_y
+                picture_behavior = "./Package/Pictures/Above_MacGyver/a_mg_w1_b_f.png"
+                self.set_image(picture_behavior)
+                move_status = True
             elif arrow_key[pg.K_DOWN] and not list_ghost_status[2]:
-                pass
+                picture_behavior = "./Package/Pictures/Above_MacGyver/a_mg_w1_b_f.png"
+                self.set_image(picture_behavior)
             elif arrow_key[pg.K_LEFT] and list_ghost_status[3]:
                 pg.key.set_repeat(1000, 250)
                 mc_gyver_move_x = -50
                 mc_gyver_move_y = 0
                 self.rect.x += mc_gyver_move_x
                 self.rect.y += mc_gyver_move_y
+                picture_behavior = "./Package/Pictures/Above_MacGyver/a_mg_w1_l_f.png"
+                self.set_image(picture_behavior)
+                move_status = True
             elif arrow_key[pg.K_LEFT] and not list_ghost_status[3]:
-                pass
+                picture_behavior = "./Package/Pictures/Above_MacGyver/a_mg_w1_l_f.png"
+                self.set_image(picture_behavior)
             else:
                 pass
+        return move_status
+
+    def standstill_avatar(self, move_status, event):
+        """
+
+        :param move_status:
+        :param event:
+        :return:
+        """
+        if event.type == 3 and event.key == 273:
+            last_event = event
+            print("dernier appui = ", last_event)
+            self.set_image("./Package/Pictures/Above_MacGyver/a_mg_s_t_f.png")
+        if event.type == 3 and event.key == 275:
+            last_event = event
+            print("dernier appui = ", last_event)
+            self.set_image("./Package/Pictures/Above_MacGyver/a_mg_s_r_f.png")
+        if event.type == 3 and event.key == 274:
+            last_event = event
+            print("dernier appui = ", last_event)
+            self.set_image("./Package/Pictures/Above_MacGyver/a_mg_s_b_f.png")
+        if event.type == 3 and event.key == 276:
+            last_event = event
+            print("dernier appui = ", last_event)
+            self.set_image("./Package/Pictures/Above_MacGyver/a_mg_s_l_f.png")
 
     def stop_move_avatar(self, event, limit_x, limit_y):
         """
