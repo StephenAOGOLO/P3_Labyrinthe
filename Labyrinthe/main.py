@@ -2,11 +2,13 @@
 
 import pygame as pg
 import configparser as cp
+import random as rd
 import Labyrinthe.Package.Mazes as Maze
 import Labyrinthe.Package.Options as Opt
 import Labyrinthe.Package.Window as Wd
 import Labyrinthe.Package.Characters as Character
 import Labyrinthe.Package.Surroundings as Sd
+import Labyrinthe.Package.Objects as Obj
 
 
 def first_main_off():
@@ -213,6 +215,45 @@ def game():
         return event.key
     return None
 
+
+def set_objects(window_displayed):
+    """
+
+    :param window_displayed:
+    :return:
+    """
+    list_forbidden = [15, 32, 49, 48, 127]
+    list_index = [index for index, element in enumerate(Sd.matrix_maze_2) if element is False]
+    for element in list_forbidden:
+        list_index.remove(element)
+    three_random_index = rd.sample(list_index, k=3)
+    dico_objects = {"a": three_random_index[0], "b": three_random_index[1], "c": three_random_index[2]}
+    y = 0
+    x = 0
+    end_window = 850
+    walls_group = pg.sprite.Group()
+    while (y and x) < end_window:
+        for key, value in dico_objects.items():
+            y = 0
+            x = 0
+            for e, element in enumerate(Sd.matrix_maze_2):
+                if x == end_window:
+                    x = 0
+                    y += 50
+                if element is False and e == value:
+                    wall = Obj.ObjectSprite(key)
+                    wall.set_position(x, y)
+                    print(wall.rect)
+                    wall.set_image("./Package/Pictures/Objects/sarcophagus_50x50.png")
+                    walls_group.add(wall)
+                    break
+                x += 50
+        break
+    walls_group.draw(window_displayed)
+    state = True
+    return state
+
+
 def main():
     """
 
@@ -251,6 +292,7 @@ def main():
     the_maze = Maze.Maze(window_size)
     window.set_background_on(window_displayed, 0, 0)
     walls_group = the_maze.initialize_maze(window_displayed)
+    set_objects(window_displayed)
     launched = True
     while launched:
         for event in pg.event.get():
