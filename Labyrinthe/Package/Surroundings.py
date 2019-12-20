@@ -52,7 +52,7 @@ matrix_test = [True, True, True, True, True, True, True, True, True, True, True,
 ]
 
 matrix_maze_2= [
-    True, True, True, True, True, True, True, True, True, True, True, True, True, True, True, True, True,
+    True, True, True, True, True, True, True, True, True, True, True, True, True, True, True, False, True,
     True, False, False, True, False, False, False, True, False, False, False, False, False, False, True, False, True,
     True, True, False, False, False, True, False, False, False, True, True, True, True, True, False, False, True,
     True, False, False, True, True, True, True, True, False, True, True, True, False, False, False, True, True,

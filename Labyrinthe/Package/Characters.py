@@ -1,4 +1,6 @@
 import pygame as pg
+import random as rd
+import Labyrinthe.Package.Objects as Obj
 
 STARTX = 150
 STARTY = 200
@@ -102,6 +104,9 @@ class Characters:
 
 
 class CharactersSprite(pg.sprite.Sprite):
+
+    list_status_objects = [False, False, False]
+
     def __init__(self, color=(0, 0, 0), width=20, height=20):
         super(CharactersSprite, self).__init__()
         self.image = pg.Surface((width, height))
@@ -122,12 +127,11 @@ class CharactersSprite(pg.sprite.Sprite):
     def set_image(self, filename=None):
         if filename is not None:
             self.image = pg.image.load(filename)
-            #self.rect = self.image.get_rect()
+            # self.rect = self.image.get_rect()
 
     def add_to_group(self, group):
         sprite_group = group.add(self)
         return sprite_group
-
 
     def start_move_avatar(self, event, list_ghost_status=[True, True, True, True]):
         """
@@ -153,11 +157,15 @@ class CharactersSprite(pg.sprite.Sprite):
                 mc_gyver_move_x = 0
                 self.rect.x += mc_gyver_move_x
                 self.rect.y += mc_gyver_move_y
-                picture_behavior = "./Package/Pictures/Above_MacGyver/a_mg_w1_u_f.png"
+                chance = rd.randrange(1, 3)
+                if chance == 1:
+                    picture_behavior = "./Package/Pictures/Above_MacGyver/a_mg_w1_t_f.png"
+                else:
+                    picture_behavior = "./Package/Pictures/Above_MacGyver/a_mg_w2_t_f.png"
                 self.set_image(picture_behavior)
                 move_status = True
             elif arrow_key[pg.K_UP] and not list_ghost_status[0]:
-                picture_behavior = "./Package/Pictures/Above_MacGyver/a_mg_w1_u_f.png"
+                picture_behavior = "./Package/Pictures/Above_MacGyver/a_mg_w1_t_f.png"
                 self.set_image(picture_behavior)
             elif arrow_key[pg.K_RIGHT] and list_ghost_status[1]:
                 pg.key.set_repeat(1000, 250)
@@ -165,7 +173,11 @@ class CharactersSprite(pg.sprite.Sprite):
                 mc_gyver_move_y = 0
                 self.rect.x += mc_gyver_move_x
                 self.rect.y += mc_gyver_move_y
-                picture_behavior = "./Package/Pictures/Above_MacGyver/a_mg_w1_r_f.png"
+                chance = rd.randrange(1, 3)
+                if chance == 1:
+                    picture_behavior = "./Package/Pictures/Above_MacGyver/a_mg_w1_r_f.png"
+                else:
+                    picture_behavior = "./Package/Pictures/Above_MacGyver/a_mg_w2_r_f.png"
                 self.set_image(picture_behavior)
                 move_status = True
             elif arrow_key[pg.K_RIGHT] and not list_ghost_status[1]:
@@ -177,7 +189,11 @@ class CharactersSprite(pg.sprite.Sprite):
                 mc_gyver_move_x = 0
                 self.rect.x += mc_gyver_move_x
                 self.rect.y += mc_gyver_move_y
-                picture_behavior = "./Package/Pictures/Above_MacGyver/a_mg_w1_b_f.png"
+                chance = rd.randrange(1, 3)
+                if chance == 1:
+                    picture_behavior = "./Package/Pictures/Above_MacGyver/a_mg_w1_b_f.png"
+                else:
+                    picture_behavior = "./Package/Pictures/Above_MacGyver/a_mg_w2_b_f.png"
                 self.set_image(picture_behavior)
                 move_status = True
             elif arrow_key[pg.K_DOWN] and not list_ghost_status[2]:
@@ -189,7 +205,11 @@ class CharactersSprite(pg.sprite.Sprite):
                 mc_gyver_move_y = 0
                 self.rect.x += mc_gyver_move_x
                 self.rect.y += mc_gyver_move_y
-                picture_behavior = "./Package/Pictures/Above_MacGyver/a_mg_w1_l_f.png"
+                chance = rd.randrange(1, 3)
+                if chance == 1:
+                    picture_behavior = "./Package/Pictures/Above_MacGyver/a_mg_w1_l_f.png"
+                else:
+                    picture_behavior = "./Package/Pictures/Above_MacGyver/a_mg_w2_l_f.png"
                 self.set_image(picture_behavior)
                 move_status = True
             elif arrow_key[pg.K_LEFT] and not list_ghost_status[3]:
@@ -240,6 +260,33 @@ class CharactersSprite(pg.sprite.Sprite):
                 self.rect.x = 50
             else:
                 pass
+
+    def be_collided(self, list_objects):
+
+        for index, sprite_object in enumerate(list_objects):
+            if pg.sprite.collide_rect(self, sprite_object):
+                Obj.ObjectSprite.list_status_objects[index] = True
+        total = Obj.ObjectSprite.list_status_objects.count(True)
+        list_status = Obj.ObjectSprite.list_status_objects
+        print("\nPICKED !!!!\nTOTAL = {}\nNeedle = {}\nTube = {}\nEther = {}\n"
+              .format(total, list_status[0], list_status[1], list_status[2]))
+        return Obj.ObjectSprite.list_status_objects
+
+    def prepared_objects_for(self, sprite_boss):
+        end_game_status = False
+        if Obj.ObjectSprite.total_objects():
+            CharactersSprite.set_image(sprite_boss, "./Package/Pictures/Above_Watchman/a_w_ss2_f.png")
+            print("Catch the WatchMan !!! Man !!!")
+            if pg.sprite.collide_rect(self, sprite_boss):
+                CharactersSprite.set_position(sprite_boss, 750, 0)
+                CharactersSprite.set_image(sprite_boss, "./Package/Pictures/Above_Watchman/a_w_ss3_f.png")
+                print("GOTCHA !!!")
+                end_game_status = True
+        else:
+            print("Collect the Objects !!!")
+            end_game_status = False
+
+        return end_game_status
 
 
 if __name__ == "__main__":

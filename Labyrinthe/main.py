@@ -2,11 +2,13 @@
 
 import pygame as pg
 import configparser as cp
+import random as rd
 import Labyrinthe.Package.Mazes as Maze
 import Labyrinthe.Package.Options as Opt
 import Labyrinthe.Package.Window as Wd
 import Labyrinthe.Package.Characters as Character
 import Labyrinthe.Package.Surroundings as Sd
+import Labyrinthe.Package.Objects as Obj
 
 
 def first_main_off():
@@ -106,7 +108,7 @@ def second_main_off():
     mc_gyver_sprite.set_position(1, 1)
     mc_gyver_sprite.set_image("./Package/Pictures/MacGyver.png")
     # sprite_char_group.add(mc_gyver_sprite)
-    #mc_gyver_sprite.add_to_group(sprite_char_group)
+    # mc_gyver_sprite.add_to_group(sprite_char_group)
     launched = True
     while launched:
         for event in pg.event.get():
@@ -115,7 +117,7 @@ def second_main_off():
         # mc_gyver.start_move_avatar(event)
         Wd.color_window(surface)
         brown_block.initialize_landscape(brown_block_picture, surface, window_base)
-        #mc_gyver.set_avatar(mc_gyver_avatar, surface)
+        # mc_gyver.set_avatar(mc_gyver_avatar, surface)
         watchman.set_avatar(watchman_avatar, surface)
         # needle.set_element(needle_picture, surface)
         # tube.set_element(tube_picture, surface)
@@ -188,15 +190,15 @@ def browsing_maze(sprite, sprite_group, sprite_name="sprite"):
 
 
 def remove_track(move_status, last_position, window_displayed):
-    remove_status = False
-    the_track = pg.sprite.Group()
+    # remove_status = False
+    # the_track = pg.sprite.Group()
     track_sprite = Character.CharactersSprite()
     if move_status:
         track_sprite.set_position(last_position[0], last_position[1])
         track_sprite.set_image("./Package/Pictures/Above_MacGyver/pyramid_sample.png")
-        the_track = pg.sprite.Group()
-        #the_track.draw(window_displayed)
-        remove_status = True
+        # the_track = pg.sprite.Group()
+        # the_track.draw(window_displayed)
+        # remove_status = True
         print("MOUVEMENT !!!!!!")
         return track_sprite
     else:
@@ -212,6 +214,46 @@ def game():
             continue
         return event.key
     return None
+
+
+def set_objects(window_displayed):
+    """
+
+    :param window_displayed:
+    :return:
+    """
+    list_sprites = []
+    list_forbidden = [15, 32, 49, 48, 127]
+    list_index = [index for index, element in enumerate(Sd.matrix_maze_2) if element is False]
+    for element in list_forbidden:
+        list_index.remove(element)
+    three_random_index = rd.sample(list_index, k=3)
+    dico_objects = {"Needle": three_random_index[0], "Tube": three_random_index[1], "Ether": three_random_index[2]}
+    y = 0
+    x = 0
+    end_window = 850
+    objects_group = pg.sprite.Group()
+    while (y and x) < end_window:
+        for key, value in dico_objects.items():
+            y = 0
+            x = 0
+            for e, element in enumerate(Sd.matrix_maze_2):
+                if x == end_window:
+                    x = 0
+                    y += 50
+                if element is False and e == value:
+                    object_sprite = Obj.ObjectSprite(key)
+                    object_sprite.set_position(x, y)
+                    print(object_sprite.rect)
+                    object_sprite.set_image("./Package/Pictures/Objects/sarcophagus_50x50.png")
+                    objects_group.add(object_sprite)
+                    list_sprites.append(object_sprite)
+                    break
+                x += 50
+        break
+    objects_group.draw(window_displayed)
+    return list_sprites
+
 
 def main():
     """
@@ -245,12 +287,13 @@ def main():
     ghost_group = pg.sprite.Group()
     ghost_group.add(top_ghost, bottom_ghost, right_ghost, left_ghost)
     mc_gyver_sprite.set_image("./Package/Pictures/Above_MacGyver/a_mg_s_t_f.png")
-    watchman_sprite.set_image("./Package/Pictures/Gardien.png")
+    watchman_sprite.set_image("./Package/Pictures/Above_Watchman/a_w_ss_f.png")
     sprite_char_group = pg.sprite.Group()
     watchman_sprite.add_to_group(sprite_char_group)
     the_maze = Maze.Maze(window_size)
     window.set_background_on(window_displayed, 0, 0)
     walls_group = the_maze.initialize_maze(window_displayed)
+    list_objects = set_objects(window_displayed)
     launched = True
     while launched:
         for event in pg.event.get():
@@ -273,19 +316,28 @@ def main():
             move_status = mc_gyver_sprite.start_move_avatar(event, list_ghost_status)
             mc_gyver_sprite.standstill_avatar(move_status, event)
             track_sprite = remove_track(move_status, last_position, window_displayed)
+            mc_gyver_sprite.be_collided(list_objects)
+            end_game_status = mc_gyver_sprite.prepared_objects_for(watchman_sprite)
             sprite_char_group.add(track_sprite)
             mc_gyver_group = pg.sprite.Group()
+            watchman_group = pg.sprite.Group()
             mc_gyver_group.add(mc_gyver_sprite)
+            watchman_group.add(watchman_group)
             sprite_char_group.draw(window_displayed)
             mc_gyver_group.draw(window_displayed)
+            watchman_group.draw(window_displayed)
             if mc_gyver_sprite.rect.y > limit_window_y or mc_gyver_sprite.rect.y < 100:
-                message("Aie !!!! un mur !!!", window, window_displayed)
+                # message("Aie !!!! un mur !!!", window, window_displayed)
                 mc_gyver_sprite.stop_move_avatar(event, limit_window_x, limit_window_y)
             if mc_gyver_sprite.rect.x > limit_window_x or mc_gyver_sprite.rect.x < 100:
-                message("Aie !!!! un mur !!!", window, window_displayed)
+                # message("Aie !!!! un mur !!!", window, window_displayed)
                 mc_gyver_sprite.stop_move_avatar(event, limit_window_x, limit_window_y)
+            if end_game_status is True:
+                launched = False
+                break
         clock.tick(fps)
         pg.display.update()
+    pg.time.wait(5000)
     pg.quit()
 
 
