@@ -273,9 +273,20 @@ class CharactersSprite(pg.sprite.Sprite):
         return Obj.ObjectSprite.list_status_objects
 
     def prepared_objects_for(self, sprite_boss):
+        end_game_status = False
+        if Obj.ObjectSprite.total_objects():
+            CharactersSprite.set_image(sprite_boss, "./Package/Pictures/Above_Watchman/a_w_ss2_f.png")
+            print("Catch the WatchMan !!! Man !!!")
+            if pg.sprite.collide_rect(self, sprite_boss):
+                CharactersSprite.set_position(sprite_boss, 750, 0)
+                CharactersSprite.set_image(sprite_boss, "./Package/Pictures/Above_Watchman/a_w_ss3_f.png")
+                print("GOTCHA !!!")
+                end_game_status = True
+        else:
+            print("Collect the Objects !!!")
+            end_game_status = False
 
-        if Obj.ObjectSprite.total_objects() == 3:
-            pass
+        return end_game_status
 
 
 if __name__ == "__main__":

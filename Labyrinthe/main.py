@@ -317,7 +317,7 @@ def main():
             mc_gyver_sprite.standstill_avatar(move_status, event)
             track_sprite = remove_track(move_status, last_position, window_displayed)
             mc_gyver_sprite.be_collided(list_objects)
-            mc_gyver_sprite.prepared_objects_for(watchman_sprite)
+            end_game_status = mc_gyver_sprite.prepared_objects_for(watchman_sprite)
             sprite_char_group.add(track_sprite)
             mc_gyver_group = pg.sprite.Group()
             watchman_group = pg.sprite.Group()
@@ -332,8 +332,12 @@ def main():
             if mc_gyver_sprite.rect.x > limit_window_x or mc_gyver_sprite.rect.x < 100:
                 # message("Aie !!!! un mur !!!", window, window_displayed)
                 mc_gyver_sprite.stop_move_avatar(event, limit_window_x, limit_window_y)
+            if end_game_status is True:
+                launched = False
+                break
         clock.tick(fps)
         pg.display.update()
+    pg.time.wait(5000)
     pg.quit()
 
 
