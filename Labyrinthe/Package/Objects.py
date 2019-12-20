@@ -4,11 +4,23 @@ import Labyrinthe.Package.Surroundings as Sd
 
 
 class ObjectSprite(pg.sprite.Sprite):
+
+    list_status_objects = [False, False, False]
+
+    @classmethod
+    def total_objects(cls):
+        total = ObjectSprite.list_status_objects.count(True)
+        if total == 3:
+            return True
+        else:
+            return False
+
     def __init__(self, name, width=50, height=50):
         super(ObjectSprite, self).__init__()
         self.name = name
         self.image = pg.Surface((width, height))
         self.rect = self.image.get_rect()
+        self.picked_status = False
 
     def set_position(self, x, y):
         self.rect.x = x
@@ -17,6 +29,13 @@ class ObjectSprite(pg.sprite.Sprite):
     def set_image(self, filename=None):
         if filename is not None:
             self.image = pg.image.load(filename)
+
+    def add_picked_object(self):
+        if self.opened == 1:
+            ObjectSprite.picked_objects = + 1
+            return True
+        else:
+            return False
 
 
 if __name__ == "__main__":

@@ -1,5 +1,6 @@
 import pygame as pg
 import random as rd
+import Labyrinthe.Package.Objects as Obj
 
 STARTX = 150
 STARTY = 200
@@ -103,6 +104,9 @@ class Characters:
 
 
 class CharactersSprite(pg.sprite.Sprite):
+
+    list_status_objects = [False, False, False]
+
     def __init__(self, color=(0, 0, 0), width=20, height=20):
         super(CharactersSprite, self).__init__()
         self.image = pg.Surface((width, height))
@@ -123,12 +127,11 @@ class CharactersSprite(pg.sprite.Sprite):
     def set_image(self, filename=None):
         if filename is not None:
             self.image = pg.image.load(filename)
-            #self.rect = self.image.get_rect()
+            # self.rect = self.image.get_rect()
 
     def add_to_group(self, group):
         sprite_group = group.add(self)
         return sprite_group
-
 
     def start_move_avatar(self, event, list_ghost_status=[True, True, True, True]):
         """
@@ -257,6 +260,22 @@ class CharactersSprite(pg.sprite.Sprite):
                 self.rect.x = 50
             else:
                 pass
+
+    def be_collided(self, list_objects):
+
+        for index, sprite_object in enumerate(list_objects):
+            if pg.sprite.collide_rect(self, sprite_object):
+                Obj.ObjectSprite.list_status_objects[index] = True
+        total = Obj.ObjectSprite.list_status_objects.count(True)
+        list_status = Obj.ObjectSprite.list_status_objects
+        print("\nPICKED !!!!\nTOTAL = {}\nNeedle = {}\nTube = {}\nEther = {}\n"
+              .format(total, list_status[0], list_status[1], list_status[2]))
+        return Obj.ObjectSprite.list_status_objects
+
+    def prepared_objects_for(self, sprite_boss):
+
+        if Obj.ObjectSprite.total_objects() == 3:
+            pass
 
 
 if __name__ == "__main__":
