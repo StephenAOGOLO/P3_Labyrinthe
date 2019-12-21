@@ -205,15 +205,14 @@ def remove_track(move_status, last_position, window_displayed):
         return track_sprite
 
 
-def game():
-    for event in pg.event.get():
-        if event.type == pg.QUIT:
-            pg.quit()
-            quit()
-        elif event.type == pg.KEYUP:
-            continue
-        return event.key
-    return None
+def game_over(status, window, window_displayed):
+    if status is True:
+        window.picture = pg.image.load("./Package/Pictures/Messages/mission_passed_200x65.png")
+    if status is False:
+        window.picture = pg.image.load("./Package/Pictures/Messages/wasted.jpg")
+    window.set_background_on(window_displayed, 300, 250)
+    pg.display.update()
+    pg.time.wait(5000)
 
 
 def set_objects(window_displayed):
@@ -299,8 +298,6 @@ def main():
         for event in pg.event.get():
             if event.type == pg.QUIT:
                 launched = False
-            elif mc_gyver_sprite.rect.x == limit_window_x and mc_gyver_sprite.rect.y == 50:
-                game()
             top_ghost.set_position(mc_gyver_sprite.rect.x, mc_gyver_sprite.rect.y - 50)
             bottom_ghost.set_position(mc_gyver_sprite.rect.x, mc_gyver_sprite.rect.y + 50)
             left_ghost.set_position(mc_gyver_sprite.rect.x - 50, mc_gyver_sprite.rect.y)
@@ -317,7 +314,7 @@ def main():
             mc_gyver_sprite.standstill_avatar(move_status, event)
             track_sprite = remove_track(move_status, last_position, window_displayed)
             mc_gyver_sprite.be_collided(list_objects)
-            end_game_status = mc_gyver_sprite.prepared_objects_for(watchman_sprite)
+            list_end_game_status = mc_gyver_sprite.prepared_objects_for(watchman_sprite)
             sprite_char_group.add(track_sprite)
             mc_gyver_group = pg.sprite.Group()
             watchman_group = pg.sprite.Group()
@@ -332,12 +329,12 @@ def main():
             if mc_gyver_sprite.rect.x > limit_window_x or mc_gyver_sprite.rect.x < 100:
                 # message("Aie !!!! un mur !!!", window, window_displayed)
                 mc_gyver_sprite.stop_move_avatar(event, limit_window_x, limit_window_y)
-            if end_game_status is True:
+            if list_end_game_status[0] is True:
                 launched = False
                 break
         clock.tick(fps)
         pg.display.update()
-    pg.time.wait(5000)
+    game_over(list_end_game_status[1], window, window_displayed)
     pg.quit()
 
 
