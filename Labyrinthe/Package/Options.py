@@ -89,6 +89,8 @@ class SettingsCharacter(Settings):
             self.data_file = self.get_data_file_ini("character_mac_gyver")
         elif self.CREATION == 1:
             self.data_file = self.get_data_file_ini("character_watchman")
+        SettingsCharacter.CREATION += 1
+
 
     def __repr__(self):
         """
