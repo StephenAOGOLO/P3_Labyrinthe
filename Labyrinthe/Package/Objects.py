@@ -38,6 +38,34 @@ class ObjectSprite(pg.sprite.Sprite):
             return False
 
 
+def update_dashboard(window_displayed):
+    """
+
+    :param window_displayed:
+    :return:
+    """
+    inventory = pg.image.load("./Package/Pictures/Inventory/area_void.png")
+    status_dashboard = ObjectSprite.list_status_objects
+    if status_dashboard == [False, False, False]:
+        inventory = pg.image.load("./Package/Pictures/Inventory/area_void.png")
+    elif status_dashboard == [True, False, False]:
+        inventory = pg.image.load("./Package/Pictures/Inventory/n.png")
+    elif status_dashboard == [False, True, False]:
+        inventory = pg.image.load("./Package/Pictures/Inventory/t.png")
+    elif status_dashboard == [False, False, True]:
+        inventory = pg.image.load("./Package/Pictures/Inventory/e.png")
+    elif status_dashboard == [True, True, False]:
+        inventory = pg.image.load("./Package/Pictures/Inventory/nt.png")
+    elif status_dashboard == [False, True, True]:
+        inventory = pg.image.load("./Package/Pictures/Inventory/te.png")
+    elif status_dashboard == [True, False, True]:
+        inventory = pg.image.load("./Package/Pictures/Inventory/ne.png")
+    elif status_dashboard == [True, True, True]:
+        inventory = pg.image.load("./Package/Pictures/Inventory/s.png")
+    window_displayed.blit(inventory, (210, 0))
+    return inventory
+
+
 if __name__ == "__main__":
     import Labyrinthe.Package.Window as Wd
     pg.init()

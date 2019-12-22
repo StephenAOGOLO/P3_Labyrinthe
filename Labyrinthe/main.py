@@ -297,6 +297,7 @@ def draw_characters(sprite_char_group, mc_gyver_group, watchman_group, window_di
     sprite_char_group.draw(window_displayed)
     mc_gyver_group.draw(window_displayed)
     watchman_group.draw(window_displayed)
+    Obj.update_dashboard(window_displayed)
     return True
 
 
@@ -346,9 +347,6 @@ def main_test():
             list_end_game_status = mac_gyver_behaviour(mc_gyver_sprite, list_ghost_status, watchman_sprite,
                                                        sprite_char_group, event, list_objects)
             draw_characters(sprite_char_group, mc_gyver_group, watchman_group, window_displayed)
-            mc_gyver_sprite.stay_in_window(event, limit_window_x, limit_window_y)
-            inventory = pg.image.load("./Package/Pictures/Inventory/area_void.png")
-            window_displayed.blit(inventory, (210, 0))
             if list_end_game_status[0] is True:
                 launched = False
                 break
