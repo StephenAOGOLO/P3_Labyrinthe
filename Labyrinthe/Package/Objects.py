@@ -1,6 +1,10 @@
 # -*- coding: utf-8 -*-
 import pygame as pg
+import logging as lg
 import Labyrinthe.Package.Surroundings as Sd
+
+
+lg.basicConfig(level=lg.WARNING)
 
 
 class ObjectSprite(pg.sprite.Sprite):
@@ -94,8 +98,8 @@ if __name__ == "__main__":
             else:
                 pass
             x += 50
-    print(walls_group.sprites())
-    print(len(walls_group))
+    lg.info(walls_group.sprites())
+    lg.info(len(walls_group))
     launched = True
     while launched:
         for event in pg.event.get():

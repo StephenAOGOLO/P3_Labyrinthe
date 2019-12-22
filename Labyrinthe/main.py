@@ -2,12 +2,15 @@
 
 import pygame as pg
 import random as rd
+import logging as lg
 import Labyrinthe.Package.Mazes as Maze
 import Labyrinthe.Package.Options as Opt
 import Labyrinthe.Package.Window as Wd
 import Labyrinthe.Package.Characters as Character
 import Labyrinthe.Package.Surroundings as Sd
 import Labyrinthe.Package.Objects as Obj
+
+lg.basicConfig(level=lg.WARNING)
 
 
 def running_maze(window_displayed):
@@ -48,17 +51,15 @@ def browsing_maze(sprite, sprite_group, sprite_name="sprite"):
     :return:
     """
     blocks_hit_list = pg.sprite.spritecollide(sprite, sprite_group, False)
-    print("*" * 100)
-    print("Event of the sprite : {}\n".format(sprite_name))
-    print("***")
+    lg.info("*\nEvent of the sprite : {}\n*".format(sprite_name))
     for index, block in enumerate(blocks_hit_list):
-        print(index, block)
+        lg.info(index, block)
         if block:
             return False
         else:
             return True
-    print("***")
-    print("*" * 100)
+    lg.info("***")
+    lg.info("*" * 100)
     return True
 
 
@@ -73,7 +74,7 @@ def remove_track(move_status, last_position):
     if move_status:
         track_sprite.set_position(last_position[0], last_position[1])
         track_sprite.set_image("./Package/Pictures/Above_MacGyver/pyramid_sample.png")
-        print("MOUVEMENT !!!!!!")
+        lg.info("MOUVEMENT !!!!!!")
         return track_sprite
     else:
         return track_sprite
@@ -125,7 +126,7 @@ def set_objects(window_displayed):
                     object_settings = Opt.SettingsObject()
                     object_sprite = Obj.ObjectSprite(key)
                     object_sprite.set_position(x, y)
-                    print(object_sprite.rect)
+                    lg.info(object_sprite.rect)
                     object_sprite.set_image(str(object_settings.data_file["path_picture"]))
                     objects_group.add(object_sprite)
                     list_sprites.append(object_sprite)

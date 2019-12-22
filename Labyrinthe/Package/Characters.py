@@ -1,7 +1,10 @@
 # -*- coding: utf-8 -*-
 import pygame as pg
 import random as rd
+import logging as lg
 import Labyrinthe.Package.Objects as Obj
+
+lg.basicConfig(level=lg.WARNING)
 
 
 class CharactersSprite(pg.sprite.Sprite):
@@ -43,7 +46,7 @@ class CharactersSprite(pg.sprite.Sprite):
         """
         if list_ghost_status is None:
             list_ghost_status = [True, True, True, True]
-        print("event -->", event)
+        lg.info("event -->", event)
         move_status = False
         picture_behavior = "./Package/Pictures/Above_MacGyver/a_mg_s_t_f.png"
         self.last_x = self.rect.x
@@ -124,19 +127,19 @@ class CharactersSprite(pg.sprite.Sprite):
         """
         if event.type == 3 and event.key == 273:
             last_event = event
-            print("dernier appui = ", last_event)
+            lg.info("dernier appui = ", last_event)
             self.set_image("./Package/Pictures/Above_MacGyver/a_mg_s_t_f.png")
         if event.type == 3 and event.key == 275:
             last_event = event
-            print("dernier appui = ", last_event)
+            lg.info("dernier appui = ", last_event)
             self.set_image("./Package/Pictures/Above_MacGyver/a_mg_s_r_f.png")
         if event.type == 3 and event.key == 274:
             last_event = event
-            print("dernier appui = ", last_event)
+            lg.info("dernier appui = ", last_event)
             self.set_image("./Package/Pictures/Above_MacGyver/a_mg_s_b_f.png")
         if event.type == 3 and event.key == 276:
             last_event = event
-            print("dernier appui = ", last_event)
+            lg.info("dernier appui = ", last_event)
             self.set_image("./Package/Pictures/Above_MacGyver/a_mg_s_l_f.png")
 
     def stop_move_avatar(self, event, limit_x, limit_y):
@@ -165,7 +168,7 @@ class CharactersSprite(pg.sprite.Sprite):
                 Obj.ObjectSprite.list_status_objects[index] = True
         total = Obj.ObjectSprite.list_status_objects.count(True)
         list_status = Obj.ObjectSprite.list_status_objects
-        print("\nPICKED !!!!\nTOTAL = {}\nNeedle = {}\nTube = {}\nEther = {}\n"
+        print("\nTOTAL picked objects = {}\nNeedle = {}\nTube = {}\nEther = {}\n"
               .format(total, list_status[0], list_status[1], list_status[2]))
         return Obj.ObjectSprite.list_status_objects
 
