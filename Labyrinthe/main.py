@@ -89,10 +89,10 @@ def game_over(status, window, window_displayed):
     :return:
     """
     if status is True:
-        window.picture = pg.image.load("./Package/Pictures/Messages/mission_passed_200x65.png")
+        window.picture = pg.image.load("./Package/Pictures/Messages/mission_passed.png")
     if status is False:
         window.picture = pg.image.load("./Package/Pictures/Messages/wasted.jpg")
-    window.set_background_on(window_displayed, 300, 250)
+    window.set_background_on(window_displayed, 200, 200)
     pg.display.update()
     pg.time.wait(5000)
 
