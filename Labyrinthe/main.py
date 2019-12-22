@@ -73,7 +73,7 @@ def remove_track(move_status, last_position):
     track_sprite = Character.CharactersSprite()
     if move_status:
         track_sprite.set_position(last_position[0], last_position[1])
-        track_sprite.set_image("./Package/Pictures/Above_MacGyver/pyramid_sample.png")
+        track_sprite.set_image("./Package/Pictures/wall/pyramid_sample.png")
         lg.info("MOUVEMENT !!!!!!")
         return track_sprite
     else:

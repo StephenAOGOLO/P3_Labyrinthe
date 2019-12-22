@@ -17,7 +17,7 @@ class Window:
         """
         self.width = width
         self.height = height
-        self.picture = pg.image.load("./Package/Pictures/Above_MacGyver/pyramid_floor.png")
+        self.picture = pg.image.load("./Package/Pictures/wall/pyramid_floor.png")
 
     def __repr__(self):
         """
