@@ -243,6 +243,16 @@ class CharactersSprite(pg.sprite.Sprite):
             print("dernier appui = ", last_event)
             self.set_image("./Package/Pictures/Above_MacGyver/a_mg_s_l_f.png")
 
+    def stay_in_window(self, event, limit_window_x, limit_window_y):
+
+        if self.rect.y > limit_window_y or self.rect.y < 100:
+            self.stop_move_avatar(event, limit_window_x, limit_window_y)
+        if self.rect.x > limit_window_x or self.rect.x < 100:
+            self.stop_move_avatar(event, limit_window_x, limit_window_y)
+        else:
+            pass
+        return True
+
     def stop_move_avatar(self, event, limit_x, limit_y):
         """
 
@@ -260,6 +270,7 @@ class CharactersSprite(pg.sprite.Sprite):
                 self.rect.x = 50
             else:
                 pass
+            return True
 
     def be_collided(self, list_objects):
 
