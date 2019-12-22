@@ -277,7 +277,7 @@ def mac_gyver_behaviour(player_sprite, list_ghost_status, boss_sprite, sprite_ch
     """
     last_position = [player_sprite.rect.x, player_sprite.rect.y]
     move_status = player_sprite.start_move_avatar(event, list_ghost_status)
-    player_sprite.standstill_avatar(move_status, event)
+    player_sprite.standstill_avatar(event)
     track_sprite = remove_track(move_status, last_position)
     player_sprite.be_collided(list_objects)
     sprite_char_group.add(track_sprite)
