@@ -346,6 +346,8 @@ def main_test():
                                                        sprite_char_group, event, list_objects)
             draw_characters(sprite_char_group, mc_gyver_group, watchman_group, window_displayed)
             mc_gyver_sprite.stay_in_window(event, limit_window_x, limit_window_y)
+            inventory = pg.image.load("./Package/Pictures/Inventory/area_3.png")
+            window_displayed.blit(inventory, (210, 0))
             if list_end_game_status[0] is True:
                 launched = False
                 break
