@@ -1,5 +1,4 @@
 # -*- coding: utf-8 -*-
-
 import configparser as cp
 
 
@@ -91,7 +90,6 @@ class SettingsCharacter(Settings):
             self.data_file = self.get_data_file_ini("character_watchman")
         SettingsCharacter.CREATION += 1
 
-
     def __repr__(self):
         """
         Show the feature of a window
@@ -119,6 +117,7 @@ class SettingsObject(Settings):
     Building in progress...
     """
     CREATION = 0
+
     def __init__(self):
         """
         Building in progress...
@@ -133,32 +132,3 @@ class SettingsObject(Settings):
             self.data_file = self.get_data_file_ini("object_ether")
         SettingsObject.CREATION += 1
 
-
-class SettingsSurroundings(Settings):
-    """
-    Building in progress...
-    """
-    CREATION = 0
-    def __init__(self):
-        """
-        Building in progress...
-        """
-        super().__init__()
-        self.particular_sections = self.get_particular_sections("surroundings_")
-        self.element = self.sort_all_elements()
-        if self.CREATION == 0:
-            self.data_file = self.get_data_file_ini("surroundings_brown_block")
-        elif self.CREATION == 1:
-            pass
-
-    def sort_all_elements(self):
-
-        dict_elements = {}
-        brown_block = "mac_gyver"
-        add_another_block = "add_another_block"
-        for section in self.particular_sections:
-            if str(section[13:]) == brown_block:
-                dict_elements[brown_block] = self.get_data_file_ini(section)
-            elif str(section[13:]) == add_another_block:
-                dict_elements[add_another_block] = self.get_data_file_ini(section)
-        return dict_elements

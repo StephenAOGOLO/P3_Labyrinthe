@@ -1,5 +1,5 @@
+# -*- coding: utf-8 -*-
 import pygame as pg
-import random as rd
 import Labyrinthe.Package.Surroundings as Sd
 
 

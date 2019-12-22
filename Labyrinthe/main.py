@@ -1,7 +1,6 @@
 # coding: utf-8
 
 import pygame as pg
-import configparser as cp
 import random as rd
 import Labyrinthe.Package.Mazes as Maze
 import Labyrinthe.Package.Options as Opt
@@ -9,31 +8,6 @@ import Labyrinthe.Package.Window as Wd
 import Labyrinthe.Package.Characters as Character
 import Labyrinthe.Package.Surroundings as Sd
 import Labyrinthe.Package.Objects as Obj
-
-
-def message(text, area, surface):
-    """
-
-    :param text:
-    :param area:
-    :param surface:
-    :return:
-    """
-    pop_font = pg.font.Font("./Package/Fonts/AGENCYR.TTF", 20)
-    pop_area, pop_rect = custom_message(text, pop_font)
-    pop_rect.center = 320, 240
-    area.set_on_window(surface, pop_area, pop_rect)
-
-
-def custom_message(text, font):
-    """
-
-    :param text:
-    :param font:
-    :return:
-    """
-    text_area = font.render(text, True, (255, 255, 255))
-    return text_area, text_area.get_rect()
 
 
 def running_maze(window_displayed):

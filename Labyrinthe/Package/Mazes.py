@@ -1,3 +1,4 @@
+# -*- coding: utf-8 -*-
 import pygame as pg
 import Labyrinthe.Package.Surroundings as Sd
 
@@ -14,9 +15,6 @@ class Maze:
         self.window_size = window_size
         self.limit_window_x = self.set_limit_window_size(100)
         self.limit_window_y = self.set_limit_window_size(100)
-        #self.event = self.run_instance(state)
-        #self.stop = self.stop_instance()
-
 
     def set_limit_window_size(self, limit):
         """
@@ -26,7 +24,6 @@ class Maze:
         """
 
         return self.window_size - limit
-
 
     def run_instance(self, state):
         """
