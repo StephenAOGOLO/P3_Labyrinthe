@@ -118,13 +118,20 @@ class SettingsObject(Settings):
     """
     Building in progress...
     """
+    CREATION = 0
     def __init__(self):
         """
         Building in progress...
         """
         super().__init__()
         self.particular_sections = self.get_particular_sections("object_")
-        self.data_file = self.get_data_file_ini("window_main")
+        if self.CREATION == 0:
+            self.data_file = self.get_data_file_ini("object_needle")
+        elif self.CREATION == 1:
+            self.data_file = self.get_data_file_ini("object_tube")
+        elif self.CREATION == 2:
+            self.data_file = self.get_data_file_ini("object_ether")
+        SettingsObject.CREATION += 1
 
 
 class SettingsSurroundings(Settings):

@@ -148,10 +148,11 @@ def set_objects(window_displayed):
                     x = 0
                     y += 50
                 if element is False and e == value:
+                    object_settings = Opt.SettingsObject()
                     object_sprite = Obj.ObjectSprite(key)
                     object_sprite.set_position(x, y)
                     print(object_sprite.rect)
-                    object_sprite.set_image("./Package/Pictures/Objects/sarcophagus_50x50.png")
+                    object_sprite.set_image(str(object_settings.data_file["path_picture"]))
                     objects_group.add(object_sprite)
                     list_sprites.append(object_sprite)
                     break
@@ -346,7 +347,7 @@ def main_test():
                                                        sprite_char_group, event, list_objects)
             draw_characters(sprite_char_group, mc_gyver_group, watchman_group, window_displayed)
             mc_gyver_sprite.stay_in_window(event, limit_window_x, limit_window_y)
-            inventory = pg.image.load("./Package/Pictures/Inventory/area_3.png")
+            inventory = pg.image.load("./Package/Pictures/Inventory/area_void.png")
             window_displayed.blit(inventory, (210, 0))
             if list_end_game_status[0] is True:
                 launched = False
