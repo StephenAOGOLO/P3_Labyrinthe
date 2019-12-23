@@ -286,7 +286,7 @@ def draw_characters(sprite_char_group, mc_gyver_group, watchman_group, window_di
     return True
 
 
-def needed_groups():
+def needed_groups_for(mc_gyver_sprite, watchman_sprite):
     """
 
     :return:
@@ -295,6 +295,9 @@ def needed_groups():
     for group in range(0, 3):
         group = pg.sprite.Group()
         list_group.append(group)
+    watchman_sprite.add_to_group(list_group[0])
+    mc_gyver_sprite.add_to_group(list_group[1])
+    watchman_sprite.add_to_group(list_group[2])
     return list_group
 
 
@@ -312,16 +315,20 @@ def main_test():
     fps = list_parameters[3]
     mc_gyver_sprite = list_parameters[4]
     watchman_sprite = list_parameters[5]
-    list_groups = needed_groups()
-    sprite_char_group = list_groups[0]
-    mc_gyver_group = list_groups[1]
-    watchman_group = list_groups[2]
     list_ghost = list_parameters[7]
     walls_group = list_parameters[8]
     list_objects = list_parameters[9]
-    watchman_sprite.add_to_group(sprite_char_group)
-    mc_gyver_group.add(mc_gyver_sprite)
-    watchman_group.add(watchman_group)
+    # list_groups = needed_groups()
+    list_groups = needed_groups_for(mc_gyver_sprite, watchman_sprite)
+    sprite_char_group = list_groups[0]
+    mc_gyver_group = list_groups[1]
+    watchman_group = list_groups[2]
+    # watchman_sprite.add_to_group(sprite_char_group)
+    # mc_gyver_group.add(mc_gyver_sprite)
+    # watchman_group.add(watchman_sprite)
+    # watchman_sprite.add_to_group(sprite_char_group)
+    # mc_gyver_sprite.add_to_group(mc_gyver_group)
+    # watchman_sprite.add_to_group(watchman_group)
     launched = True
     while launched:
         for event in pg.event.get():
