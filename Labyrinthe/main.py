@@ -151,16 +151,24 @@ def initialize_game():
     window_size = int(window_settings.data_file["window_size"])
     clock_settings = Opt.SettingsWindow()
     fps = int(clock_settings.data_file["fps"])
+    window_displayed = window.display_window()
+    window.set_background_on(window_displayed, 0, 0)
     # MAC GYVER PARAMETERS
     mc_gyver_settings = Opt.SettingsCharacter()
     mc_gyver_sprite = Character.CharactersSprite()
     mc_gyver_sprite.set_position(int(mc_gyver_settings.data_file["startx"]), int(mc_gyver_settings.data_file["starty"]))
     mc_gyver_sprite.set_image(str(mc_gyver_settings.data_file["path_picture"]))
+    list_ghost = set_ghost_sprite(mc_gyver_sprite)
     # WATCHMAN PARAMETERS
     watchman_settings = Opt.SettingsCharacter()
     watchman_sprite = Character.CharactersSprite()
     watchman_sprite.set_position(int(watchman_settings.data_file["startx"]), int(watchman_settings.data_file["starty"]))
     watchman_sprite.set_image(watchman_settings.data_file["path_picture"])
+    # MAZE PARAMETERS
+    the_maze = Maze.Maze(window_size)
+    walls_group = the_maze.initialize_maze(window_displayed)
+    # OBJECTS PARAMETERS
+    list_objects = set_objects(window_displayed)
     list_parameters.append(window)
     list_parameters.append(limit_window_x)
     list_parameters.append(limit_window_y)
@@ -168,6 +176,11 @@ def initialize_game():
     list_parameters.append(fps)
     list_parameters.append(mc_gyver_sprite)
     list_parameters.append(watchman_sprite)
+    list_parameters.append(window_displayed)
+    list_parameters.append(list_ghost)
+    list_parameters.append(the_maze)
+    list_parameters.append(walls_group)
+    list_parameters.append(list_objects)
     return list_parameters
 
 
@@ -298,6 +311,7 @@ def main_test():
     list_parameters = initialize_game()
     window = list_parameters[0]
     window_size = list_parameters[3]
+    window_displayed = list_parameters[7]
     fps = list_parameters[4]
     mc_gyver_sprite = list_parameters[5]
     watchman_sprite = list_parameters[6]
@@ -305,12 +319,16 @@ def main_test():
     sprite_char_group = list_groups[0]
     mc_gyver_group = list_groups[1]
     watchman_group = list_groups[2]
-    window_displayed = window.display_window()
-    window.set_background_on(window_displayed, 0, 0)
-    list_ghost = set_ghost_sprite(mc_gyver_sprite)
-    the_maze = Maze.Maze(window_size)
-    walls_group = the_maze.initialize_maze(window_displayed)
-    list_objects = set_objects(window_displayed)
+    # window_displayed = window.display_window()
+    #window.set_background_on(window_displayed, 0, 0)
+    #list_ghost = set_ghost_sprite(mc_gyver_sprite)
+    list_ghost = list_parameters[8]
+    #the_maze = Maze.Maze(window_size)
+    the_maze = list_parameters[9]
+    #walls_group = the_maze.initialize_maze(window_displayed)
+    walls_group = list_parameters[10]
+    #list_objects = set_objects(window_displayed)
+    list_objects = list_parameters[11]
     watchman_sprite.add_to_group(sprite_char_group)
     mc_gyver_group.add(mc_gyver_sprite)
     watchman_group.add(watchman_group)
