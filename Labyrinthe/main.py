@@ -142,7 +142,8 @@ def initialize_game():
     :return:
     """
     pg.display.set_caption("Aidez MacGyver à s'échapper !")
-    list_parameters = []
+    #list_parameters = []
+    dict_parameters = {}
     # WINDOW PARAMETERS
     window_settings = Opt.SettingsWindow()
     window = Wd.Window(int(window_settings.data_file["window_width"]), int(window_settings.data_file["window_height"]))
@@ -171,18 +172,30 @@ def initialize_game():
     walls_group = the_maze.initialize_maze(window_displayed)
     # OBJECTS PARAMETERS
     list_objects = set_objects(window_displayed)
-    list_parameters.append(window)
-    list_parameters.append(limit_window_x)
-    list_parameters.append(limit_window_y)
-    list_parameters.append(fps)
-    list_parameters.append(mc_gyver_sprite)
-    list_parameters.append(watchman_sprite)
-    list_parameters.append(window_displayed)
-    list_parameters.append(list_ghost)
-    list_parameters.append(walls_group)
-    list_parameters.append(list_objects)
-    list_parameters.append(list_groups)
-    return list_parameters
+    #list_parameters.append(window)
+    #list_parameters.append(limit_window_x)
+    #list_parameters.append(limit_window_y)
+    #list_parameters.append(fps)
+    #list_parameters.append(mc_gyver_sprite)
+    #list_parameters.append(watchman_sprite)
+    #list_parameters.append(window_displayed)
+    #list_parameters.append(list_ghost)
+    #list_parameters.append(walls_group)
+    #list_parameters.append(list_objects)
+    #list_parameters.append(list_groups)
+    dict_parameters["window"] = window
+    dict_parameters["limit_window_x"] = limit_window_x
+    dict_parameters["limit_window_y"] = limit_window_y
+    dict_parameters["fps"] = fps
+    dict_parameters["mc_gyver_sprite"] = mc_gyver_sprite
+    dict_parameters["watchman_sprite"] = watchman_sprite
+    dict_parameters["window_displayed"] = window_displayed
+    dict_parameters["list_ghost"] = list_ghost
+    dict_parameters["walls_group"] = walls_group
+    dict_parameters["list_objects"] = list_objects
+    dict_parameters["list_groups"] = list_groups
+    #return list_parameters
+    return dict_parameters
 
 
 def set_ghost_sprite(the_sprite):
@@ -312,16 +325,29 @@ def main_test():
     global game_state
     pg.init()
     clock = pg.time.Clock()
-    list_parameters = initialize_game()
-    window = list_parameters[0]
-    window_displayed = list_parameters[6]
-    fps = list_parameters[3]
-    mc_gyver_sprite = list_parameters[4]
-    watchman_sprite = list_parameters[5]
-    list_ghost = list_parameters[7]
-    walls_group = list_parameters[8]
-    list_objects = list_parameters[9]
-    list_groups = list_parameters[10]
+    #list_parameters = initialize_game()
+    #window = list_parameters[0]
+    #window_displayed = list_parameters[6]
+    #fps = list_parameters[3]
+    #mc_gyver_sprite = list_parameters[4]
+    #watchman_sprite = list_parameters[5]
+    #list_ghost = list_parameters[7]
+    #walls_group = list_parameters[8]
+    #list_objects = list_parameters[9]
+    #list_groups = list_parameters[10]
+    #char_group = list_groups[0]
+    #mc_gyver_group = list_groups[1]
+    #watchman_group = list_groups[2]
+    dict_parameters = initialize_game()
+    window = dict_parameters["window"]
+    fps = dict_parameters["fps"]
+    mc_gyver_sprite = dict_parameters["mc_gyver_sprite"]
+    watchman_sprite = dict_parameters["watchman_sprite"]
+    window_displayed = dict_parameters["window_displayed"]
+    list_ghost = dict_parameters["list_ghost"]
+    walls_group = dict_parameters["walls_group"]
+    list_objects = dict_parameters["list_objects"]
+    list_groups = dict_parameters["list_groups"]
     char_group = list_groups[0]
     mc_gyver_group = list_groups[1]
     watchman_group = list_groups[2]
