@@ -172,13 +172,11 @@ def initialize_game():
     list_parameters.append(window)
     list_parameters.append(limit_window_x)
     list_parameters.append(limit_window_y)
-    list_parameters.append(window_size)
     list_parameters.append(fps)
     list_parameters.append(mc_gyver_sprite)
     list_parameters.append(watchman_sprite)
     list_parameters.append(window_displayed)
     list_parameters.append(list_ghost)
-    list_parameters.append(the_maze)
     list_parameters.append(walls_group)
     list_parameters.append(list_objects)
     return list_parameters
@@ -310,25 +308,17 @@ def main_test():
     clock = pg.time.Clock()
     list_parameters = initialize_game()
     window = list_parameters[0]
-    window_size = list_parameters[3]
-    window_displayed = list_parameters[7]
-    fps = list_parameters[4]
-    mc_gyver_sprite = list_parameters[5]
-    watchman_sprite = list_parameters[6]
+    window_displayed = list_parameters[6]
+    fps = list_parameters[3]
+    mc_gyver_sprite = list_parameters[4]
+    watchman_sprite = list_parameters[5]
     list_groups = needed_groups()
     sprite_char_group = list_groups[0]
     mc_gyver_group = list_groups[1]
     watchman_group = list_groups[2]
-    # window_displayed = window.display_window()
-    #window.set_background_on(window_displayed, 0, 0)
-    #list_ghost = set_ghost_sprite(mc_gyver_sprite)
-    list_ghost = list_parameters[8]
-    #the_maze = Maze.Maze(window_size)
-    the_maze = list_parameters[9]
-    #walls_group = the_maze.initialize_maze(window_displayed)
-    walls_group = list_parameters[10]
-    #list_objects = set_objects(window_displayed)
-    list_objects = list_parameters[11]
+    list_ghost = list_parameters[7]
+    walls_group = list_parameters[8]
+    list_objects = list_parameters[9]
     watchman_sprite.add_to_group(sprite_char_group)
     mc_gyver_group.add(mc_gyver_sprite)
     watchman_group.add(watchman_group)
