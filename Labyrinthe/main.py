@@ -297,8 +297,6 @@ def main_test():
     clock = pg.time.Clock()
     list_parameters = initialize_game()
     window = list_parameters[0]
-    #limit_window_x = list_parameters[1]
-    #limit_window_y = list_parameters[2]
     window_size = list_parameters[3]
     fps = list_parameters[4]
     mc_gyver_sprite = list_parameters[5]
