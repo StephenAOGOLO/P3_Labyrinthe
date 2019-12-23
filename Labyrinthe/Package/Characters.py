@@ -142,24 +142,24 @@ class CharactersSprite(pg.sprite.Sprite):
             lg.info("dernier appui = ", last_event)
             self.set_image("./Package/Pictures/Above_MacGyver/a_mg_s_l_f.png")
 
-    def stop_move_avatar(self, event, limit_x, limit_y):
-        """
-
-        :return:
-        """
-        arrow_key = pg.key.get_pressed()
-        if event.type == pg.KEYDOWN:
-            if arrow_key[pg.K_UP] and (limit_x > self.rect.x > 50):
-                self.rect.y = 50
-            elif arrow_key[pg.K_DOWN] and (limit_x > self.rect.x > 50):
-                self.rect.y = limit_y
-            elif arrow_key[pg.K_RIGHT] and (limit_y > self.rect.y > 50):
-                self.rect.x = limit_x
-            elif arrow_key[pg.K_LEFT] and (limit_y > self.rect.y > 50):
-                self.rect.x = 50
-            else:
-                pass
-            return True
+    #def stop_move_avatar(self, event, limit_x, limit_y):
+    #    """
+#
+    #    :return:
+    #    """
+    #    arrow_key = pg.key.get_pressed()
+    #    if event.type == pg.KEYDOWN:
+    #        if arrow_key[pg.K_UP] and (limit_x > self.rect.x > 50):
+    #            self.rect.y = 50
+    #        elif arrow_key[pg.K_DOWN] and (limit_x > self.rect.x > 50):
+    #            self.rect.y = limit_y
+    #        elif arrow_key[pg.K_RIGHT] and (limit_y > self.rect.y > 50):
+    #            self.rect.x = limit_x
+    #        elif arrow_key[pg.K_LEFT] and (limit_y > self.rect.y > 50):
+    #            self.rect.x = 50
+    #        else:
+    #            pass
+    #        return True
 
     def be_collided(self, list_objects):
 

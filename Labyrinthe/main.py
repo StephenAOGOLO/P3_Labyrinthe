@@ -1,5 +1,4 @@
 # coding: utf-8
-
 import pygame as pg
 import random as rd
 import logging as lg
@@ -277,8 +276,12 @@ def draw_characters(sprite_char_group, mc_gyver_group, watchman_group, window_di
 
 
 def needed_groups():
-    list_group =[]
-    for group in range(0,3):
+    """
+
+    :return:
+    """
+    list_group = []
+    for group in range(0, 3):
         group = pg.sprite.Group()
         list_group.append(group)
     return list_group
@@ -289,12 +292,13 @@ def main_test():
 
     :return:
     """
+    global list_end_game_status
     pg.init()
     clock = pg.time.Clock()
     list_parameters = initialize_game()
     window = list_parameters[0]
-    limit_window_x = list_parameters[1]
-    limit_window_y = list_parameters[2]
+    #limit_window_x = list_parameters[1]
+    #limit_window_y = list_parameters[2]
     window_size = list_parameters[3]
     fps = list_parameters[4]
     mc_gyver_sprite = list_parameters[5]

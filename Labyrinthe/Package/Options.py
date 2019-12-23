@@ -131,4 +131,3 @@ class SettingsObject(Settings):
         elif self.CREATION == 2:
             self.data_file = self.get_data_file_ini("object_ether")
         SettingsObject.CREATION += 1
-
