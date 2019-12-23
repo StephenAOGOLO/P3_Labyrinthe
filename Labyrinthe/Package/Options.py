@@ -50,6 +50,11 @@ class Settings:
         return config.sections()
 
     def get_particular_sections(self, pattern):
+        """
+
+        :param pattern:
+        :return:
+        """
         list_particular_section = []
         for section in self.all_sections_file:
             if pattern in section:
@@ -100,7 +105,10 @@ class SettingsCharacter(Settings):
         return message
 
     def sort_all_characters(self):
+        """
 
+        :return:
+        """
         dict_characters = {}
         mac_gyver = "mac_gyver"
         watchman = "watchman"

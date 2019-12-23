@@ -50,7 +50,11 @@ class Maze:
         return message
 
     def initialize_maze(self, window_displayed):
+        """
 
+        :param window_displayed:
+        :return:
+        """
         x = 0
         y = 0
         walls_group = pg.sprite.Group()

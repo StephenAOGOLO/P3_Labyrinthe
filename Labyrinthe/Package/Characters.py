@@ -8,10 +8,18 @@ lg.basicConfig(level=lg.WARNING)
 
 
 class CharactersSprite(pg.sprite.Sprite):
+    """
 
+    """
     list_status_objects = [False, False, False]
 
     def __init__(self, color=(0, 0, 0), width=20, height=20):
+        """
+
+        :param color:
+        :param width:
+        :param height:
+        """
         super(CharactersSprite, self).__init__()
         self.image = pg.Surface((width, height))
         self.image.fill(color)
@@ -20,20 +28,40 @@ class CharactersSprite(pg.sprite.Sprite):
         self.last_y = 350
 
     def set_position(self, x, y):
+        """
+
+        :param x:
+        :param y:
+        :return:
+        """
         self.rect.x = x
         self.rect.y = y
 
     def reset_last_position(self):
+        """
+
+        :return:
+        """
         self.rect.x = self.last_x
         self.rect.y = self.last_y
         return self.rect.x, self.rect.y
 
     def set_image(self, filename=None):
+        """
+
+        :param filename:
+        :return:
+        """
         if filename is not None:
             self.image = pg.image.load(filename)
             # self.rect = self.image.get_rect()
 
     def add_to_group(self, group):
+        """
+
+        :param group:
+        :return:
+        """
         sprite_group = group.add(self)
         return sprite_group
 
@@ -143,7 +171,11 @@ class CharactersSprite(pg.sprite.Sprite):
             self.set_image("./Package/Pictures/Above_MacGyver/a_mg_s_l_f.png")
 
     def be_collided(self, list_objects):
+        """
 
+        :param list_objects:
+        :return:
+        """
         for index, sprite_object in enumerate(list_objects):
             if pg.sprite.collide_rect(self, sprite_object):
                 Obj.ObjectSprite.list_status_objects[index] = True
@@ -154,7 +186,11 @@ class CharactersSprite(pg.sprite.Sprite):
         return Obj.ObjectSprite.list_status_objects
 
     def prepared_objects_for(self, sprite_boss):
+        """
 
+        :param sprite_boss:
+        :return:
+        """
         end_game_status = False
         success_status = False
         list_endgame = []

@@ -164,6 +164,8 @@ def initialize_game():
     watchman_sprite = Character.CharactersSprite()
     watchman_sprite.set_position(int(watchman_settings.data_file["startx"]), int(watchman_settings.data_file["starty"]))
     watchman_sprite.set_image(watchman_settings.data_file["path_picture"])
+    # GROUPS PARAMETERS
+    list_groups = needed_groups_for(mc_gyver_sprite, watchman_sprite)
     # MAZE PARAMETERS
     the_maze = Maze.Maze(window_size)
     walls_group = the_maze.initialize_maze(window_displayed)
@@ -179,6 +181,7 @@ def initialize_game():
     list_parameters.append(list_ghost)
     list_parameters.append(walls_group)
     list_parameters.append(list_objects)
+    list_parameters.append(list_groups)
     return list_parameters
 
 
@@ -249,7 +252,7 @@ def handle_collision(list_ghost, walls_group):
     return list_ghost_status
 
 
-def mac_gyver_behaviour(player_sprite, list_ghost_status, boss_sprite, sprite_char_group, event, list_objects):
+def attitude(player_sprite, list_ghost_status, boss_sprite, sprite_char_group, event, list_objects):
     """
 
     :param player_sprite:
@@ -306,7 +309,7 @@ def main_test():
 
     :return:
     """
-    global list_end_game_status
+    global game_state
     pg.init()
     clock = pg.time.Clock()
     list_parameters = initialize_game()
@@ -318,33 +321,25 @@ def main_test():
     list_ghost = list_parameters[7]
     walls_group = list_parameters[8]
     list_objects = list_parameters[9]
-    # list_groups = needed_groups()
-    list_groups = needed_groups_for(mc_gyver_sprite, watchman_sprite)
-    sprite_char_group = list_groups[0]
+    list_groups = list_parameters[10]
+    char_group = list_groups[0]
     mc_gyver_group = list_groups[1]
     watchman_group = list_groups[2]
-    # watchman_sprite.add_to_group(sprite_char_group)
-    # mc_gyver_group.add(mc_gyver_sprite)
-    # watchman_group.add(watchman_sprite)
-    # watchman_sprite.add_to_group(sprite_char_group)
-    # mc_gyver_sprite.add_to_group(mc_gyver_group)
-    # watchman_sprite.add_to_group(watchman_group)
     launched = True
     while launched:
         for event in pg.event.get():
             if event.type == pg.QUIT:
                 launched = False
-            list_ghost_reset = reset_ghost_sprite(list_ghost, mc_gyver_sprite)
-            list_ghost_status = handle_collision(list_ghost_reset, walls_group)
-            list_end_game_status = mac_gyver_behaviour(mc_gyver_sprite, list_ghost_status, watchman_sprite,
-                                                       sprite_char_group, event, list_objects)
-            draw_characters(sprite_char_group, mc_gyver_group, watchman_group, window_displayed)
-            if list_end_game_status[0] is True:
+            ghost_reset = reset_ghost_sprite(list_ghost, mc_gyver_sprite)
+            ghost_state = handle_collision(ghost_reset, walls_group)
+            game_state = attitude(mc_gyver_sprite, ghost_state, watchman_sprite, char_group, event, list_objects)
+            draw_characters(char_group, mc_gyver_group, watchman_group, window_displayed)
+            if game_state[0] is True:
                 launched = False
                 break
         clock.tick(fps)
         pg.display.update()
-    game_over(list_end_game_status[1], window, window_displayed)
+    game_over(game_state[1], window, window_displayed)
     pg.quit()
 
 

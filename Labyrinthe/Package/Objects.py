@@ -8,11 +8,17 @@ lg.basicConfig(level=lg.WARNING)
 
 
 class ObjectSprite(pg.sprite.Sprite):
+    """
 
+    """
     list_status_objects = [False, False, False]
 
     @classmethod
     def total_objects(cls):
+        """
+
+        :return:
+        """
         total = ObjectSprite.list_status_objects.count(True)
         if total == 3:
             return True
@@ -20,6 +26,12 @@ class ObjectSprite(pg.sprite.Sprite):
             return False
 
     def __init__(self, name, width=50, height=50):
+        """
+
+        :param name:
+        :param width:
+        :param height:
+        """
         super(ObjectSprite, self).__init__()
         self.name = name
         self.image = pg.Surface((width, height))
@@ -27,14 +39,29 @@ class ObjectSprite(pg.sprite.Sprite):
         self.picked_status = False
 
     def set_position(self, x, y):
+        """
+
+        :param x:
+        :param y:
+        :return:
+        """
         self.rect.x = x
         self.rect.y = y
 
     def set_image(self, filename=None):
+        """
+
+        :param filename:
+        :return:
+        """
         if filename is not None:
             self.image = pg.image.load(filename)
 
     def add_picked_object(self):
+        """
+
+        :return:
+        """
         if self.opened == 1:
             ObjectSprite.picked_objects = + 1
             return True

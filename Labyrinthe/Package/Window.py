@@ -44,6 +44,13 @@ class Window:
         return avatar
 
     def set_background_on(self, window, x, y):
+        """
+
+        :param window:
+        :param x:
+        :param y:
+        :return:
+        """
         picture_set = window.blit(self.picture, (x, y))
         return picture_set
 
