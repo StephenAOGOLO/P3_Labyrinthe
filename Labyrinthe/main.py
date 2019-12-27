@@ -12,54 +12,6 @@ import Labyrinthe.Package.Objects as Obj
 lg.basicConfig(level=lg.WARNING)
 
 
-def open_file(path_file):
-    """ This function open the file with the path
-    provided as argument. The content file is returned
-    into list.
-    :param path_file:
-    :return list_file: """
-
-    with open(path_file,"rt") as file:
-        list_file = file.readlines()
-    print("=" * 150)
-    print("\nThere is the file content : {}\n".format(path_file))
-    for index, line in enumerate(list_file):
-        print("line {} : {}".format(index, line))
-    print("=" * 150)
-    print("\nEnd of file\n")
-    print("=" * 150)
-    return list_file
-
-
-def off_running_maze(window_displayed):
-    """
-
-    :param window_displayed:
-    :return:
-    """
-    y = 0
-    x = 0
-    end_window = 850
-    walls_group = pg.sprite.Group()
-    while (y and x) < end_window:
-        for element in Sd.matrix_maze_2:
-            if x == end_window:
-                x = 0
-                y += 50
-            if element:
-                wall = Sd.SurroundigsSprite()
-                wall.set_position(x, y)
-                wall.set_image("./Package/Pictures/Wall/big_brown_block.png")
-                walls_group.add(wall)
-                walls_group.draw(window_displayed)
-            else:
-                pass
-            x += 50
-        break
-    state = True
-    return state
-
-
 def browsing_maze(sprite, sprite_group, sprite_name="sprite"):
     """
 
@@ -115,53 +67,12 @@ def game_over(status, window, window_displayed):
     pg.time.wait(5000)
 
 
-def set_objects(window_displayed):
-    """
-
-    :param window_displayed:
-    :return:
-    """
-    list_sprites = []
-    list_forbidden = [15, 32, 49, 48, 127]
-    list_index = [index for index, element in enumerate(Sd.matrix_maze_2) if element is False]
-    for element in list_forbidden:
-        list_index.remove(element)
-    three_random_index = rd.sample(list_index, k=3)
-    dico_objects = {"Needle": three_random_index[0], "Tube": three_random_index[1], "Ether": three_random_index[2]}
-    y = 0
-    x = 0
-    end_window = 850
-    objects_group = pg.sprite.Group()
-    while (y and x) < end_window:
-        for key, value in dico_objects.items():
-            y = 0
-            x = 0
-            for e, element in enumerate(Sd.matrix_maze_2):
-                if x == end_window:
-                    x = 0
-                    y += 50
-                if element is False and e == value:
-                    object_settings = Opt.SettingsObject()
-                    object_sprite = Obj.ObjectSprite(key)
-                    object_sprite.set_position(x, y)
-                    lg.info(object_sprite.rect)
-                    object_sprite.set_image(str(object_settings.data_file["path_picture"]))
-                    objects_group.add(object_sprite)
-                    list_sprites.append(object_sprite)
-                    break
-                x += 50
-        break
-    objects_group.draw(window_displayed)
-    return list_sprites
-
-
 def initialize_game():
     """
 
     :return:
     """
     pg.display.set_caption("Aidez MacGyver à s'échapper !")
-    #list_parameters = []
     dict_parameters = {}
     # WINDOW PARAMETERS
     window_settings = Opt.SettingsWindow()
@@ -176,13 +87,11 @@ def initialize_game():
     # MAC GYVER PARAMETERS
     mc_gyver_settings = Opt.SettingsCharacter()
     mc_gyver_sprite = Character.CharactersSprite()
-    #mc_gyver_sprite.set_position(int(mc_gyver_settings.data_file["startx"]), int(mc_gyver_settings.data_file["starty"]))
     mc_gyver_sprite.set_image(str(mc_gyver_settings.data_file["path_picture"]))
     list_ghost = set_ghost_sprite(mc_gyver_sprite)
     # WATCHMAN PARAMETERS
     watchman_settings = Opt.SettingsCharacter()
     watchman_sprite = Character.CharactersSprite()
-    #watchman_sprite.set_position(int(watchman_settings.data_file["startx"]), int(watchman_settings.data_file["starty"]))
     watchman_sprite.set_image(watchman_settings.data_file["path_picture"])
     # GROUPS PARAMETERS
     list_groups = needed_groups_for(mc_gyver_sprite, watchman_sprite)
@@ -191,18 +100,8 @@ def initialize_game():
     walls_group = the_maze.initialize_maze(window_displayed)
     Character.set_in_maze(the_maze, mc_gyver_sprite, watchman_sprite)
     # OBJECTS PARAMETERS
-    list_objects = set_objects(window_displayed)
-    #list_parameters.append(window)
-    #list_parameters.append(limit_window_x)
-    #list_parameters.append(limit_window_y)
-    #list_parameters.append(fps)
-    #list_parameters.append(mc_gyver_sprite)
-    #list_parameters.append(watchman_sprite)
-    #list_parameters.append(window_displayed)
-    #list_parameters.append(list_ghost)
-    #list_parameters.append(walls_group)
-    #list_parameters.append(list_objects)
-    #list_parameters.append(list_groups)
+    list_objects = Obj.set_objects(window_displayed)
+    #list_objects = set_objects(window_displayed)
     dict_parameters["window"] = window
     dict_parameters["limit_window_x"] = limit_window_x
     dict_parameters["limit_window_y"] = limit_window_y
@@ -214,17 +113,16 @@ def initialize_game():
     dict_parameters["walls_group"] = walls_group
     dict_parameters["list_objects"] = list_objects
     dict_parameters["list_groups"] = list_groups
-    #return list_parameters
     return dict_parameters
 
 
 def set_ghost_sprite(the_sprite):
     """
-
+    Create ghosts sprite around the referenced sprite.
+    Add all the ghosts sprite and the group into the list to return.
     :param the_sprite:
     :return:
     """
-    # Create ghosts sprite around the referenced sprite
     list_ghost = []
     top_ghost = Character.CharactersSprite()
     bottom_ghost = Character.CharactersSprite()
@@ -236,7 +134,6 @@ def set_ghost_sprite(the_sprite):
     right_ghost.set_position(the_sprite.rect.x+50, the_sprite.rect.y)
     ghost_group = pg.sprite.Group()
     ghost_group.add(top_ghost, bottom_ghost, right_ghost, left_ghost)
-    # Add all the ghosts sprite and the group into the list to return
     list_ghost.append(top_ghost)
     list_ghost.append(bottom_ghost)
     list_ghost.append(right_ghost)
