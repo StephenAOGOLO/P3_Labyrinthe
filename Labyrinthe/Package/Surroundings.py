@@ -1,57 +1,7 @@
 import pygame as pg
 
-matrix_maze_off = [
-    "tbl", "tb", "tb", "tb", "tb", "tb", "tb", "tb", "tb", "tb", "tb", "tr", "tl", "tr", "watchman",
-    "trl" ,"tl" ,"tb" ,"tb" ,"tb" ,"tb" ,"tr" ,"rl" ,"rl" ,"rl" ,"rl" ,"rl" ,"rl" ,"rl" ,"rl" ,
-    "rl" ,"" ,"" ,"" ,"" ,"" ,"" ,"" ,"" ,"" ,"" ,"" ,"" ,"" ,"rl" ,
-    "rl" ,"" ,"" ,"" ,"" ,"" ,"" ,"" ,"" ,"" ,"" ,"" ,"" ,"" ,"rl" ,
-    "rl" ,"" ,"" ,"" ,"" ,"" ,"" ,"" ,"" ,"" ,"" ,"" ,"" ,"" ,"rl" ,
-    "rl" ,"" ,"" ,"" ,"" ,"" ,"" ,"" ,"" ,"" ,"" ,"" ,"" ,"" ,"rl" ,
-    "rl" ,"" ,"" ,"" ,"" ,"" ,"" ,"" ,"" ,"" ,"" ,"" ,"" ,"" ,"rl" ,
-    "rl" ,"" ,"" ,"" ,"" ,"" ,"" ,"" ,"" ,"" ,"" ,"" ,"" ,"" ,"rl" ,
-    "rl" ,"" ,"" ,"" ,"" ,"" ,"" ,"" ,"" ,"" ,"" ,"" ,"" ,"" ,"rl" ,
-    "rl" ,"" ,"" ,"" ,"" ,"" ,"" ,"" ,"" ,"" ,"" ,"" ,"" ,"" ,"rl" ,
-    "rl" ,"" ,"" ,"" ,"" ,"" ,"" ,"" ,"" ,"" ,"" ,"" ,"" ,"" ,"rl" ,
-    "l" ,"" ,"" ,"" ,"" ,"" ,"" ,"" ,"" ,"" ,"" ,"" ,"" ,"" ,"rl" ,
-    "rl" ,"" ,"" ,"" ,"" ,"" ,"" ,"" ,"" ,"" ,"" ,"" ,"" ,"" ,"rl" ,
-    "l" ,"" ,"" ,"" ,"" ,"" ,"" ,"" ,"" ,"" ,"" ,"" ,"" ,"" ,"rl" ,
-    "bl" ,"tb" ,"tb" ,"tb" ,"b" ,"b" ,"b" ,"b" ,"b" ,"rb" ,"bl" ,"b" ,"b" ,"b" ,"rb" ,
-]
 
-matrix_maze = [False, False, True, False, False, False, True, False, False, False, False, False, False, True, False,
-               True, False, False, False, True, False, False, False, True, True, True, True, True, False, False,
-               False, False, True, True, True, True, True, False, True, True, True, False, False, False, True,
-               False, True, True, False, False, False, False, False, False, False, True, False, True, True, False,
-               False, False, True, False, True, True, True, True, True, False, True, False, True, False, False,
-               True, False, True, False, True, False, False, False, True, False, True, False, False, False, True,
-               False, False, True, False, True, False, True, False, True, False, True, True, True, False, False,
-               False, True, True, False, True, False, True, True, True, False, True, False, True, True, False,
-               False, False, True, False, True, False, False, False, False, False, True, False, True, True, False,
-               True, False, True, False, True, True, True, True, True, True, True, False, True, True, False,
-               False, False, True, False, False, False, False, False, False, False, False, False, True, False, False,
-               False, True, True, True, True, True, True, True, False, True, True, True, True, False, True,
-               False, False, True, True, False, False, False, True, False, False, False, False, False, False, False,
-               True, True, True, False, False, True, False, False, True, False, True, True, True, False, True,
-               False, False, False, False, True, False, False, False, False, False, False, True, False, False, False,
-               ]
-matrix_test = [True, True, True, True, True, True, True, True, True, True, True, True, True, True, True,
-               True, True, True, True, True, True, True, True, True, True, True, True, True, True, True,
-               True, True, True, True, True, True, True, True, True, True, True, True, True, True, True,
-               True, True, True, True, True, True, True, True, True, True, True, True, True, True, True,
-               True, True, True, True, True, True, True, True, True, True, True, True, True, True, True,
-               True, True, True, True, True, True, True, True, True, True, True, True, True, True, True,
-               True, True, True, True, True, True, True, True, True, True, True, True, True, True, True,
-               True, True, True, True, True, True, True, True, True, True, True, True, True, True, True,
-               True, True, True, True, True, True, True, True, True, True, True, True, True, True, True,
-               True, True, True, True, True, True, True, True, True, True, True, True, True, True, True,
-               True, True, True, True, True, True, True, True, True, True, True, True, True, True, True,
-               True, True, True, True, True, True, True, True, True, True, True, True, True, True, True,
-               True, True, True, True, True, True, True, True, True, True, True, True, True, True, True,
-               True, True, True, True, True, True, True, True, True, True, True, True, True, True, True,
-               True, True, True, True, True, True, True, True, True, True, True, True, True, True, True,
-]
-
-matrix_maze_2= [
+matrix_maze_2 = [
     True, True, True, True, True, True, True, True, True, True, True, True, True, True, True, False, True,
     True, False, False, True, False, False, False, True, False, False, False, False, False, False, True, False, True,
     True, True, False, False, False, True, False, False, False, True, True, True, True, True, False, False, True,
@@ -70,6 +20,7 @@ matrix_maze_2= [
     True, False, False, False, False, True, False, False, False, False, False, False, True, False, False, False, True,
     True, True, True, True, True, True, True, True, True, True, True, True, True, True, True, True, True,
     ]
+
 
 class SurroundingsElement:
     """

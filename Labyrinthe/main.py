@@ -12,7 +12,26 @@ import Labyrinthe.Package.Objects as Obj
 lg.basicConfig(level=lg.WARNING)
 
 
-def running_maze(window_displayed):
+def open_file(path_file):
+    """ This function open the file with the path
+    provided as argument. The content file is returned
+    into list.
+    :param path_file:
+    :return list_file: """
+
+    with open(path_file,"rt") as file:
+        list_file = file.readlines()
+    print("=" * 150)
+    print("\nThere is the file content : {}\n".format(path_file))
+    for index, line in enumerate(list_file):
+        print("line {} : {}".format(index, line))
+    print("=" * 150)
+    print("\nEnd of file\n")
+    print("=" * 150)
+    return list_file
+
+
+def off_running_maze(window_displayed):
     """
 
     :param window_displayed:
