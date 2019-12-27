@@ -84,7 +84,7 @@ class Maze:
         x = 0
         y = 0
         walls_group = pg.sprite.Group()
-        matrix_content = open_file("./Package/matrix_pattern.txt")
+        matrix_content = open_file("./Package/good_matrix_pattern_with_characters.txt")
         matrix = "".join(matrix_content)
         matrix = matrix.replace("\n", "")
         while (y and x) < self.window_size:

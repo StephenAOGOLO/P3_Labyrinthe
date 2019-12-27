@@ -176,19 +176,20 @@ def initialize_game():
     # MAC GYVER PARAMETERS
     mc_gyver_settings = Opt.SettingsCharacter()
     mc_gyver_sprite = Character.CharactersSprite()
-    mc_gyver_sprite.set_position(int(mc_gyver_settings.data_file["startx"]), int(mc_gyver_settings.data_file["starty"]))
+    #mc_gyver_sprite.set_position(int(mc_gyver_settings.data_file["startx"]), int(mc_gyver_settings.data_file["starty"]))
     mc_gyver_sprite.set_image(str(mc_gyver_settings.data_file["path_picture"]))
     list_ghost = set_ghost_sprite(mc_gyver_sprite)
     # WATCHMAN PARAMETERS
     watchman_settings = Opt.SettingsCharacter()
     watchman_sprite = Character.CharactersSprite()
-    watchman_sprite.set_position(int(watchman_settings.data_file["startx"]), int(watchman_settings.data_file["starty"]))
+    #watchman_sprite.set_position(int(watchman_settings.data_file["startx"]), int(watchman_settings.data_file["starty"]))
     watchman_sprite.set_image(watchman_settings.data_file["path_picture"])
     # GROUPS PARAMETERS
     list_groups = needed_groups_for(mc_gyver_sprite, watchman_sprite)
     # MAZE PARAMETERS
     the_maze = Maze.Maze(window_size)
     walls_group = the_maze.initialize_maze(window_displayed)
+    Character.set_in_maze(the_maze, mc_gyver_sprite, watchman_sprite)
     # OBJECTS PARAMETERS
     list_objects = set_objects(window_displayed)
     #list_parameters.append(window)

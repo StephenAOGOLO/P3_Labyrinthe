@@ -4,6 +4,7 @@ import random as rd
 import logging as lg
 import Labyrinthe.Package.Objects as Obj
 
+
 lg.basicConfig(level=lg.WARNING)
 
 
@@ -216,6 +217,52 @@ class CharactersSprite(pg.sprite.Sprite):
         list_endgame.append(end_game_status)
         list_endgame.append(success_status)
         return list_endgame
+
+
+def set_in_maze(maze, mc_gyver, watchman):
+    """
+
+    :param mc_gyver:
+    :param watchman:
+    :return:
+    """
+    x = 0
+    y = 0
+    matrix_content = open_file("./Package/good_matrix_pattern_with_characters.txt")
+    matrix = "".join(matrix_content)
+    matrix = matrix.replace("\n", "")
+    while (y and x) < maze.window_size:
+        for element in matrix:
+            if x == maze.window_size:
+                x = 0
+                y += 50
+            if element == "M":
+                mc_gyver.set_position(x, y)
+            elif element == "W":
+                watchman.set_position(x, y)
+            else:
+                pass
+            x += 50
+        break
+    return True
+
+
+def open_file(path_file):
+    """ This function open the file with the path
+    provided as argument. The content file is returned
+    into list.
+    :param path_file:
+    :return list_file: """
+    with open(path_file, "rt") as file:
+        list_file = file.readlines()
+    print("=" * 150)
+    print("\nThere is the file content : {}\n".format(path_file))
+    for index, line in enumerate(list_file):
+        print("line {} : {}".format(index, line))
+    print("=" * 150)
+    print("\nEnd of file\n")
+    print("=" * 150)
+    return list_file
 
 
 if __name__ == "__main__":
