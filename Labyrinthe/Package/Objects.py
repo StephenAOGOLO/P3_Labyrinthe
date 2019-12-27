@@ -2,7 +2,6 @@
 import pygame as pg
 import logging as lg
 import random as rd
-import Labyrinthe.Package.Surroundings as Sd
 import Labyrinthe.Package.Options as Opt
 
 
@@ -160,41 +159,3 @@ def open_file(path_file):
     print("=" * 150)
     return list_file
 
-if __name__ == "__main__":
-    import Labyrinthe.Package.Window as Wd
-    pg.init()
-    pg.display.set_caption("Aidez MacGyver à s'échapper !")
-    window = Wd.Window(770, 770)
-    window_displayed = window.display_window()
-    clock = pg.time.Clock()
-    fps = 60
-    walls_group = pg.sprite.Group()
-    list_bool = [True, False]
-    y = 0
-    x = 0
-    end_window = 750
-    window.set_background_on(window_displayed, 0, 0)
-    while (y and x) < end_window:
-        for element in Sd.matrix_maze:
-            if x == end_window:
-                x = 0
-                y += 50
-            if element:
-                wall = Sd.SurroundigsSprite()
-                wall.set_position(x, y)
-                wall.set_image("./Pictures/Wall/big_brown_block.png")
-                walls_group.add(wall)
-                walls_group.draw(window_displayed)
-            else:
-                pass
-            x += 50
-    lg.info(walls_group.sprites())
-    lg.info(len(walls_group))
-    launched = True
-    while launched:
-        for event in pg.event.get():
-            if event.type == pg.QUIT:
-                launched = False
-        clock.tick(fps)
-        pg.display.update()
-    pg.quit()

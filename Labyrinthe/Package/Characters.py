@@ -263,31 +263,3 @@ def open_file(path_file):
     print("\nEnd of file\n")
     print("=" * 150)
     return list_file
-
-
-if __name__ == "__main__":
-    import Labyrinthe.Package.Window as Wd
-    pg.init()
-    pg.display.set_caption("Aidez MacGyver à s'échapper !")
-    window_width = 640
-    window_height = 480
-    window = Wd.Window(window_width, window_height)
-    window = window.display_window()
-    window.fill((255, 255, 255))
-    clock = pg.time.Clock()
-    fps = 60
-    sprite_char_group = pg.sprite.Group()
-    mc_gyver_sprite = CharactersSprite()
-    mc_gyver_sprite.set_position(1, 1)
-    mc_gyver_sprite.set_image("./Pictures/brown_block.png")
-    sprite_char_group.add(mc_gyver_sprite)
-    launched = True
-    while launched:
-        for event in pg.event.get():
-            if event.type == pg.QUIT:
-                launched = False
-        Wd.color_window(window)
-        sprite_char_group.draw(window)
-        clock.tick(fps)
-        pg.display.update()
-    pg.quit()

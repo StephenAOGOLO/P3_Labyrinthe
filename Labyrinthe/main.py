@@ -1,12 +1,10 @@
 # coding: utf-8
 import pygame as pg
-import random as rd
 import logging as lg
 import Labyrinthe.Package.Mazes as Maze
 import Labyrinthe.Package.Options as Opt
 import Labyrinthe.Package.Window as Wd
 import Labyrinthe.Package.Characters as Character
-import Labyrinthe.Package.Surroundings as Sd
 import Labyrinthe.Package.Objects as Obj
 
 lg.basicConfig(level=lg.WARNING)
@@ -76,10 +74,12 @@ def initialize_game():
     dict_parameters = {}
     # WINDOW PARAMETERS
     window_settings = Opt.SettingsWindow()
-    window = Wd.Window(int(window_settings.data_file["window_width"]), int(window_settings.data_file["window_height"]))
+    window_width = int(window_settings.data_file["window_width"])
+    window_height = int(window_settings.data_file["window_height"])
     limit_window_x = int(window_settings.data_file["limit_x"])
     limit_window_y = int(window_settings.data_file["limit_y"])
     window_size = int(window_settings.data_file["window_size"])
+    window = Wd.Window(window_width, window_height)
     clock_settings = Opt.SettingsWindow()
     fps = int(clock_settings.data_file["fps"])
     window_displayed = window.display_window()
@@ -101,7 +101,6 @@ def initialize_game():
     Character.set_in_maze(the_maze, mc_gyver_sprite, watchman_sprite)
     # OBJECTS PARAMETERS
     list_objects = Obj.set_objects(window_displayed)
-    #list_objects = set_objects(window_displayed)
     dict_parameters["window"] = window
     dict_parameters["limit_window_x"] = limit_window_x
     dict_parameters["limit_window_y"] = limit_window_y
@@ -242,19 +241,6 @@ def main_test():
     global game_state
     pg.init()
     clock = pg.time.Clock()
-    #list_parameters = initialize_game()
-    #window = list_parameters[0]
-    #window_displayed = list_parameters[6]
-    #fps = list_parameters[3]
-    #mc_gyver_sprite = list_parameters[4]
-    #watchman_sprite = list_parameters[5]
-    #list_ghost = list_parameters[7]
-    #walls_group = list_parameters[8]
-    #list_objects = list_parameters[9]
-    #list_groups = list_parameters[10]
-    #char_group = list_groups[0]
-    #mc_gyver_group = list_groups[1]
-    #watchman_group = list_groups[2]
     dict_parameters = initialize_game()
     window = dict_parameters["window"]
     fps = dict_parameters["fps"]
