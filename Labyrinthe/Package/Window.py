@@ -54,6 +54,22 @@ class Window:
         picture_set = window.blit(self.picture, (x, y))
         return picture_set
 
+    def game_over(self, status, window_displayed):
+        """
+
+        :param status:
+        :param window:
+        :param window_displayed:
+        :return:
+        """
+        if status is True:
+            self.picture = pg.image.load("./Package/Pictures/Messages/mission_passed.png")
+        if status is False:
+            self.picture = pg.image.load("./Package/Pictures/Messages/wasted.jpg")
+        self.set_background_on(window_displayed, 200, 200)
+        pg.display.update()
+        pg.time.wait(3000)
+
 
 def color_window(window, color=BACKGROUND):
     """

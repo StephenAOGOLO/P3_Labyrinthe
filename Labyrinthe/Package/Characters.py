@@ -218,6 +218,117 @@ class CharactersSprite(pg.sprite.Sprite):
         list_endgame.append(success_status)
         return list_endgame
 
+    def get_move_state(self, list_ghost_status, event):
+        """
+
+        :param player_sprite:
+        :param list_ghost_status:
+        :param event:
+        :return:
+        """
+        dict_state = {"last_position": [self.rect.x, self.rect.y],
+                      "move_state": self.start_move_avatar(event, list_ghost_status)}
+        self.standstill_avatar(event)
+        return dict_state
+
+    def set_ghost_sprite(self):
+        """
+        Create ghosts sprite around the referenced sprite.
+        Add all the ghosts sprite and the group into the list to return.
+        :return:
+        """
+        list_ghost = []
+        top_ghost = CharactersSprite()
+        bottom_ghost = CharactersSprite()
+        left_ghost = CharactersSprite()
+        right_ghost = CharactersSprite()
+        top_ghost.set_position(self.rect.x, self.rect.y - 50)
+        bottom_ghost.set_position(self.rect.x, self.rect.y + 50)
+        left_ghost.set_position(self.rect.x - 50, self.rect.y)
+        right_ghost.set_position(self.rect.x + 50, self.rect.y)
+        ghost_group = pg.sprite.Group()
+        ghost_group.add(top_ghost, bottom_ghost, right_ghost, left_ghost)
+        list_ghost.append(top_ghost)
+        list_ghost.append(bottom_ghost)
+        list_ghost.append(right_ghost)
+        list_ghost.append(left_ghost)
+        list_ghost.append(ghost_group)
+        return list_ghost
+
+    def reset_ghost_sprite(self, list_ghost):
+        """
+
+        :param list_ghost:
+        :return:
+        """
+        new_list = []
+        top_ghost = list_ghost[0]
+        bottom_ghost = list_ghost[1]
+        right_ghost = list_ghost[2]
+        left_ghost = list_ghost[3]
+        ghost_group = list_ghost[4]
+        top_ghost.set_position(self.rect.x, self.rect.y - 50)
+        bottom_ghost.set_position(self.rect.x, self.rect.y + 50)
+        left_ghost.set_position(self.rect.x - 50, self.rect.y)
+        right_ghost.set_position(self.rect.x + 50, self.rect.y)
+        pg.sprite.Group.update(ghost_group)
+        new_list.append(top_ghost)
+        new_list.append(right_ghost)
+        new_list.append(bottom_ghost)
+        new_list.append(left_ghost)
+        return new_list
+
+    def attitude(self, dict_state, boss_sprite, sprite_char_group, list_objects):
+        """
+
+        :param dict_state:
+        :param boss_sprite:
+        :param sprite_char_group:
+        :param list_objects:
+        :return:
+        """
+        # last_position = [player_sprite.rect.x, player_sprite.rect.y]
+        # move_status = player_sprite.start_move_avatar(event, list_ghost_status)
+        # player_sprite.standstill_avatar(event)
+        track_sprite = remove_track(dict_state["move_state"], dict_state["last_position"])
+        self.be_collided(list_objects)
+        sprite_char_group.add(track_sprite)
+        list_end_game_status = self.prepared_objects_for(boss_sprite)
+        return list_end_game_status
+
+    def browsing_maze(self, sprite_group, sprite_name="sprite"):
+        """
+
+        :param sprite:
+        :param sprite_group:
+        :param sprite_name:
+        :return:
+        """
+        blocks_hit_list = pg.sprite.spritecollide(self, sprite_group, False)
+        lg.info("*\nEvent of the sprite : %s\n*", sprite_name)
+        for index, block in enumerate(blocks_hit_list):
+            lg.info(index, block)
+            if block:
+                return False
+            return True
+        lg.info("***")
+        lg.info("*" * 100)
+        return True
+
+    def needed_groups_for(self, watchman_sprite):
+        """
+
+        :return:
+        """
+        list_group = []
+        for group in range(0, 3):
+            group = pg.sprite.Group()
+            list_group.append(group)
+        watchman_sprite.add_to_group(list_group[0])
+        self.add_to_group(list_group[1])
+        watchman_sprite.add_to_group(list_group[2])
+        return list_group
+
 
 def set_in_maze(maze, mc_gyver, watchman):
     """
@@ -245,6 +356,37 @@ def set_in_maze(maze, mc_gyver, watchman):
             x += 50
         break
     return True
+
+
+def remove_track(move_status, last_position):
+    """
+
+    :param move_status:
+    :param last_position:
+    :return:
+    """
+    track_sprite = CharactersSprite()
+    if move_status:
+        track_sprite.set_position(last_position[0], last_position[1])
+        track_sprite.set_image("./Package/Pictures/wall/pyramid_sample.png")
+        lg.info("MOVEMENT !!!!!!")
+        return track_sprite
+    return track_sprite
+
+
+def handle_collision(list_ghost, walls_group):
+    """
+
+    :param list_ghost:
+    :param walls_group:
+    :return:
+    """
+    list_ghost_status = []
+    list_ghost_name = ["top_ghost", "right_ghost", "bottom_ghost", "left_ghost"]
+    for index, ghost in enumerate(list_ghost):
+        collision_status = ghost.browsing_maze(walls_group, list_ghost_name[index])
+        list_ghost_status.append(collision_status)
+    return list_ghost_status
 
 
 def open_file(path_file):
