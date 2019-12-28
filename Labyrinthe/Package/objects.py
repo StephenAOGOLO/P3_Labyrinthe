@@ -1,8 +1,9 @@
+"""hello"""
 # -*- coding: utf-8 -*-
 import pygame as pg
 import logging as lg
 import random as rd
-import Labyrinthe.Package.Options as Opt
+import Labyrinthe.Package.options as opt
 
 
 lg.basicConfig(level=lg.WARNING)
@@ -128,7 +129,7 @@ def set_objects(window_displayed):
                     x = 0
                     y += 50
                 if element == "_" and e == value:
-                    object_settings = Opt.SettingsObject()
+                    object_settings = opt.SettingsObject()
                     object_sprite = ObjectSprite(key)
                     object_sprite.set_position(x, y)
                     lg.info(object_sprite.rect)

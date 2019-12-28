@@ -1,16 +1,15 @@
+"""hello"""
 # -*- coding: utf-8 -*-
 import pygame as pg
 import random as rd
 import logging as lg
-import Labyrinthe.Package.Objects as Obj
-
-
+import Labyrinthe.Package.objects as obj
 lg.basicConfig(level=lg.WARNING)
 
 
 class CharactersSprite(pg.sprite.Sprite):
     """
-
+    hello
     """
     list_status_objects = [False, False, False]
 
@@ -55,7 +54,6 @@ class CharactersSprite(pg.sprite.Sprite):
         """
         if filename is not None:
             self.image = pg.image.load(filename)
-            # self.rect = self.image.get_rect()
 
     def add_to_group(self, group):
         """
@@ -77,7 +75,7 @@ class CharactersSprite(pg.sprite.Sprite):
             list_ghost_status = [True, True, True, True]
         lg.info("event -->", event)
         move_status = False
-        picture_behavior = "./Package/Pictures/Above_MacGyver/a_mg_s_t_f.png"
+        picture_behavior = "./Pictures/mg/a_mg_s_t_f.png"
         self.last_x = self.rect.x
         self.last_y = self.rect.y
         arrow_key = pg.key.get_pressed()
@@ -91,13 +89,13 @@ class CharactersSprite(pg.sprite.Sprite):
                 self.rect.y += mc_gyver_move_y
                 chance = rd.randrange(1, 3)
                 if chance == 1:
-                    picture_behavior = "./Package/Pictures/Above_MacGyver/a_mg_w1_t_f.png"
+                    picture_behavior = "./Pictures/mg/a_mg_w1_t_f.png"
                 else:
-                    picture_behavior = "./Package/Pictures/Above_MacGyver/a_mg_w2_t_f.png"
+                    picture_behavior = "./Pictures/mg/a_mg_w2_t_f.png"
                 self.set_image(picture_behavior)
                 move_status = True
             elif arrow_key[pg.K_UP] and not list_ghost_status[0]:
-                picture_behavior = "./Package/Pictures/Above_MacGyver/a_mg_w1_t_f.png"
+                picture_behavior = "./Pictures/mg/a_mg_w1_t_f.png"
                 self.set_image(picture_behavior)
             elif arrow_key[pg.K_RIGHT] and list_ghost_status[1]:
                 mc_gyver_move_x = 50
@@ -106,13 +104,13 @@ class CharactersSprite(pg.sprite.Sprite):
                 self.rect.y += mc_gyver_move_y
                 chance = rd.randrange(1, 3)
                 if chance == 1:
-                    picture_behavior = "./Package/Pictures/Above_MacGyver/a_mg_w1_r_f.png"
+                    picture_behavior = "./Pictures/mg/a_mg_w1_r_f.png"
                 else:
-                    picture_behavior = "./Package/Pictures/Above_MacGyver/a_mg_w2_r_f.png"
+                    picture_behavior = "./Pictures/mg/a_mg_w2_r_f.png"
                 self.set_image(picture_behavior)
                 move_status = True
             elif arrow_key[pg.K_RIGHT] and not list_ghost_status[1]:
-                picture_behavior = "./Package/Pictures/Above_MacGyver/a_mg_w1_r_f.png"
+                picture_behavior = "./Pictures/mg/a_mg_w1_r_f.png"
                 self.set_image(picture_behavior)
             elif arrow_key[pg.K_DOWN] and list_ghost_status[2]:
                 mc_gyver_move_y = 50
@@ -121,13 +119,13 @@ class CharactersSprite(pg.sprite.Sprite):
                 self.rect.y += mc_gyver_move_y
                 chance = rd.randrange(1, 3)
                 if chance == 1:
-                    picture_behavior = "./Package/Pictures/Above_MacGyver/a_mg_w1_b_f.png"
+                    picture_behavior = "./Pictures/mg/a_mg_w1_b_f.png"
                 else:
-                    picture_behavior = "./Package/Pictures/Above_MacGyver/a_mg_w2_b_f.png"
+                    picture_behavior = "./Pictures/mg/a_mg_w2_b_f.png"
                 self.set_image(picture_behavior)
                 move_status = True
             elif arrow_key[pg.K_DOWN] and not list_ghost_status[2]:
-                picture_behavior = "./Package/Pictures/Above_MacGyver/a_mg_w1_b_f.png"
+                picture_behavior = "./Pictures/mg/a_mg_w1_b_f.png"
                 self.set_image(picture_behavior)
             elif arrow_key[pg.K_LEFT] and list_ghost_status[3]:
                 mc_gyver_move_x = -50
@@ -136,13 +134,13 @@ class CharactersSprite(pg.sprite.Sprite):
                 self.rect.y += mc_gyver_move_y
                 chance = rd.randrange(1, 3)
                 if chance == 1:
-                    picture_behavior = "./Package/Pictures/Above_MacGyver/a_mg_w1_l_f.png"
+                    picture_behavior = "./Pictures/mg/a_mg_w1_l_f.png"
                 else:
-                    picture_behavior = "./Package/Pictures/Above_MacGyver/a_mg_w2_l_f.png"
+                    picture_behavior = "./Pictures/mg/a_mg_w2_l_f.png"
                 self.set_image(picture_behavior)
                 move_status = True
             elif arrow_key[pg.K_LEFT] and not list_ghost_status[3]:
-                picture_behavior = "./Package/Pictures/Above_MacGyver/a_mg_w1_l_f.png"
+                picture_behavior = "./Pictures/mg/a_mg_w1_l_f.png"
                 self.set_image(picture_behavior)
             else:
                 pass
@@ -157,19 +155,19 @@ class CharactersSprite(pg.sprite.Sprite):
         if event.type == 3 and event.key == 273:
             last_event = event
             lg.info("dernier appui = ", last_event)
-            self.set_image("./Package/Pictures/Above_MacGyver/a_mg_s_t_f.png")
+            self.set_image("./Pictures/mg/a_mg_s_t_f.png")
         if event.type == 3 and event.key == 275:
             last_event = event
             lg.info("dernier appui = ", last_event)
-            self.set_image("./Package/Pictures/Above_MacGyver/a_mg_s_r_f.png")
+            self.set_image("./Pictures/mg/a_mg_s_r_f.png")
         if event.type == 3 and event.key == 274:
             last_event = event
             lg.info("dernier appui = ", last_event)
-            self.set_image("./Package/Pictures/Above_MacGyver/a_mg_s_b_f.png")
+            self.set_image("./Pictures/mg/a_mg_s_b_f.png")
         if event.type == 3 and event.key == 276:
             last_event = event
             lg.info("dernier appui = ", last_event)
-            self.set_image("./Package/Pictures/Above_MacGyver/a_mg_s_l_f.png")
+            self.set_image("./Pictures/mg/a_mg_s_l_f.png")
 
     def be_collided(self, list_objects):
         """
@@ -179,12 +177,12 @@ class CharactersSprite(pg.sprite.Sprite):
         """
         for index, sprite_object in enumerate(list_objects):
             if pg.sprite.collide_rect(self, sprite_object):
-                Obj.ObjectSprite.list_status_objects[index] = True
-        total = Obj.ObjectSprite.list_status_objects.count(True)
-        list_status = Obj.ObjectSprite.list_status_objects
+                obj.ObjectSprite.list_status_objects[index] = True
+        total = obj.ObjectSprite.list_status_objects.count(True)
+        list_status = obj.ObjectSprite.list_status_objects
         print("\nTOTAL picked objects = {}\nNeedle = {}\nTube = {}\nEther = {}\n"
               .format(total, list_status[0], list_status[1], list_status[2]))
-        return Obj.ObjectSprite.list_status_objects
+        return obj.ObjectSprite.list_status_objects
 
     def prepared_objects_for(self, sprite_boss):
         """
@@ -195,12 +193,12 @@ class CharactersSprite(pg.sprite.Sprite):
         end_game_status = False
         success_status = False
         list_endgame = []
-        if Obj.ObjectSprite.total_objects():
-            CharactersSprite.set_image(sprite_boss, "./Package/Pictures/Above_Watchman/a_w_ss2_f.png")
+        if obj.ObjectSprite.total_objects():
+            CharactersSprite.set_image(sprite_boss, "./Pictures/wm/a_w_ss2_f.png")
             print("Catch the WatchMan !!! Man !!!")
             if pg.sprite.collide_rect(self, sprite_boss):
                 CharactersSprite.set_position(sprite_boss, 750, 0)
-                CharactersSprite.set_image(sprite_boss, "./Package/Pictures/Above_Watchman/a_w_ss3_f.png")
+                CharactersSprite.set_image(sprite_boss, "./Pictures/wm/a_w_ss3_f.png")
                 print("GOTCHA !!! YOU WIN")
                 end_game_status = True
                 success_status = True
@@ -209,8 +207,8 @@ class CharactersSprite(pg.sprite.Sprite):
             end_game_status = False
             if pg.sprite.collide_rect(self, sprite_boss):
                 CharactersSprite.set_position(sprite_boss, 750, 0)
-                CharactersSprite.set_image(sprite_boss, "./Package/Pictures/Above_Watchman/a_w_ss4_f.png")
-                CharactersSprite.set_image(self, "./Package/Pictures/Above_Watchman/a_w_ss3_f.png")
+                CharactersSprite.set_image(sprite_boss, "./Pictures/wm/a_w_ss4_f.png")
+                CharactersSprite.set_image(self, "./Pictures/wm/a_w_ss3_f.png")
                 print("HE GOT U !!! YOU LOSE !!!")
                 end_game_status = True
                 success_status = False
@@ -287,9 +285,6 @@ class CharactersSprite(pg.sprite.Sprite):
         :param list_objects:
         :return:
         """
-        # last_position = [player_sprite.rect.x, player_sprite.rect.y]
-        # move_status = player_sprite.start_move_avatar(event, list_ghost_status)
-        # player_sprite.standstill_avatar(event)
         track_sprite = remove_track(dict_state["move_state"], dict_state["last_position"])
         self.be_collided(list_objects)
         sprite_char_group.add(track_sprite)
@@ -368,7 +363,7 @@ def remove_track(move_status, last_position):
     track_sprite = CharactersSprite()
     if move_status:
         track_sprite.set_position(last_position[0], last_position[1])
-        track_sprite.set_image("./Package/Pictures/wall/pyramid_sample.png")
+        track_sprite.set_image("./Pictures/w/pyramid_sample.png")
         lg.info("MOVEMENT !!!!!!")
         return track_sprite
     return track_sprite
@@ -387,6 +382,22 @@ def handle_collision(list_ghost, walls_group):
         collision_status = ghost.browsing_maze(walls_group, list_ghost_name[index])
         list_ghost_status.append(collision_status)
     return list_ghost_status
+
+
+def draw_characters(sprite_char_group, mc_gyver_group, watchman_group, window_displayed):
+    """
+
+    :param sprite_char_group:
+    :param mc_gyver_group:
+    :param watchman_group:
+    :param window_displayed:
+    :return:
+    """
+    sprite_char_group.draw(window_displayed)
+    mc_gyver_group.draw(window_displayed)
+    watchman_group.draw(window_displayed)
+    obj.update_dashboard(window_displayed)
+    return True
 
 
 def open_file(path_file):

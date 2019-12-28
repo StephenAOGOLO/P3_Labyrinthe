@@ -1,3 +1,4 @@
+"""hello"""
 # -*- coding: utf-8 -*-
 import pygame as pg
 

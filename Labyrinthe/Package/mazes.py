@@ -1,6 +1,7 @@
+"""hello"""
 # -*- coding: utf-8 -*-
 import pygame as pg
-import Labyrinthe.Package.Surroundings as Sd
+import Labyrinthe.Package.surroundings as sd
 
 
 class Maze:
@@ -43,7 +44,7 @@ class Maze:
                     x = 0
                     y += 50
                 if element == "#":
-                    wall = Sd.SurroundigsSprite()
+                    wall = sd.SurroundigsSprite()
                     wall.set_position(x, y)
                     wall.set_image("./Package/Pictures/Wall/big_brown_block.png")
                     walls_group.add(wall)
