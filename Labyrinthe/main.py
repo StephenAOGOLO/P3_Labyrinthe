@@ -2,8 +2,10 @@
 # -*- coding: utf-8 -*-
 import logging as lg
 import pygame as pg
-import Labyrinthe.Package.characters as ch
-import Labyrinthe.loading as ld
+import loading as ld
+import Package.characters as ch
+
+
 lg.basicConfig(level=lg.WARNING)
 
 

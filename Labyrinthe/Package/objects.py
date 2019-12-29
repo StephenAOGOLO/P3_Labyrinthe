@@ -3,7 +3,7 @@
 import logging as lg
 import random as rd
 import pygame as pg
-import Labyrinthe.Package.options as opt
+import Package.options as opt
 
 
 lg.basicConfig(level=lg.WARNING)

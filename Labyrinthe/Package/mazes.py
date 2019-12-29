@@ -1,7 +1,7 @@
 """hello"""
 # -*- coding: utf-8 -*-
 import pygame as pg
-import Labyrinthe.Package.surroundings as sd
+import Package.surroundings as sd
 
 
 class Maze:

@@ -3,7 +3,7 @@
 import random as rd
 import logging as lg
 import pygame as pg
-import Labyrinthe.Package.objects as obj
+import Package.objects as obj
 lg.basicConfig(level=lg.WARNING)
 
 

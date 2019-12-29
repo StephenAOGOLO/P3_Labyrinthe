@@ -1,10 +1,10 @@
 """hello"""
 # -*- coding: utf-8 -*-
-import Labyrinthe.Package.mazes as maze
-import Labyrinthe.Package.options as opt
-import Labyrinthe.Package.window as wd
-import Labyrinthe.Package.characters as ch
-import Labyrinthe.Package.objects as obj
+import Package.mazes as maze
+import Package.options as opt
+import Package.window as wd
+import Package.characters as ch
+import Package.objects as obj
 
 
 def initialize_game():
