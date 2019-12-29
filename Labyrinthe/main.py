@@ -1,9 +1,16 @@
-"""hello"""
+"""
+Welcome to the main program 'main.py'.
+When it starts the program process is following the steps below:
+- The initialization
+- The provided parameters
+- The player management
+- The endgame:
+"""
 # -*- coding: utf-8 -*-
 import logging as lg
 import pygame as pg
-import loading as ld
-import Package.characters as ch
+from Package import loading as ld
+from Package import characters as ch
 
 
 lg.basicConfig(level=lg.WARNING)

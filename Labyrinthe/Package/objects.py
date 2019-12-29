@@ -1,9 +1,15 @@
-"""hello"""
+"""
+Welcome to the object module, 'objects.py'.
+This module is used to create and manage the objects in the game.
+One class method inform on total picked game objects.
+Three methods help to create and handle each game object.
+Four functions allow to display each object in the game.
+"""
 # -*- coding: utf-8 -*-
 import logging as lg
 import random as rd
 import pygame as pg
-import Package.options as opt
+from Package import options as opt
 
 
 lg.basicConfig(level=lg.WARNING)

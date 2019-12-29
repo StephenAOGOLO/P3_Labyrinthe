@@ -1,8 +1,10 @@
-"""hello"""
+"""
+Welcome to the window module, 'window.py'.
+This class handles the graphical creation and the display of the window which contains the game.
+It is composed of one class, four methods and one function.
+"""
 # -*- coding: utf-8 -*-
 import pygame as pg
-
-BACKGROUND = (128, 128, 0)
 
 
 class Window:
@@ -64,7 +66,7 @@ class Window:
         pg.time.wait(3000)
 
 
-def color_window(window, color=BACKGROUND):
+def color_window(window, color):
     """
 
     :param window:

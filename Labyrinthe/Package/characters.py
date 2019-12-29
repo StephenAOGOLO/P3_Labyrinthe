@@ -1,9 +1,14 @@
-"""hello"""
+"""
+Welcome to the characters module, 'characters.py'.
+This module is mainly composed of 'CharactersSprite'.
+Eighteen methods are defined to handle the game characters through the process.
+five functions are defined to control characters data's and effects .
+"""
 # -*- coding: utf-8 -*-
 import random as rd
 import logging as lg
 import pygame as pg
-import Package.objects as obj
+from Package import objects as obj
 lg.basicConfig(level=lg.WARNING)
 
 

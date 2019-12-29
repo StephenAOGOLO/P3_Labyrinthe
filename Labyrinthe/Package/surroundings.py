@@ -1,41 +1,9 @@
-"""hello"""
+"""
+Welcome to the surroundings module, 'surroundings.py'.
+This module is used to create each piece of wall into the game.
+It contains only one class with two methods.
+"""
 import pygame as pg
-
-
-class SurroundingsElement:
-    """
-    Building in progress...
-    """
-    def __init__(self, name, file_png, posx, posy):
-        """
-
-        :param name:
-        :param file_png:
-        :param posx:
-        :param posy:
-        """
-        self.name = name
-        self.picture = file_png
-        self.posx = posx
-        self.posy = posy
-
-    def load_element_picture(self):
-        """
-
-        :return:
-        """
-        picture_element = pg.image.load(self.picture)
-        return picture_element
-
-    def set_element(self, image, area):
-        """
-
-        :param image:
-        :param area:
-        :return:
-        """
-        element_set = area.blit(image, (self.posx, self.posy))
-        return element_set
 
 
 class SurroundingsSprite(pg.sprite.Sprite):

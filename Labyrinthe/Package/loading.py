@@ -1,10 +1,14 @@
-"""hello"""
+"""
+Welcome to the loading module, 'loading.py'.
+This module is especially composed of one function.
+Which is used to initialize and feeds program parameters.
+"""
 # -*- coding: utf-8 -*-
-import Package.mazes as maze
-import Package.options as opt
-import Package.window as wd
-import Package.characters as ch
-import Package.objects as obj
+from Package import mazes as maze
+from Package import options as opt
+from Package import window as wd
+from Package import characters as ch
+from Package import objects as obj
 
 
 def initialize_game():

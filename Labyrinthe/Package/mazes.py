@@ -1,7 +1,12 @@
-"""hello"""
+"""
+Welcome to the maze module, 'mazes.py'.
+This module is mainly composed of 'Maze' class.
+Two methods are defined to draw all the maze respecting an external file.
+one function is defined to open that external file.
+"""
 # -*- coding: utf-8 -*-
 import pygame as pg
-import Package.surroundings as sd
+from Package import surroundings as sd
 
 
 class Maze:
@@ -34,8 +39,8 @@ class Maze:
         a_x = 0
         a_y = 0
         walls_group = pg.sprite.Group()
-        matrix_content = open_file("./Package/good_matrix_pattern_with_characters.txt")
-        matrix = "".join(matrix_content)
+        matrix = open_file("./Package/good_matrix_pattern_with_characters.txt")
+        matrix = "".join(matrix)
         matrix = matrix.replace("\n", "")
         while (a_y and a_x) < self.window_size:
             for element in matrix:

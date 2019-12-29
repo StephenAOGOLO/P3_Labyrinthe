@@ -1,4 +1,9 @@
-"""hello"""
+"""
+Welcome to the option module, 'options.py'.
+This module is used to pick some parameters from an external file.
+It contains four classes whose an abstract class and three concrete ones.
+Each concrete class are called for the program initialization.
+"""
 # -*- coding: utf-8 -*-
 import configparser as cp
 
