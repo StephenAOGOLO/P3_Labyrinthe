@@ -1,8 +1,8 @@
 """hello"""
 # -*- coding: utf-8 -*-
-import pygame as pg
 import logging as lg
 import random as rd
+import pygame as pg
 import Labyrinthe.Package.options as opt
 
 
@@ -11,7 +11,7 @@ lg.basicConfig(level=lg.WARNING)
 
 class ObjectSprite(pg.sprite.Sprite):
     """
-
+    hello
     """
     list_status_objects = [False, False, False]
 
@@ -21,11 +21,11 @@ class ObjectSprite(pg.sprite.Sprite):
 
         :return:
         """
+        total_state = False
         total = ObjectSprite.list_status_objects.count(True)
         if total == 3:
-            return True
-        else:
-            return False
+            total_state = True
+        return total_state
 
     def __init__(self, name, width=50, height=50):
         """
@@ -40,15 +40,15 @@ class ObjectSprite(pg.sprite.Sprite):
         self.rect = self.image.get_rect()
         self.picked_status = False
 
-    def set_position(self, x, y):
+    def set_position(self, a_x, a_y):
         """
 
-        :param x:
-        :param y:
+        :param a_x:
+        :param a_y:
         :return:
         """
-        self.rect.x = x
-        self.rect.y = y
+        self.rect.x = a_x
+        self.rect.y = a_y
 
     def set_image(self, filename=None):
         """
@@ -64,11 +64,11 @@ class ObjectSprite(pg.sprite.Sprite):
 
         :return:
         """
+        object_state = False
         if self.opened == 1:
             ObjectSprite.picked_objects = + 1
-            return True
-        else:
-            return False
+            object_state = True
+        return object_state
 
 
 def update_dashboard(window_displayed):
@@ -105,42 +105,53 @@ def set_objects(window_displayed):
     :param window_displayed:
     :return:
     """
-    matrix = open_file("./Package/good_matrix_pattern_with_characters.txt")
-    matrix = "".join(matrix)
-    matrix = matrix.replace("\n", "")
+    var_y = 0
+    var_x = 0
     list_sprites = []
-    list_forbidden = [15, 32, 49, 48, 127]
-    list_index = [index for index, char in enumerate(matrix) if char == "_"]
-    for index in list_forbidden:
-        if index in list_index:
-            list_index.remove(index)
-    three_random_index = rd.sample(list_index, k=3)
-    dict_objects = {"Needle": three_random_index[0], "Tube": three_random_index[1], "Ether": three_random_index[2]}
-    y = 0
-    x = 0
-    end_window = 850
+    dict_shuffle = shuffle_objects()
+    dict_objects = dict_shuffle["dict_objects"]
+    matrix = dict_shuffle["matrix"]
     objects_group = pg.sprite.Group()
-    while (y and x) < end_window:
+    while (var_y and var_x) < 850:
         for key, value in dict_objects.items():
-            y = 0
-            x = 0
-            for e, element in enumerate(matrix):
-                if x == end_window:
-                    x = 0
-                    y += 50
-                if element == "_" and e == value:
+            var_y = 0
+            var_x = 0
+            for var_e, element in enumerate(matrix):
+                if var_x == 850:
+                    var_x = 0
+                    var_y += 50
+                if element == "_" and var_e == value:
                     object_settings = opt.SettingsObject()
                     object_sprite = ObjectSprite(key)
-                    object_sprite.set_position(x, y)
+                    object_sprite.set_position(var_x, var_y)
                     lg.info(object_sprite.rect)
                     object_sprite.set_image(str(object_settings.data_file["path_picture"]))
                     objects_group.add(object_sprite)
                     list_sprites.append(object_sprite)
                     break
-                x += 50
+                var_x += 50
         break
     objects_group.draw(window_displayed)
     return list_sprites
+
+
+def shuffle_objects():
+    """
+
+    :return:
+    """
+    matrix = open_file("./Package/good_matrix_pattern_with_characters.txt")
+    matrix = "".join(matrix)
+    matrix = matrix.replace("\n", "")
+    list_forbidden = [15, 32, 49, 48, 127]
+    list_index = [index for index, char in enumerate(matrix) if char == "_"]
+    for index in list_forbidden:
+        if index in list_index:
+            list_index.remove(index)
+    random_values = rd.sample(list_index, k=3)
+    dict_objects = {"Needle": random_values[0], "Tube": random_values[1], "Ether": random_values[2]}
+    dict_shuffle = {"dict_objects": dict_objects, "matrix": matrix}
+    return dict_shuffle
 
 
 def open_file(path_file):
@@ -159,4 +170,3 @@ def open_file(path_file):
     print("\nEnd of file\n")
     print("=" * 150)
     return list_file
-

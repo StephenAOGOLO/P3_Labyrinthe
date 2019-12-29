@@ -10,7 +10,6 @@ lg.basicConfig(level=lg.WARNING)
 def main():
     """
     this is the main function.
-    :return:
     """
     pg.init()
     pg.display.set_caption("Aidez MacGyver à s'échapper !")
@@ -22,7 +21,7 @@ def main():
     list_objects = dict_parameters["list_objects"]
     list_groups = dict_parameters["list_groups"]
     char_group = list_groups[0]
-    mc_gyver_group = list_groups[1]
+    player_group = list_groups[1]
     watchman_group = list_groups[2]
     launched = True
     while launched:
@@ -33,7 +32,7 @@ def main():
             ghost_state = ch.handle_collision(ghost_reset, dict_parameters["walls_group"])
             dict_state = player.get_move_state(ghost_state, event)
             list_state = player.attitude(dict_state, watchman_sprite, char_group, list_objects)
-            ch.draw_characters(char_group, mc_gyver_group, watchman_group, window_displayed)
+            ch.draw_characters(char_group, player_group, watchman_group, window_displayed)
             if list_state[0] is True:
                 launched = False
                 break

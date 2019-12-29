@@ -12,7 +12,6 @@ class Maze:
         """
         Building in progress...
         """
-        state = True
         self.window_size = window_size
         self.limit_window_x = self.set_limit_window_size(100)
         self.limit_window_y = self.set_limit_window_size(100)
@@ -32,26 +31,26 @@ class Maze:
         :param window_displayed:
         :return:
         """
-        x = 0
-        y = 0
+        a_x = 0
+        a_y = 0
         walls_group = pg.sprite.Group()
         matrix_content = open_file("./Package/good_matrix_pattern_with_characters.txt")
         matrix = "".join(matrix_content)
         matrix = matrix.replace("\n", "")
-        while (y and x) < self.window_size:
+        while (a_y and a_x) < self.window_size:
             for element in matrix:
-                if x == self.window_size:
-                    x = 0
-                    y += 50
+                if a_x == self.window_size:
+                    a_x = 0
+                    a_y += 50
                 if element == "#":
-                    wall = sd.SurroundigsSprite()
-                    wall.set_position(x, y)
+                    wall = sd.SurroundingsSprite()
+                    wall.set_position(a_x, a_y)
                     wall.set_image("./Package/Pictures/Wall/big_brown_block.png")
                     walls_group.add(wall)
                     walls_group.draw(window_displayed)
                 else:
                     pass
-                x += 50
+                a_x += 50
             break
         return walls_group
 
@@ -63,7 +62,7 @@ def open_file(path_file):
     :param path_file:
     :return list_file: """
 
-    with open(path_file,"rt") as file:
+    with open(path_file, "rt") as file:
         list_file = file.readlines()
     print("=" * 150)
     print("\nThere is the file content : {}\n".format(path_file))
@@ -73,13 +72,3 @@ def open_file(path_file):
     print("\nEnd of file\n")
     print("=" * 150)
     return list_file
-
-
-
-
-
-
-
-
-
-

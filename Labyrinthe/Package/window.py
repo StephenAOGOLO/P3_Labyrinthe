@@ -20,20 +20,12 @@ class Window:
         self.height = height
         self.picture = pg.image.load("./Package/Pictures/wall/pyramid_floor.png")
 
-    def __repr__(self):
-        """
-        Show the feature of a window
-        :return:message
-        """
-        message = "*****\nType: {}\nwidth = {}\nheight = {}\n*****".format(type(self), self.width, self.height)
-        return message
-
     def display_window(self):
         """
 
         :return:
         """
-        displayed_window = pg.display.set_mode((self.width, self.height), pg.RESIZABLE)
+        displayed_window = pg.display.set_mode((self.width, self.height))
         return displayed_window
 
     def load_element_picture(self,):
@@ -44,15 +36,15 @@ class Window:
         avatar = pg.image.load(self.picture)
         return avatar
 
-    def set_background_on(self, window, x, y):
+    def set_background_on(self, window, var_x, var_y):
         """
 
         :param window:
-        :param x:
-        :param y:
+        :param var_x:
+        :param var_y:
         :return:
         """
-        picture_set = window.blit(self.picture, (x, y))
+        picture_set = window.blit(self.picture, (var_x, var_y))
         return picture_set
 
     def game_over(self, status, window_displayed):
@@ -81,5 +73,3 @@ def color_window(window, color=BACKGROUND):
     """
     colored_window = window.fill(color)
     return colored_window
-
-

@@ -96,15 +96,6 @@ class SettingsCharacter(Settings):
             self.data_file = self.get_data_file_ini("character_watchman")
         SettingsCharacter.CREATION += 1
 
-    def __repr__(self):
-        """
-        Show the feature of a window
-        :return:message
-        """
-        message = "*****\nType: {}\nsections: {}\n*****"\
-            .format(type(self), [item for item in self.characters.items()])
-        return message
-
     def sort_all_characters(self):
         """
 
