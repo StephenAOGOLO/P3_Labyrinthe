@@ -1,7 +1,7 @@
 """
 Welcome to the characters module, 'characters.py'.
 This module is mainly composed of 'CharactersSprite'.
-Eighteen methods are defined to handle the game characters through the process.
+Seventeen methods are defined to handle the game characters through the process.
 five functions are defined to control characters data's and effects .
 """
 # -*- coding: utf-8 -*-
@@ -14,13 +14,16 @@ lg.basicConfig(level=lg.WARNING)
 
 class CharactersSprite(pg.sprite.Sprite):
     """
-    hello
+    This class is a concrete class of Sprite which is the base class.
+    It is use to create, manage and display game characters as pygame sprite's.
     """
     list_status_objects = [False, False, False]
 
     def __init__(self, color=(0, 0, 0), width=20, height=20):
         """
-
+        This constructor calls the Sprite class constructor to inherit it.
+        the instance needs color and dimension to be created.
+        A black twenty per twenty pixels square is created by default.
         :param color:
         :param width:
         :param height:
@@ -34,7 +37,8 @@ class CharactersSprite(pg.sprite.Sprite):
 
     def set_position(self, set_x, set_y):
         """
-
+        This method is called to set the instance on the window.
+        The parameters are integers.
         :param set_x:
         :param set_y:
         :return:
@@ -42,18 +46,9 @@ class CharactersSprite(pg.sprite.Sprite):
         self.rect.x = set_x
         self.rect.y = set_y
 
-    def reset_last_position(self):
-        """
-
-        :return:
-        """
-        self.rect.x = self.last_x
-        self.rect.y = self.last_y
-        return self.rect.x, self.rect.y
-
     def set_image(self, filename=None):
         """
-
+        This method is use to change the picture of the instance.
         :param filename:
         :return:
         """
@@ -62,7 +57,8 @@ class CharactersSprite(pg.sprite.Sprite):
 
     def add_to_group(self, group):
         """
-
+        This method is used to simplify the following syntax:
+        'group.add(sprite)'.
         :param group:
         :return:
         """
@@ -71,7 +67,10 @@ class CharactersSprite(pg.sprite.Sprite):
 
     def start_move_avatar(self, event, list_ghost_status=None):
         """
-
+        This method is used to detect if a arrow key is pressed up or not.
+        It also get collision information into the argument list_ghost_status.
+        Pressed up : the instance get a picture showing a motionless man.
+        Pressed down : this function send information to the suitable movement function.
         :param event:
         :param list_ghost_status:
         :return:
@@ -101,7 +100,9 @@ class CharactersSprite(pg.sprite.Sprite):
 
     def go_up(self, ghost_status, move_status):
         """
-
+        Move to the top.
+        This method is used to change the instance position related to the pressed key.
+        A movement is allowed when the ghost_status value is True.
         :param ghost_status:
         :param move_status:
         :return:
@@ -125,7 +126,9 @@ class CharactersSprite(pg.sprite.Sprite):
 
     def go_right(self, ghost_status, move_status):
         """
-
+        Move to the right.
+        This method is used to change the instance position related to the pressed key.
+        A movement is allowed when the ghost_status value is True.
         :param ghost_status:
         :param move_status:
         :return:
@@ -149,7 +152,9 @@ class CharactersSprite(pg.sprite.Sprite):
 
     def go_down(self, ghost_status, move_status):
         """
-
+        Move to the bottom
+        This method is used to change the instance position related to the pressed key.
+        A movement is allowed when the ghost_status value is True.
         :param ghost_status:
         :param move_status:
         :return:
@@ -173,7 +178,9 @@ class CharactersSprite(pg.sprite.Sprite):
 
     def go_left(self, ghost_status, move_status):
         """
-
+        Move to the left
+        This method is used to change the instance position related to the pressed key.
+        A movement is allowed when the ghost_status value is True.
         :param ghost_status:
         :param move_status:
         :return:
@@ -197,7 +204,9 @@ class CharactersSprite(pg.sprite.Sprite):
 
     def standstill_avatar(self, event):
         """
-
+        Motionless
+        This method is used to change the instance picture related to the last pressed key.
+        When a key is unpressed , the instance get a man picture who is watching in the right direction.
         :param event:
         :return:
         """
@@ -220,7 +229,8 @@ class CharactersSprite(pg.sprite.Sprite):
 
     def be_collided(self, list_objects):
         """
-
+        This method detects the collision between the instance and the three sprites objects.
+        It returns bool status for each game object.
         :param list_objects:
         :return:
         """
@@ -235,7 +245,10 @@ class CharactersSprite(pg.sprite.Sprite):
 
     def prepared_objects_for(self, sprite_boss):
         """
-
+        This method modify the behaviour of game characters in function of the collected objects.
+        There is two scenarios:
+        If all three game objects are picked the watchman picture change to KO once MacGyver collided.
+        Otherwise, at least one game object is missing and MacGyver's picture switch to KO.
         :param sprite_boss:
         :return:
         """
@@ -267,8 +280,9 @@ class CharactersSprite(pg.sprite.Sprite):
 
     def get_move_state(self, list_ghost_status, event):
         """
-
-        :param player_sprite:
+        This method concentrate the ghost status.
+        This information is necessary to allow instance movement
+        without collision.
         :param list_ghost_status:
         :param event:
         :return:
@@ -280,7 +294,10 @@ class CharactersSprite(pg.sprite.Sprite):
 
     def set_ghost_sprite(self):
         """
-        Create ghosts sprite around the referenced sprite.
+        this method is called at the program initialization.
+        Create ghosts sprite around the referenced sprite, the instance.
+        Ghosts are created to willingly collide with wall sprites.
+        After collision, ghosts are change bool state to alert the main sprite, the instance.
         Add all the ghosts sprite and the group into the list to return.
         :return:
         """
@@ -304,7 +321,12 @@ class CharactersSprite(pg.sprite.Sprite):
 
     def reset_ghost_sprite(self, list_ghost):
         """
-
+        This method is called into the loop program.
+        It reate ghosts sprite around the referenced sprite, the instance.
+        Ghosts are created to willingly collide with wall sprites.
+        After collision, ghosts are change bool state to alert the main sprite, the instance.
+        Add all the ghosts sprite and the group into the list to return.
+        Ghosts position are reset relating to instance position.
         :param list_ghost:
         :return:
         """
@@ -327,7 +349,8 @@ class CharactersSprite(pg.sprite.Sprite):
 
     def attitude(self, dict_state, boss_sprite, sprite_char_group, list_objects):
         """
-
+        This method concentrates the needed data's concerning the allowed collision with game objects
+        and the remove track management.
         :param dict_state:
         :param boss_sprite:
         :param sprite_char_group:
@@ -342,8 +365,7 @@ class CharactersSprite(pg.sprite.Sprite):
 
     def browsing_maze(self, sprite_group, sprite_name="sprite"):
         """
-
-        :param sprite:
+        This method detects the collision between the instance and the wal sprites.
         :param sprite_group:
         :param sprite_name:
         :return:
@@ -361,7 +383,8 @@ class CharactersSprite(pg.sprite.Sprite):
 
     def needed_groups_for(self, watchman_sprite):
         """
-
+        This method generates three sprite groups for the instance and the watchman.
+        Thanks to these groups, the hierarchic collisions can be manage.
         :return:
         """
         list_group = []
@@ -376,7 +399,8 @@ class CharactersSprite(pg.sprite.Sprite):
 
 def set_in_maze(maze, mc_gyver, watchman):
     """
-
+    This function is used to set the both game characters in the maze.
+    Their position are defined by an external file.
     :param maze:
     :param mc_gyver:
     :param watchman:
@@ -405,7 +429,8 @@ def set_in_maze(maze, mc_gyver, watchman):
 
 def remove_track(move_status, last_position):
     """
-
+    This function is called to remove each instance picture
+    drew after his movement.
     :param move_status:
     :param last_position:
     :return:
@@ -421,7 +446,7 @@ def remove_track(move_status, last_position):
 
 def handle_collision(list_ghost, walls_group):
     """
-
+    This function returns the ghosts collision status.
     :param list_ghost:
     :param walls_group:
     :return:
@@ -436,7 +461,7 @@ def handle_collision(list_ghost, walls_group):
 
 def draw_characters(sprite_char_group, mc_gyver_group, watchman_group, window_displayed):
     """
-
+    This function draw all the game elements.
     :param sprite_char_group:
     :param mc_gyver_group:
     :param watchman_group:
@@ -453,7 +478,7 @@ def draw_characters(sprite_char_group, mc_gyver_group, watchman_group, window_di
 def open_file(path_file):
     """ This function open the file with the path
     provided as argument. The content file is returned
-    into list.
+    into a list.
     :param path_file:
     :return list_file: """
     with open(path_file, "rt") as file:

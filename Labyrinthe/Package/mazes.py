@@ -11,11 +11,11 @@ from Package import surroundings as sd
 
 class Maze:
     """
-    Building in progress...
+    This class manage the maze area.
     """
     def __init__(self, window_size):
         """
-        Building in progress...
+        This constructor create an area game into the window size.
         """
         self.window_size = window_size
         self.limit_window_x = self.set_limit_window_size(100)
@@ -23,7 +23,7 @@ class Maze:
 
     def set_limit_window_size(self, limit):
         """
-
+        This method define the game area.
         :param limit:
         :return:
         """
@@ -32,7 +32,8 @@ class Maze:
 
     def initialize_maze(self, window_displayed):
         """
-
+        This method fill the window with wall sprites.
+        Each wall sprites are set in function of an external file.
         :param window_displayed:
         :return:
         """

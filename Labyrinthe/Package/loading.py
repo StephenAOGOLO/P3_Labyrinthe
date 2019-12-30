@@ -13,8 +13,11 @@ from Package import objects as obj
 
 def initialize_game():
     """
-    WINDOW PARAMETERS, MAC GYVER PARAMETERS, WATCHMAN PARAMETERS
-    GROUPS PARAMETERS, MAZE PARAMETERS, OBJECTS PARAMETERS.
+    This function obtains obtains parameters concerning the folowing needed elements:
+    window, MacGyver, Watchman, maze and objects.
+    Each of them are formatted with their own class of settings.
+    So this function is ran to concentrate these parameters first and return dict ready to use.
+
     :return: dict_parameters
     """
     dict_parameters = {}

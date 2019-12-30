@@ -10,18 +10,18 @@ import configparser as cp
 
 class Settings:
     """
-    Building in progress...
+    This class manage data parameters stored in a external file.
     """
     def __init__(self):
         """
-        Building in progress...
+        This constructor create a instance which contains all the data from a file ini.
         """
         self.file_ini = ".\\Package\\settings.ini"
         self.all_sections_file = self.get_all_sections_file_ini()
 
     def get_data_file_ini(self, section):
         """
-        This function picks all data of a specified section from 'settings.ini'.
+        This method picks all data of a specified section from 'settings.ini'.
 
 
         :param section:
@@ -36,7 +36,7 @@ class Settings:
 
     def get_option_file_ini(self, section):
         """
-        This function picks all options of a specified section from 'settings.ini'.
+        This method picks all options of a specified section from 'settings.ini'.
 
         :param section:
         :return config.options(section):
@@ -47,7 +47,7 @@ class Settings:
 
     def get_all_sections_file_ini(self):
         """
-        This function picks all sections from 'settings.ini'.
+        This method picks all sections from 'settings.ini'.
 
         :return:
         """
@@ -57,7 +57,7 @@ class Settings:
 
     def get_particular_sections(self, pattern):
         """
-
+        This method picks all options from a given section 'pattern'
         :param pattern:
         :return:
         """
@@ -70,11 +70,12 @@ class Settings:
 
 class SettingsWindow(Settings):
     """
-    Building in progress...
+    Base class : Settings
+    This concrete class manage data parameters stored in a external file concerning Window instance.
     """
     def __init__(self):
         """
-        Building in progress...
+        This constructor create a instance which contains all the Window data from a file ini.
         """
         super().__init__()
         self.particular_sections = self.get_particular_sections("window_")
@@ -84,13 +85,14 @@ class SettingsWindow(Settings):
 
 class SettingsCharacter(Settings):
     """
-    Building in progress...
+    Base class : Settings
+    This concrete class manage data parameters stored in a external file concerning Character instance.
     """
     CREATION = 0
 
     def __init__(self):
         """
-        Building in progress...
+        This constructor create a instance which contains all the Character data from a file ini.
         """
         super().__init__()
         self.particular_sections = self.get_particular_sections("character_")
@@ -103,7 +105,7 @@ class SettingsCharacter(Settings):
 
     def sort_all_characters(self):
         """
-
+        This function automatically picks data concerning an implicit given section.
         :return:
         """
         dict_characters = {}
@@ -119,13 +121,14 @@ class SettingsCharacter(Settings):
 
 class SettingsObject(Settings):
     """
-    Building in progress...
+    Base class : Settings
+    This concrete class manage data parameters stored in a external file concerning Object instance.
     """
     CREATION = 0
 
     def __init__(self):
         """
-        Building in progress...
+        This constructor create a instance which contains all the Object data from a file ini.
         """
         super().__init__()
         self.particular_sections = self.get_particular_sections("object_")

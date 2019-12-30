@@ -17,14 +17,15 @@ lg.basicConfig(level=lg.WARNING)
 
 class ObjectSprite(pg.sprite.Sprite):
     """
-    hello
+    This class is a concrete class of Sprite which is the base class.
+    This class manage each game object as pygame sprite's.
     """
     list_status_objects = [False, False, False]
 
     @classmethod
     def total_objects(cls):
         """
-
+        This class method is the main counter of the collected game objects.
         :return:
         """
         total_state = False
@@ -35,7 +36,9 @@ class ObjectSprite(pg.sprite.Sprite):
 
     def __init__(self, name, width=50, height=50):
         """
-
+        This constructor calls the Sprite class constructor to inherit it.
+        the instance needs a name and dimension to be created.
+        A fifty per fifty pixels square is created by default.
         :param name:
         :param width:
         :param height:
@@ -48,7 +51,8 @@ class ObjectSprite(pg.sprite.Sprite):
 
     def set_position(self, a_x, a_y):
         """
-
+        This method is called to set the instance on the window.
+        The parameters are integers.
         :param a_x:
         :param a_y:
         :return:
@@ -58,7 +62,7 @@ class ObjectSprite(pg.sprite.Sprite):
 
     def set_image(self, filename=None):
         """
-
+        This method is use to change the picture of the instance.
         :param filename:
         :return:
         """
@@ -67,7 +71,7 @@ class ObjectSprite(pg.sprite.Sprite):
 
     def add_picked_object(self):
         """
-
+        This method is the sub counter of the collected game objects.
         :return:
         """
         object_state = False
@@ -79,7 +83,8 @@ class ObjectSprite(pg.sprite.Sprite):
 
 def update_dashboard(window_displayed):
     """
-
+    This function creates a dashboard at the top of the game.
+    It shows which game object is collected.
     :param window_displayed:
     :return:
     """
@@ -107,7 +112,8 @@ def update_dashboard(window_displayed):
 
 def set_objects(window_displayed):
     """
-
+    This function set all the game objects into the maze.
+    It is called at the initialization of the program.
     :param window_displayed:
     :return:
     """
@@ -143,7 +149,8 @@ def set_objects(window_displayed):
 
 def shuffle_objects():
     """
-
+    This function generates random postion for each game object.
+    these positions will be use to set each game object in the maze.
     :return:
     """
     matrix = open_file("./Package/good_matrix_pattern_with_characters.txt")

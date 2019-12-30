@@ -9,12 +9,12 @@ import pygame as pg
 
 class Window:
     """
-    Building in progress...
+    This class manage pygame window.
     """
 
     def __init__(self, width, height):
         """
-
+        the instance needs dimension to be created.
         :param width:
         :param height:
         """
@@ -24,23 +24,15 @@ class Window:
 
     def display_window(self):
         """
-
+        This method displays the window with the dimension given during creation.
         :return:
         """
         displayed_window = pg.display.set_mode((self.width, self.height))
         return displayed_window
 
-    def load_element_picture(self,):
-        """
-
-        :return:
-        """
-        avatar = pg.image.load(self.picture)
-        return avatar
-
     def set_background_on(self, window, var_x, var_y):
         """
-
+        This method is called to set the floor of the maze.
         :param window:
         :param var_x:
         :param var_y:
@@ -51,7 +43,7 @@ class Window:
 
     def game_over(self, status, window_displayed):
         """
-
+        This method displays 'mission passed' after win or 'wasted' after lose.
         :param status:
         :param window:
         :param window_displayed:
@@ -65,13 +57,3 @@ class Window:
         pg.display.update()
         pg.time.wait(3000)
 
-
-def color_window(window, color):
-    """
-
-    :param window:
-    :param color:
-    :return:
-    """
-    colored_window = window.fill(color)
-    return colored_window
