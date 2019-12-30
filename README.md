@@ -18,24 +18,24 @@ Ils permettront à MacGyver de créer une seringue et d'endormir notre garde.
 Cliquer sur le lien suivant : https://github.com/StephenAOGOLO/P3_Labyrinthe.git
 Télécharger le projet (.zip) et copier le dans un répertoire prévu à cet effet.
 Décompresser le projet. Le répertoire se constitue des éléments suivants:
-          - Le répertoire "Labyrinthe" (Le programme)
-          - Un fichier (.gitignore)
-          - Un Historique de conception (.docx)
-          - Un Requirements (.txt)
-          - Résumé de réalisation (.docx)
+- Le répertoire "Labyrinthe" (Le programme)
+- Un fichier (.gitignore)
+- Un Historique de conception (.docx)
+- Un Requirements (.txt)
+- Résumé de réalisation (.docx)
 Ouvrir le répertoire Labyrinthe. Le répertoire se constitue des éléments suivants:
-          - Dossier Include (dépendance Python)
-          - Dossier Lib (dépendance Python)
-          - Dossier Package (dépendance Programme)
-          - Dossier Pictures (dépendance Programme)
-          - Dossier Script (dépendance Environnement Virtuel/Python/Programme)
-          - Dossier tcl (dépendance Python)
-          - __init__.py (dépendance Programme)
-          - Fichier LICENSE.txt (info Python)
-          - main.py (Programme Principale)
-          - setup.py (dépendance Programme)
+- Dossier Include (dépendance Python)
+- Dossier Lib (dépendance Python)
+- Dossier Package (dépendance Programme)
+- Dossier Pictures (dépendance Programme)
+- Dossier Script (dépendance Environnement Virtuel/Python/Programme)
+- Dossier tcl (dépendance Python)
+- __init__.py (dépendance Programme)
+- Fichier LICENSE.txt (info Python)
+- main.py (Programme Principale)
+- setup.py (dépendance Programme)
 Pour lancer le programme:
-          - Double-cliquer sur "main.py" oubien ouvrir "main.py" dans un IDE python.
+- Double-cliquer sur "main.py" oubien ouvrir "main.py" dans un IDE python.
 
 # Gameplay
 Une fois le jeu lancé, déplacez MacGyver à l'aide des touches directionnelles de votre clavier.
