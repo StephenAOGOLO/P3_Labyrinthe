@@ -56,4 +56,3 @@ class Window:
         self.set_background_on(window_displayed, 200, 200)
         pg.display.update()
         pg.time.wait(3000)
-

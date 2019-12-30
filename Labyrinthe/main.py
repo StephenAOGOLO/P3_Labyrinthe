@@ -18,12 +18,18 @@ lg.basicConfig(level=lg.WARNING)
 
 def main():
     """
-     the function main() uses PYGAME module to start, manage and stop each events of the game session.
-     It obtains the following parameters given by the function initialize_game():
-     The MacGyver player, The Watchman player, the game objects and the graphical window.
-     Once the game is running, each event of the session game is analysed to change the behaviour of the player.
-     So the program is looping on MacGyver's methods, until the his sprite collide with the watchman one.
-     The program stops either when it happens or once the user left-click on the dedicated button to close the window.
+     the function main() uses PYGAME module to start,
+     manage and stop each events of the game session.
+     It obtains the following parameters
+     given by the function initialize_game():
+     The MacGyver player, The Watchman player,
+     the game objects and the graphical window.
+     Once the game is running, each event of the session game
+     is analysed to change the behaviour of the player.
+     So the program is looping on MacGyver's methods,
+     until the his sprite collide with the watchman one.
+     The program stops either when it happens
+     or once the user left-click on the dedicated button to close the window.
     """
     pg.init()
     pg.display.set_caption("Aidez MacGyver à s'échapper !")

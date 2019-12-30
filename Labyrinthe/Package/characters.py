@@ -205,8 +205,10 @@ class CharactersSprite(pg.sprite.Sprite):
     def standstill_avatar(self, event):
         """
         Motionless
-        This method is used to change the instance picture related to the last pressed key.
-        When a key is unpressed , the instance get a man picture who is watching in the right direction.
+        This method is used to change the instance picture
+        related to the last pressed key.
+        When a key is unpressed , the instance get a man picture
+         who is watching in the right direction.
         :param event:
         :return:
         """
@@ -245,10 +247,13 @@ class CharactersSprite(pg.sprite.Sprite):
 
     def prepared_objects_for(self, sprite_boss):
         """
-        This method modify the behaviour of game characters in function of the collected objects.
+        This method modify the behaviour of game characters
+        in function of the collected objects.
         There is two scenarios:
-        If all three game objects are picked the watchman picture change to KO once MacGyver collided.
-        Otherwise, at least one game object is missing and MacGyver's picture switch to KO.
+        If all three game objects are picked
+        the watchman picture change to KO once MacGyver collided.
+        Otherwise, at least one game object is missing
+        and MacGyver's picture switch to KO.
         :param sprite_boss:
         :return:
         """
@@ -324,7 +329,7 @@ class CharactersSprite(pg.sprite.Sprite):
         This method is called into the loop program.
         It reate ghosts sprite around the referenced sprite, the instance.
         Ghosts are created to willingly collide with wall sprites.
-        After collision, ghosts are change bool state to alert the main sprite, the instance.
+        After collision, ghosts are change bool state to alert the main sprite.
         Add all the ghosts sprite and the group into the list to return.
         Ghosts position are reset relating to instance position.
         :param list_ghost:
@@ -349,7 +354,8 @@ class CharactersSprite(pg.sprite.Sprite):
 
     def attitude(self, dict_state, boss_sprite, sprite_char_group, list_objects):
         """
-        This method concentrates the needed data's concerning the allowed collision with game objects
+        This method concentrates the needed data's
+        concerning the allowed collision with game objects
         and the remove track management.
         :param dict_state:
         :param boss_sprite:

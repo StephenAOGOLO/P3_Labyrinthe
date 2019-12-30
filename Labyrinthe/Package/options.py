@@ -86,7 +86,8 @@ class SettingsWindow(Settings):
 class SettingsCharacter(Settings):
     """
     Base class : Settings
-    This concrete class manage data parameters stored in a external file concerning Character instance.
+    This concrete class manage data parameters
+    stored in a external file concerning Character instance.
     """
     CREATION = 0
 
