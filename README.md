@@ -15,27 +15,29 @@ une aiguille, un petit tube en plastique et de l'éther.
 Ils permettront à MacGyver de créer une seringue et d'endormir notre garde.
 
 # installation
-TELECHARGMENT
-Cliquez sur le lien suivant : https://github.com/StephenAOGOLO/P3_Labyrinthe.git
+TELECHARGMENT.
+- Cliquez sur le lien suivant : https://github.com/StephenAOGOLO/P3_Labyrinthe.git
 Téléchargez le projet (.zip) et copiez le dans un répertoire prévu à cet effet (exemple sous windows : "D:projet\projet_python\").
-Décompressez et Ouvrez le projet.Le répertoire se constitue des éléments suivants:
+Décompressez et Ouvrez le projet.
+
+Le répertoire se constitue des éléments suivants:
 - Labyrinthe (Répertoire)
 - .gitignore (fichier)
 - README.md (fichier
 
-ENVIRONNEMENT VIRTUEL
+
 Le projet a été développer avec PYTHON VERSION 3.7.4.
 Cette version doit être prise en compte à l'installation du projet.
-Créez un environnement virtuel en suivants les procédures ci-dessous:
+
+ENVIRONNEMENT VIRTUEL.
 - Ouvrir un invité de commandes et rendez-vous à la racine du projet téléchargé (exemple sous windows : cd D:projet\projet_python\P3_Labyrinthe-master).
 - Créez l'environnement virtuel (exemple sous windows : python -m virtualenv -p python my_env).
 - Lancez l'environnement virtuel (exemple sous windows : my_env\Script\activate).
 
-DEPENDANCES
-Installez les dépendances externes du projet avec le fichier requirements.txt:
-- entrez la commande "pip install -r requirements.txt" (exemple sous windows : my_env\Script\pip install -r Labyrinthe\requirements.txt)
+DEPENDANCES.
+- Pour nstaller les dépendances externes du projet, entrez la commande "pip install -r requirements.txt" (exemple sous windows : my_env\Script\pip install -r Labyrinthe\requirements.txt)
 
-DEMARRAGE DU PROGRAMME
+DEMARRAGE DU PROGRAMME.
 - Rendez-vous dans le répertoire "Labyrinthe" (exemple sous windows : cd P3_Labyrinthe\Labyrinthe)
 - Lancer le programme principale "main.py" (exemple sous windows : python main.py). 
 
