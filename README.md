@@ -23,6 +23,7 @@ Décompresser le projet. Le répertoire se constitue des éléments suivants:
 - Un Historique de conception (.docx)
 - Un Requirements (.txt)
 - Résumé de réalisation (.docx)
+
 Ouvrir le répertoire Labyrinthe. Le répertoire se constitue des éléments suivants:
 - Dossier Include (dépendance Python)
 - Dossier Lib (dépendance Python)
@@ -34,6 +35,7 @@ Ouvrir le répertoire Labyrinthe. Le répertoire se constitue des éléments sui
 - Fichier LICENSE.txt (info Python)
 - main.py (Programme Principale)
 - setup.py (dépendance Programme)
+
 Pour lancer le programme:
 - Double-cliquer sur "main.py" oubien ouvrir "main.py" dans un IDE python.
 

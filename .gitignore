@@ -1,7 +1,16 @@
+/.idea
 /Matrix/
 /ressource
+/Historique_de_conception.docx
+/Résumé_de_réalisation_projet_P3.docx
 /Labyrinthe/test.py
 /Labyrinthe/Pictures/l/
 /macgyver_ressources.zip
 /Labyrinthe/Package/Fonts
 /Labyrinthe/Package/Pictures/locked
+/Labyrinthe/__pycache__/
+/Labyrinthe/Include/
+/Labyrinthe/Lib/
+/Labyrinthe/Scripts/
+/Labyrinthe/tcl/
+/Labyrinthe/LICENSE.txt
