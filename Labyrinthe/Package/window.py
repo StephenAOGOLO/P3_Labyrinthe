@@ -20,7 +20,7 @@ class Window:
         """
         self.width = width
         self.height = height
-        self.picture = pg.image.load("./Package/Pictures/wall/pyramid_floor.png")
+        self.picture = pg.image.load("./Pictures/w/pyramid_floor.png")
 
     def display_window(self):
         """
@@ -50,9 +50,9 @@ class Window:
         :return:
         """
         if status is True:
-            self.picture = pg.image.load("./Package/Pictures/Messages/mission_passed.png")
+            self.picture = pg.image.load("./Pictures/m/mission_passed.png")
         if status is False:
-            self.picture = pg.image.load("./Package/Pictures/Messages/wasted.jpg")
+            self.picture = pg.image.load("./Pictures/m/wasted.jpg")
         self.set_background_on(window_displayed, 200, 200)
         pg.display.update()
         pg.time.wait(3000)

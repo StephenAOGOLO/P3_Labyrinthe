@@ -51,7 +51,7 @@ class Maze:
                 if element == "#":
                     wall = sd.SurroundingsSprite()
                     wall.set_position(a_x, a_y)
-                    wall.set_image("./Package/Pictures/Wall/big_brown_block.png")
+                    wall.set_image("./Pictures/w/big_brown_block.png")
                     walls_group.add(wall)
                     walls_group.draw(window_displayed)
                 else:

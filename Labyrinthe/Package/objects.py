@@ -88,24 +88,24 @@ def update_dashboard(window_displayed):
     :param window_displayed:
     :return:
     """
-    inventory = pg.image.load("./Package/Pictures/Inventory/area_void.png")
+    inventory = pg.image.load("./Pictures/i/area_void.png")
     status_dashboard = ObjectSprite.list_status_objects
     if status_dashboard == [False, False, False]:
-        inventory = pg.image.load("./Package/Pictures/Inventory/area_void.png")
+        inventory = pg.image.load("./Pictures/i/area_void.png")
     elif status_dashboard == [True, False, False]:
-        inventory = pg.image.load("./Package/Pictures/Inventory/n.png")
+        inventory = pg.image.load("./Pictures/i/n.png")
     elif status_dashboard == [False, True, False]:
-        inventory = pg.image.load("./Package/Pictures/Inventory/t.png")
+        inventory = pg.image.load("./Pictures/i/t.png")
     elif status_dashboard == [False, False, True]:
-        inventory = pg.image.load("./Package/Pictures/Inventory/e.png")
+        inventory = pg.image.load("./Pictures/i/e.png")
     elif status_dashboard == [True, True, False]:
-        inventory = pg.image.load("./Package/Pictures/Inventory/nt.png")
+        inventory = pg.image.load("./Pictures/i/nt.png")
     elif status_dashboard == [False, True, True]:
-        inventory = pg.image.load("./Package/Pictures/Inventory/te.png")
+        inventory = pg.image.load("./Pictures/i/te.png")
     elif status_dashboard == [True, False, True]:
-        inventory = pg.image.load("./Package/Pictures/Inventory/ne.png")
+        inventory = pg.image.load("./Pictures/i/ne.png")
     elif status_dashboard == [True, True, True]:
-        inventory = pg.image.load("./Package/Pictures/Inventory/s.png")
+        inventory = pg.image.load("./Pictures/i/s.png")
     window_displayed.blit(inventory, (210, 0))
     return inventory
 
