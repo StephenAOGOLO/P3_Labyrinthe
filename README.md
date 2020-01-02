@@ -26,7 +26,7 @@ Le répertoire se constitue des éléments suivants:
 - README.md (fichier
 
 
-Le projet a été développer avec PYTHON VERSION 3.7.4.
+Le projet a été développé avec PYTHON VERSION 3.7.4.
 Cette version doit être prise en compte à l'installation du projet.
 
 ENVIRONNEMENT VIRTUEL.
