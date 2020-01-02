@@ -14,30 +14,33 @@ Pour le distraire, il faut réunir les éléments suivants (dispersés dans le l
 une aiguille, un petit tube en plastique et de l'éther. 
 Ils permettront à MacGyver de créer une seringue et d'endormir notre garde.
 
-# Installation
-Cliquer sur le lien suivant : https://github.com/StephenAOGOLO/P3_Labyrinthe.git
-Télécharger le projet (.zip) et copier le dans un répertoire prévu à cet effet.
-Décompresser le projet. Le répertoire se constitue des éléments suivants:
-- Le répertoire "Labyrinthe" (Le programme)
-- Un fichier (.gitignore)
-- Un Historique de conception (.docx)
-- Un Requirements (.txt)
-- Résumé de réalisation (.docx)
+# installation
+TELECHARGMENT
+Cliquez sur le lien suivant : https://github.com/StephenAOGOLO/P3_Labyrinthe.git
+Téléchargez le projet (.zip) et copiez le dans un répertoire prévu à cet effet (exemple sous windows : "D:projet\projet_python\").
+Décompressez et Ouvrez le projet.Le répertoire se constitue des éléments suivants:
+- Labyrinthe (Répertoire)
+- .gitignore (fichier)
+- README.md (fichier
 
-Ouvrir le répertoire Labyrinthe. Le répertoire se constitue des éléments suivants:
-- Dossier Include (dépendance Python)
-- Dossier Lib (dépendance Python)
-- Dossier Package (dépendance Programme)
-- Dossier Pictures (dépendance Programme)
-- Dossier Script (dépendance Environnement Virtuel/Python/Programme)
-- Dossier tcl (dépendance Python)
-- __init__.py (dépendance Programme)
-- Fichier LICENSE.txt (info Python)
-- main.py (Programme Principale)
-- setup.py (dépendance Programme)
+ENVIRONNEMENT VIRTUEL
+Le projet a été développer avec PYTHON VERSION 3.7.4.
+Cette version doit être prise en compte à l'installation du projet.
+Créez un environnement virtuel en suivants les procédures ci-dessous:
+- Ouvrir un invité de commandes et rendez-vous à la racine du projet téléchargé (exemple sous windows : cd D:projet\projet_python\P3_Labyrinthe-master).
+- Créez l'environnement virtuel (exemple sous windows : python -m virtualenv -p python my_env).
+- Lancez l'environnement virtuel (exemple sous windows : my_env\Script\activate).
 
-Pour lancer le programme:
-- Double-cliquer sur "main.py" oubien ouvrir "main.py" dans un IDE python.
+DEPENDANCES
+Installez les dépendances externes du projet avec le fichier requirements.txt:
+- entrez la commande "pip install -r requirements.txt" (exemple sous windows : my_env\Script\pip install -r Labyrinthe\requirements.txt)
+
+DEMARRAGE DU PROGRAMME
+- Rendez-vous dans le répertoire "Labyrinthe" (exemple sous windows : cd P3_Labyrinthe\Labyrinthe)
+- Lancer le programme principale "main.py" (exemple sous windows : python main.py). 
+
+Pour lancer le programme autrement:
+- Double-cliquez sur "main.py" oubien ouvrir "main.py" dans un IDE python.
 
 # Gameplay
 Une fois le jeu lancé, déplacez MacGyver à l'aide des touches directionnelles de votre clavier.
